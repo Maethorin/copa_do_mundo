@@ -1,0 +1,258 @@
+div {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+div.rodadas {
+    padding: 10px;
+    text-align: center;
+    font-family: arial;
+}
+
+div.rodadas hr {
+    display: none;
+}
+
+div.rodada {
+    clear: both;
+    padding: 8px;
+    border: solid #006600 1px;
+    height: 800px;
+    width: 98%;
+}
+
+h1.nome-rodada {
+   color: black;
+   background-color: #EFE;
+   padding: 4px;
+   text-align: left;
+}
+
+li.partida {
+    float: left;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 285px;
+    height: 175px;
+    border: solid #AAFFAA 1px;
+    padding: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+h2.data {
+    text-align: right;
+    padding: 3px;
+    background-color: #FEE;
+    font-size: 16px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+h2.realizada {
+    margin-bottom: 3px;
+    background-color: #AFA;
+}
+
+li input.enviar {
+    margin-top: 5px;
+    background: transparent url(/media/img/bkg_form_btns.png) no-repeat;
+    background-position: 0 -127px;
+    border: 1px solid #f0f0f0;
+    border-width:0 1px 0 1px;
+    color: #1F79FF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    padding: 2px 9px 5px;
+    position: relative;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+input.palpite {
+    width: 9px;
+    font-size: 14px !important;
+    text-align: right;
+}
+
+li div.resultado-parcial {
+    padding-bottom: 4px;
+    margin-top: 8px;
+    border: solid #FEE 1px;
+}
+
+li div.realizada {
+    margin-top: 46px;
+}
+
+li div.resultado-parcial h3.parcial {
+    color: #228822;
+    background-color: #FEE;
+    padding: 4px;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+li div.resultado-parcial span.gols {
+    padding: 0px 1px 0 2px;
+    border: solid #228822 1px;
+    background-color: #FEE;
+    color: #228822;
+    font-size: 16px;
+}
+
+li div.resultado-parcial span.nenhum-palpite {
+    font-size: 14px;
+}
+
+li span.time {
+    font-size: 12px;
+    border: solid #a9a9a9 1px;
+    background-color: #a9a9a9;
+    background-repeat: no-repeat;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+li span.esquerdo {
+    padding: 2px 2px 2px 19px;
+    background-position: center left;
+}
+
+li span.direito {
+    padding: 2px 19px 2px 2px;
+    background-position: center right;
+}
+
+li span.ar {
+    background-image: url(/media/img/gif/ar.gif);
+}
+
+li span.au {
+    background-image: url(/media/img/gif/au.gif);
+}
+
+li span.br {
+    background-image: url(/media/img/gif/br.gif);
+}
+
+li span.ch {
+    background-image: url(/media/img/gif/ch.gif);
+}
+
+li span.ci {
+    background-image: url(/media/img/gif/ci.gif);
+}
+
+li span.cl {
+    background-image: url(/media/img/gif/cl.gif);
+}
+
+li span.cm {
+    background-image: url(/media/img/gif/cm.gif);
+}
+
+li span.de {
+    background-image: url(/media/img/gif/de.gif);
+}
+
+li span.dk {
+    background-image: url(/media/img/gif/dk.gif);
+}
+
+li span.dz {
+    background-image: url(/media/img/gif/dz.gif);
+}
+
+li span.england {
+    background-image: url(/media/img/gif/england.gif);
+}
+
+li span.es {
+    background-image: url(/media/img/gif/es.gif);
+}
+
+li span.fr {
+    background-image: url(/media/img/gif/fr.gif);
+}
+
+li span.ga {
+    background-image: url(/media/img/gif/ga.gif);
+}
+
+li span.gr {
+    background-image: url(/media/img/gif/gr.gif);
+}
+
+li span.hn {
+    background-image: url(/media/img/gif/hn.gif);
+}
+
+li span.it {
+    background-image: url(/media/img/gif/it.gif);
+}
+
+li span.jp {
+    background-image: url(/media/img/gif/jp.gif);
+}
+
+li span.kp {
+    background-image: url(/media/img/gif/kp.gif);
+}
+
+li span.kr {
+    background-image: url(/media/img/gif/kr.gif);
+}
+
+li span.mx {
+    background-image: url(/media/img/gif/mx.gif);
+}
+
+li span.ng {
+    background-image: url(/media/img/gif/ng.gif);
+}
+
+li span.nl {
+    background-image: url(/media/img/gif/nl.gif);
+}
+
+li span.nz {
+    background-image: url(/media/img/gif/nz.gif);
+}
+
+li span.pt {
+    background-image: url(/media/img/gif/pt.gif);
+}
+
+li span.py {
+    background-image: url(/media/img/gif/py.gif);
+}
+
+li span.rs {
+    background-image: url(/media/img/gif/rs.gif);
+}
+
+li span.si {
+    background-image: url(/media/img/gif/si.gif);
+}
+
+li span.sk {
+    background-image: url(/media/img/gif/sk.gif);
+}
+
+li span.us {
+    background-image: url(/media/img/gif/us.gif);
+}
+
+li span.uy {
+    background-image: url(/media/img/gif/uy.gif);
+}
+
+li span.za {
+    background-image: url(/media/img/gif/za.gif);
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	{% for grupo in grupos %}
+	    <span class="nome-grupo">{{grupo.nome}}</span><br />
+        <ul class="grupo">
+	    {% for time in grupo.times %}
+	        <li class="time">{{time.nome}} - Pontos: {{time.pontos}}</li>
+	    {% endfor %}
+        </ul>
+	{% endfor %}
+</body>
+</html>
