@@ -15,7 +15,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'mysql'
-DATABASE_NAME = 'tabela_copa_test'
+DATABASE_NAME = 'tabela_copa'
 DATABASE_USER = 'root'
 DATABASE_PASSWORD = ''
 DATABASE_HOST = ''

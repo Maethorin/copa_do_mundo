@@ -34,7 +34,7 @@ li.partida {
     margin-right: 10px;
     width: 285px;
     height: 175px;
-    border: solid #AAFFAA 1px;
+    border: solid gray 1px;
     padding: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -43,15 +43,17 @@ li.partida {
 h2.data {
     text-align: right;
     padding: 3px;
-    background-color: #FEE;
+    background-color: #3851a6;
     font-size: 16px;
+    font-weight: normal;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
+    color: white;
 }
 
 h2.realizada {
     margin-bottom: 3px;
-    background-color: #AFA;
+    background-color: #428855;
 }
 
 li input.enviar {
@@ -91,11 +93,13 @@ li div.realizada {
 
 li div.resultado-parcial h3.parcial {
     color: #228822;
-    background-color: #FEE;
+    background-color: #f7f5a5;
     padding: 4px;
     text-align: left;
     margin-bottom: 5px;
     font-size: 12px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
 }
 
 li div.resultado-parcial span.gols {
@@ -108,151 +112,4 @@ li div.resultado-parcial span.gols {
 
 li div.resultado-parcial span.nenhum-palpite {
     font-size: 14px;
-}
-
-li span.time {
-    font-size: 12px;
-    border: solid #a9a9a9 1px;
-    background-color: #a9a9a9;
-    background-repeat: no-repeat;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-}
-
-li span.esquerdo {
-    padding: 2px 2px 2px 19px;
-    background-position: center left;
-}
-
-li span.direito {
-    padding: 2px 19px 2px 2px;
-    background-position: center right;
-}
-
-li span.ar {
-    background-image: url(/media/img/gif/ar.gif);
-}
-
-li span.au {
-    background-image: url(/media/img/gif/au.gif);
-}
-
-li span.br {
-    background-image: url(/media/img/gif/br.gif);
-}
-
-li span.ch {
-    background-image: url(/media/img/gif/ch.gif);
-}
-
-li span.ci {
-    background-image: url(/media/img/gif/ci.gif);
-}
-
-li span.cl {
-    background-image: url(/media/img/gif/cl.gif);
-}
-
-li span.cm {
-    background-image: url(/media/img/gif/cm.gif);
-}
-
-li span.de {
-    background-image: url(/media/img/gif/de.gif);
-}
-
-li span.dk {
-    background-image: url(/media/img/gif/dk.gif);
-}
-
-li span.dz {
-    background-image: url(/media/img/gif/dz.gif);
-}
-
-li span.england {
-    background-image: url(/media/img/gif/england.gif);
-}
-
-li span.es {
-    background-image: url(/media/img/gif/es.gif);
-}
-
-li span.fr {
-    background-image: url(/media/img/gif/fr.gif);
-}
-
-li span.ga {
-    background-image: url(/media/img/gif/ga.gif);
-}
-
-li span.gr {
-    background-image: url(/media/img/gif/gr.gif);
-}
-
-li span.hn {
-    background-image: url(/media/img/gif/hn.gif);
-}
-
-li span.it {
-    background-image: url(/media/img/gif/it.gif);
-}
-
-li span.jp {
-    background-image: url(/media/img/gif/jp.gif);
-}
-
-li span.kp {
-    background-image: url(/media/img/gif/kp.gif);
-}
-
-li span.kr {
-    background-image: url(/media/img/gif/kr.gif);
-}
-
-li span.mx {
-    background-image: url(/media/img/gif/mx.gif);
-}
-
-li span.ng {
-    background-image: url(/media/img/gif/ng.gif);
-}
-
-li span.nl {
-    background-image: url(/media/img/gif/nl.gif);
-}
-
-li span.nz {
-    background-image: url(/media/img/gif/nz.gif);
-}
-
-li span.pt {
-    background-image: url(/media/img/gif/pt.gif);
-}
-
-li span.py {
-    background-image: url(/media/img/gif/py.gif);
-}
-
-li span.rs {
-    background-image: url(/media/img/gif/rs.gif);
-}
-
-li span.si {
-    background-image: url(/media/img/gif/si.gif);
-}
-
-li span.sk {
-    background-image: url(/media/img/gif/sk.gif);
-}
-
-li span.us {
-    background-image: url(/media/img/gif/us.gif);
-}
-
-li span.uy {
-    background-image: url(/media/img/gif/uy.gif);
-}
-
-li span.za {
-    background-image: url(/media/img/gif/za.gif);
 }

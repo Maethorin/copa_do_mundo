@@ -1,0 +1,147 @@
+
+span.time {
+    font-size: 12px;
+    border: solid #EaEaEa 1px;
+    background-color: #EaEaEa;
+    background-repeat: no-repeat;
+    border-radius: 3px;
+    border-radius: 3px;
+}
+
+span.esquerdo {
+    padding: 2px 2px 2px 19px;
+    background-position: center left;
+}
+
+span.direito {
+    padding: 2px 19px 2px 2px;
+    background-position: center right;
+}
+
+span.ar {
+    background-image: url(/media/img/gif/ar.gif);
+}
+
+span.au {
+    background-image: url(/media/img/gif/au.gif);
+}
+
+span.br {
+    background-image: url(/media/img/gif/br.gif);
+}
+
+span.ch {
+    background-image: url(/media/img/gif/ch.gif);
+}
+
+span.ci {
+    background-image: url(/media/img/gif/ci.gif);
+}
+
+span.cl {
+    background-image: url(/media/img/gif/cl.gif);
+}
+
+span.cm {
+    background-image: url(/media/img/gif/cm.gif);
+}
+
+span.de {
+    background-image: url(/media/img/gif/de.gif);
+}
+
+span.dk {
+    background-image: url(/media/img/gif/dk.gif);
+}
+
+span.dz {
+    background-image: url(/media/img/gif/dz.gif);
+}
+
+span.england {
+    background-image: url(/media/img/gif/england.gif);
+}
+
+span.es {
+    background-image: url(/media/img/gif/es.gif);
+}
+
+span.fr {
+    background-image: url(/media/img/gif/fr.gif);
+}
+
+span.ga {
+    background-image: url(/media/img/gif/ga.gif);
+}
+
+span.gr {
+    background-image: url(/media/img/gif/gr.gif);
+}
+
+span.hn {
+    background-image: url(/media/img/gif/hn.gif);
+}
+
+span.it {
+    background-image: url(/media/img/gif/it.gif);
+}
+
+span.jp {
+    background-image: url(/media/img/gif/jp.gif);
+}
+
+span.kp {
+    background-image: url(/media/img/gif/kp.gif);
+}
+
+span.kr {
+    background-image: url(/media/img/gif/kr.gif);
+}
+
+span.mx {
+    background-image: url(/media/img/gif/mx.gif);
+}
+
+span.ng {
+    background-image: url(/media/img/gif/ng.gif);
+}
+
+span.nl {
+    background-image: url(/media/img/gif/nl.gif);
+}
+
+span.nz {
+    background-image: url(/media/img/gif/nz.gif);
+}
+
+span.pt {
+    background-image: url(/media/img/gif/pt.gif);
+}
+
+span.py {
+    background-image: url(/media/img/gif/py.gif);
+}
+
+span.rs {
+    background-image: url(/media/img/gif/rs.gif);
+}
+
+span.si {
+    background-image: url(/media/img/gif/si.gif);
+}
+
+span.sk {
+    background-image: url(/media/img/gif/sk.gif);
+}
+
+span.us {
+    background-image: url(/media/img/gif/us.gif);
+}
+
+span.uy {
+    background-image: url(/media/img/gif/uy.gif);
+}
+
+span.za {
+    background-image: url(/media/img/gif/za.gif);
+}

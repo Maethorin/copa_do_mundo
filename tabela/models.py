@@ -20,10 +20,20 @@ class Time(models.Model):
     id = models.AutoField(primary_key=True, db_column='time_id')
     nome = models.CharField(max_length=200, unique=True)
     pontos = models.IntegerField(blank=True, default=0)
-    gols_feitos = models.IntegerField(blank=True, default=0)
-    gols_tomados = models.IntegerField(blank=True, default=0)
     grupo = models.ForeignKey(Grupo)
     abreviatura = models.CharField(max_length=15, unique=True, blank=True, null=True)
+    
+    jogos = 0
+    vitorias = 0
+    empates = 0
+    gols_feitos = 0
+    gols_tomados = 0
+
+    def derrotas(self):
+        return self.jogos - (self.vitorias + self.empates)
+
+    def aproveitamento(self):
+        return round(float(self.vitorias) / float(self.jogos) * 100, 1)
 
     class Meta:
         ordering = ['grupo', '-pontos', 'nome']

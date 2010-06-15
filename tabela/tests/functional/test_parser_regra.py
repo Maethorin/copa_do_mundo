@@ -37,3 +37,7 @@ def test_obtem_classificacoes_de_regra_dispara_erro_se_regra_nao_eh_da_primeira_
         assert False
     except ValueError:
         assert True
+
+def test_obtem_ids_de_partida_de_regra():
+    ids = parser_regra.obtem_ids_de_partida_de_regra('O53x54')
+    assert_equals(ids, ['53', '54'])
