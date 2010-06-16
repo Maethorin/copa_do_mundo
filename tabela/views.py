@@ -19,14 +19,14 @@ def grupos(request):
 
 def partidas(request):
     rodadas = [
-        {'id': 'rodada_1', 'nome': '1ª Rodada', 'index': 1}, 
-        {'id': 'rodada_2', 'nome': '2ª Rodada', 'index': 2}, 
-        {'id': 'rodada_3', 'nome': '3ª Rodada', 'index': 3},
-        {'id': 'oitavas', 'nome': 'Oitavas', 'index': 4},
-        {'id': 'quartas', 'nome': 'Quartas', 'index': 5},
-        {'id': 'semifinais', 'nome': 'Semifinais', 'index': 6},
-        {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'index': 7},
-        {'id': 'final', 'nome': 'Final', 'index': 8}
+        {'id': 'rodada_1', 'nome': '1ª Rodada', 'index': 0}, 
+        {'id': 'rodada_2', 'nome': '2ª Rodada', 'index': 1}, 
+        {'id': 'rodada_3', 'nome': '3ª Rodada', 'index': 2},
+        {'id': 'oitavas', 'nome': 'Oitavas', 'index': 3},
+        {'id': 'quartas', 'nome': 'Quartas', 'index': 4},
+        {'id': 'semifinais', 'nome': 'Semifinais', 'index': 5},
+        {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'index': 6},
+        {'id': 'final', 'nome': 'Final', 'index': 7}
     ]
     index = 1
     for rodada in rodadas:

@@ -46,14 +46,14 @@ def test_obtem_lista_de_partidas():
     partida12 = FakeModel('Partida 1 da rodada 2')
 
     rodadas = [
-        {'id': 'rodada_1', 'nome': '1ª Rodada', 'partidas': [partida11, partida12]}, 
-        {'id': 'rodada_2', 'nome': '2ª Rodada', 'partidas': [partida11, partida12]}, 
-        {'id': 'rodada_3', 'nome': '3ª Rodada', 'partidas': [partida11, partida12]},
-        {'id': 'oitavas', 'nome': 'Oitavas', 'partidas': [partida11, partida12]},
-        {'id': 'quartas', 'nome': 'Quartas', 'partidas': [partida11, partida12]},
-        {'id': 'semifinais', 'nome': 'Semifinais', 'partidas': [partida11, partida12]},
-        {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'partidas': [partida11, partida12]},
-        {'id': 'final', 'nome': 'Final', 'partidas': [partida11, partida12]}
+        {'id': 'rodada_1', 'nome': '1ª Rodada', 'partidas': [partida11, partida12], 'index': 0}, 
+        {'id': 'rodada_2', 'nome': '2ª Rodada', 'partidas': [partida11, partida12], 'index': 1}, 
+        {'id': 'rodada_3', 'nome': '3ª Rodada', 'partidas': [partida11, partida12], 'index': 2},
+        {'id': 'oitavas', 'nome': 'Oitavas', 'partidas': [partida11, partida12], 'index': 3},
+        {'id': 'quartas', 'nome': 'Quartas', 'partidas': [partida11, partida12], 'index': 4},
+        {'id': 'semifinais', 'nome': 'Semifinais', 'partidas': [partida11, partida12], 'index': 5},
+        {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'partidas': [partida11, partida12], 'index': 6},
+        {'id': 'final', 'nome': 'Final', 'partidas': [partida11, partida12], 'index': 7}
     ]
     
     views.Partida = mox.CreateMockAnything()
@@ -73,7 +73,7 @@ def test_obtem_lista_de_partidas():
 
     render_to_response = views.render_to_response
     views.render_to_response = mox.CreateMockAnything()
-    views.render_to_response.__call__('partidas.html', {'rodadas': rodadas})
+    views.render_to_response.__call__('partidas.html', {'rodadas': rodadas, 'index': 1})
     mox.ReplayAll()
 
     views.partidas(request_mock)

@@ -203,41 +203,46 @@ def test_obtem_times_de_partida_de_outras_fases_com_regra_de_outras_fases():
     simulador.Partida.objects = mox.CreateMockAnything()
     partida1 = FakeModel('partida 1')
     partida1.rodada = 'quartas'
-    partida1.regra_para_times = 'O56x57'
+    partida1.regra_para_times = 'Q56x57'
     partida2 = FakeModel('partida 2')
-    partida2.regra_para_times = 'O51x52'
+    partida2.regra_para_times = 'Q51x52'
 
-    simulador.Partida.objects.get(id='53').AndReturn(partida1)
-    simulador.Partida.objects.get(id='54').AndReturn(partida2)
+    partida3 = FakeModel('partida 3')
+    partida3.rodada = 'oitavas'
+    partida3.regra_para_times = 'O53x54'
+    partida4 = FakeModel('partida 4')
+    partida4.regra_para_times = 'O58x59'
 
     time1 = FakeModel('time 1')
     time2 = FakeModel('time 2')
 
+    simulador.Partida.objects.get(id='53').AndReturn(partida1)
+    simulador.Partida.objects.get(id='54').AndReturn(partida2)
+
     simulador.parser_regra.eh_disputa_de_terceiro_lugar(regra).AndReturn(False)
 
     simulador.parser_regra.obtem_ids_de_partida_de_regra(partida1.regra_para_times).AndReturn(['56', '57'])
-    simulador.Partida.objects.get(id='56').AndReturn(partida1)
-    simulador.Partida.objects.get(id='57').AndReturn(partida2)
+    simulador.Partida.objects.get(id='56').AndReturn(partida3)
+    simulador.Partida.objects.get(id='57').AndReturn(partida4)
+
+    simulador.obtem_times_de_partida_de_oitavas('O53x54').AndReturn((time1, time2))
+    simulador.obtem_times_de_partida_de_oitavas('O58x59').AndReturn((time2, time1))
+
+    simulador.obter_time_na_partida(partida3, False).AndReturn((time1, 2, 3))
+    simulador.obter_time_na_partida(partida4, False).AndReturn((time2, 2, 3))
+
+    simulador.parser_regra.obtem_ids_de_partida_de_regra(partida2.regra_para_times).AndReturn(['51', '52'])
+    simulador.Partida.objects.get(id='51').AndReturn(partida3)
+    simulador.Partida.objects.get(id='52').AndReturn(partida4)
+
+    simulador.obtem_times_de_partida_de_oitavas('O53x54').AndReturn((time1, time2))
+    simulador.obtem_times_de_partida_de_oitavas('O58x59').AndReturn((time2, time1))
+
+    simulador.obter_time_na_partida(partida3, False).AndReturn((time1, 2, 3))
+    simulador.obter_time_na_partida(partida4, False).AndReturn((time2, 2, 3))
 
     simulador.obter_time_na_partida(partida1, False).AndReturn((time1, 2, 3))
     simulador.obter_time_na_partida(partida2, False).AndReturn((time2, 2, 3))
-
-    simulador.parser_regra.eh_disputa_de_terceiro_lugar(partida1.regra_para_times).AndReturn(False)
-
-    # if partida1.rodada == 'oitavas':
-    #     partida1.time_1, partida1.time_2 = obtem_times_de_partida_de_oitavas(partida1.regra_para_times)
-    #     partida2.time_1, partida2.time_2 = obtem_times_de_partida_de_oitavas(partida2.regra_para_times)
-    # elif parser_regra.eh_disputa_de_terceiro_lugar(regra):
-    #     partida1.time_1, partida1.time_2 = obtem_times_de_partida_de_outras_fases(partida1.regra_para_times, perdedor=True)
-    #     partida2.time_1, partida2.time_2 = obtem_times_de_partida_de_outras_fases(partida2.regra_para_times, perdedor=True)
-    # else:
-    #     partida1.time_1, partida1.time_2 = obtem_times_de_partida_de_outras_fases(partida1.regra_para_times)
-    #     partida2.time_1, partida2.time_2 = obtem_times_de_partida_de_outras_fases(partida2.regra_para_times)
-    # time1, gols_time_1, gols_time_2 = obter_time_na_partida(partida1, perdedor)
-    # time2, gols_time_1, gols_time_2 = obter_time_na_partida(partida2, perdedor)
-    # 
-    # return time1, time2
-
 
     mox.ReplayAll()
     try:
