@@ -10,6 +10,7 @@
 
     <script type="text/javascript" src="/media/js/lib/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="/media/js/lib/jquery-ui-1.8.1.custom.min.js"></script>    
+    <script type="text/javascript" src="/media/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="/media/js/lib/jquery.meio.mask.js"></script>
     <script type="text/javascript" src="/media/js/partidas.js"></script>
 </head>
@@ -25,7 +26,7 @@
         	    <h1 class="nome-rodada">{{rodada.nome}}</h1>
                 <ul class="partidas">
         	    {% for partida in rodada.partidas %}
-        	        <li class="partida">
+        	        <li class="partida" id="partida_{{partida.id}}">
         	            <h2 class="data{% if partida.realizada %} realizada{% endif %}">{{partida.data|date:"D d M Y H:i"}}{% if partida.realizada %} - Realizada{% endif %}</h2><br />
         	            {% if partida.realizada %}
                             <span class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome}}</span>
@@ -64,5 +65,10 @@
             <hr />
     	{% endfor %}
     </div>
+    <script type="text/javascript">
+        $(function() {
+            montaTabs({{index}});
+        });
+    </script>
 </body>
 </html>
