@@ -10,7 +10,7 @@ $(function() {
                      atual = partida(resultado.partida_id);
                      atual.$gols_time_1.html(resultado.gols_time_1);
                      atual.$gols_time_2.html(resultado.gols_time_2);
-                     atual.$votos.html('Votos: ' + resultado.votos);
+                     atual.$votos.html('Total: ' + resultado.votos);
                      atual.$computado.show();
                      atual.$enviar.hide();
                  },

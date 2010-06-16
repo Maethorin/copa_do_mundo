@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
 	<title>Simulador da Copa do Mundo</title>
+    <meta name="author" content="Márcio Duarte" />
+    <meta name="description" content="Simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida." />
+    <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos" />
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <link rel="stylesheet" type="text/css" href="/media/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/media/css/geral.css" />
@@ -10,8 +13,9 @@
 <body>
     <h1>Simulador da Copa do Mundo</h1>
     <p class="descricao">Este é um simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes.</p>
-    <p>Contrário dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado dos palpites de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida.</p>
+    <p>Contrário dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida.</p>
     <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha e Suiça :D...</p>
+    <p>A tabela com as partidas e seus resultados poderão ser acessadas nos links abaixo. As partidas não realizadas poderão receber os palpites.</p>
     <h2 class="final">Por enquanto e final será:</h2>
     <ul class="partidas">
 	{% for rodada in rodadas %}
