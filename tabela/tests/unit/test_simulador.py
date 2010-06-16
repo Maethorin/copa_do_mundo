@@ -253,7 +253,68 @@ def test_obtem_times_de_partida_de_outras_fases_com_regra_de_outras_fases():
     finally:
         mox.UnsetStubs()
 
+def test_obtem_times_de_partida_de_disputa_de_terceiro_lugar():
+    mox = Mox()
+    mox.StubOutWithMock(simulador, 'obtem_time_do_grupo_na_classificacao')
+    mox.StubOutWithMock(simulador, 'parser_regra')
+    mox.StubOutWithMock(simulador, 'Partida')
+    mox.StubOutWithMock(simulador, 'obtem_times_de_partida_de_oitavas')
+    mox.StubOutWithMock(simulador, 'obter_time_na_partida')
 
+    regra = 'O53x54'
+    simulador.parser_regra.obtem_ids_de_partida_de_regra(regra).AndReturn(['53', '54'])
+    simulador.Partida.objects = mox.CreateMockAnything()
+    partida1 = FakeModel('partida 1')
+    partida1.rodada = 'quartas'
+    partida1.regra_para_times = 'Q56x57'
+    partida2 = FakeModel('partida 2')
+    partida2.regra_para_times = 'Q51x52'
+
+    partida3 = FakeModel('partida 3')
+    partida3.rodada = 'oitavas'
+    partida3.regra_para_times = 'O53x54'
+    partida4 = FakeModel('partida 4')
+    partida4.regra_para_times = 'O58x59'
+
+    time1 = FakeModel('time 1')
+    time2 = FakeModel('time 2')
+
+    simulador.Partida.objects.get(id='53').AndReturn(partida1)
+    simulador.Partida.objects.get(id='54').AndReturn(partida2)
+
+    simulador.parser_regra.eh_disputa_de_terceiro_lugar(regra).AndReturn(True)
+
+    simulador.parser_regra.obtem_ids_de_partida_de_regra(partida1.regra_para_times).AndReturn(['56', '57'])
+    simulador.Partida.objects.get(id='56').AndReturn(partida3)
+    simulador.Partida.objects.get(id='57').AndReturn(partida4)
+
+    simulador.obtem_times_de_partida_de_oitavas('O53x54').AndReturn((time1, time2))
+    simulador.obtem_times_de_partida_de_oitavas('O58x59').AndReturn((time2, time1))
+
+    simulador.obter_time_na_partida(partida3, True).AndReturn((time1, 2, 3))
+    simulador.obter_time_na_partida(partida4, True).AndReturn((time2, 2, 3))
+
+    simulador.parser_regra.obtem_ids_de_partida_de_regra(partida2.regra_para_times).AndReturn(['51', '52'])
+    simulador.Partida.objects.get(id='51').AndReturn(partida3)
+    simulador.Partida.objects.get(id='52').AndReturn(partida4)
+
+    simulador.obtem_times_de_partida_de_oitavas('O53x54').AndReturn((time1, time2))
+    simulador.obtem_times_de_partida_de_oitavas('O58x59').AndReturn((time2, time1))
+
+    simulador.obter_time_na_partida(partida3, True).AndReturn((time1, 2, 3))
+    simulador.obter_time_na_partida(partida4, True).AndReturn((time2, 2, 3))
+
+    simulador.obter_time_na_partida(partida1, False).AndReturn((time1, 2, 3))
+    simulador.obter_time_na_partida(partida2, False).AndReturn((time2, 2, 3))
+
+    mox.ReplayAll()
+    try:
+        timeA, timeB = simulador.obtem_times_de_partida_de_outras_fases(regra)
+        assert_equals(time1, timeA)
+        assert_equals(time2, timeB)
+        mox.VerifyAll()
+    finally:
+        mox.UnsetStubs()
 
 def test_obtem_time_do_grupo_na_classificacao():
     mox = Mox()
@@ -372,6 +433,17 @@ def test_analiza_resultado_retorna_none_quando_empate():
     time, gol1, gol2 = simulador.analiza_resultado_e_acumula_gols(partida.gols_time_1, partida.gols_time_2, 1, partida, False)
 
     assert_equals(time, None)
+
+def test_analiza_resultado_retorna_time_1_perdedor():
+    partida = FakeModel('partida')
+    partida.time_1 = FakeModel('time1')
+    partida.time_2 = FakeModel('time2')
+    partida.gols_time_1 = 1
+    partida.gols_time_2 = 2
+
+    time, gol1, gol2 = simulador.analiza_resultado_e_acumula_gols(partida.gols_time_1, partida.gols_time_2, 1, partida, True)
+
+    assert_equals(time, partida.time_1)
 
 def test_analiza_resultado_retorna_time_1():
     partida = FakeModel('partida')
