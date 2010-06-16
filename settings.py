@@ -6,7 +6,8 @@
 import tabela
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+LOCAL_DEVELOPMENT = True
+TEMPLATE_DEBUG = True
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -17,10 +18,13 @@ MANAGERS = ADMINS
 DATABASE_ENGINE = 'mysql'
 DATABASE_NAME = 'tabela_copa'
 DATABASE_USER = 'root'
-DATABASE_PASSWORD = ''
-DATABASE_HOST = ''
+DATABASE_PASSWORD = 'p3y5t8mysql'
+DATABASE_HOST = 'localhost'
 DATABASE_PORT = ''
 DATABASE_SUPPORTS_TRANSACTIONS = False
+if LOCAL_DEVELOPMENT:
+    DATABASE_PASSWORD = ''
+    DATABASE_HOST = ''
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

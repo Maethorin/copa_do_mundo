@@ -1,11 +1,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
 <head>
-	<title></title>
+	<title>Simulador da Copa do Mundo</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/media/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/media/css/geral.css" />
+    <link rel="stylesheet" type="text/css" href="/media/css/partidas.css" />
 </head>
 <body>
-    
-	ESTOU AQUI!!!! {{ usuario }}
+    <h1>Simulador da Copa do Mundo</h1>
+    <p class="descricao">Este é um simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes.</p>
+    <p>Contrário dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado dos palpites de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida.</p>
+    <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha e Suiça :D...</p>
+    <h2 class="final">Por enquanto e final será:</h2>
+    <ul class="partidas">
+	{% for rodada in rodadas %}
+        {% for partida in rodada.partidas %}
+            <li class="partida" id="partida_{{partida.id}}">
+                <h2 class="data{% if partida.realizada %} realizada{% endif %}">{{partida.data|date:"D d M Y H:i"}}{% if partida.realizada %} - Realizada{% endif %}</h2><br />
+                {% if partida.realizada %}
+                    <span class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome}}</span>
+                    <span class="gols">{{partida.gols_time_1}}</span>
+                    X
+                    <span class="gols">{{partida.gols_time_2}}</span>
+                    <span class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome}}</span>
+                {% else %}
+                    <form action="/registra_palpite/">
+                        <input type="hidden" name="partida_id" value="{{partida.id}}" />
+                        <input type="hidden" name="rodada_id" value="{{rodada.id}}" />
+                        <span class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome}}</span>
+                        <input class="palpite" type="text" name="palpiteTime1" title="Palpite para {{partida.time_1.nome}}" maxlength="1" />
+                        X
+                        <input class="palpite" type="text" name="palpiteTime2" title="Palpite para {{partida.time_2.nome}}" maxlength="1" />
+                        <span class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome}}</span><br />
+                        <input type="submit" class="enviar" value="Enviar" title="Enviar palpite para {{partida.time_1.nome}} X {{partida.time_2.nome}}" />
+        	        </form>
+                {% endif %}
+                <div class="resultado-parcial{% if partida.realizada %} realizada{% endif %}">
+                    <h3 class="parcial">Resultado dos palpites (média):</h3>
+    	            {% if partida.votos %}
+                        <span class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome}}</span>
+                        <span class="gols">{{partida.media_palpites_time_1}}</span>
+                        X
+                        <span class="gols">{{partida.media_palpites_time_2}}</span>
+                        <span class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome}}</span>
+                    {% else %}
+                        <span class="nenhum-palpite">Não há palpites para essa partida</span>
+    	            {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    {% endfor %}
+    </ul>
+    <ul class="indice">
+        <li><a href="/grupos.html">Veja os grupos com suas classificações da primeira fase<a></li>
+        <li><a href="/rodada/rodada_1/">Partidas da 1ª rodada</a></li>
+        <li><a href="/rodada/rodada_2/">Partidas da 2ª rodada</a></li>
+        <li><a href="/rodada/rodada_3/">Partidas da 3ª rodada</a></li>
+        <li><a href="/rodada/oitavas/">Partidas das Oitavas</a></li>
+        <li><a href="/rodada/quartas/">Partidas das Quartas</a></li>
+        <li><a href="/rodada/semifinais/">Partidas das Semifinais</a></li>
+        <li><a href="/rodada/terceiro_lugar/">Disputa de terceiro lugar</a></li>
+        <li><a href="/rodada/final/">Grande Final</a></li>
+        <li><a href="/partidas.html">Se se navegador não suporta JavaScript, acesse esse link para ver todas as partidas de todas as rodadas.</a></li>
+    </ul>
 </body>
 </html>

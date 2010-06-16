@@ -63,7 +63,7 @@ class Partida(models.Model):
         db_table = 'partidas'
 
     def __unicode__(self):
-        locale.setlocale(locale.LC_ALL, 'pt_BR')
+        #locale.setlocale(locale.LC_ALL, 'pt_BR')
         formato_data = '%a %d %B - %H:%M'
         if self.time_1:
             return '%s - %s x %s - %s' % (

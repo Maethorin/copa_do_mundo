@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 from django.conf.urls.defaults import *
+from copa_do_mundo import settings
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -21,6 +22,10 @@ urlpatterns = patterns('',
 
     (r'^admin/', include(admin.site.urls)),
 
-    url(r'^media/(?P<path>.*)', 'copa_do_mundo.static_serve.serve_media',
-                                name='serve_media_file'),
 )
+
+if settings.LOCAL_DEVELOPMENT:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)', 'copa_do_mundo.static_serve.serve_media',
+                                name='serve_media_file'),
+    )
