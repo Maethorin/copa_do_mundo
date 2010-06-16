@@ -44,11 +44,12 @@
                                 X
                                 <input class="palpite" type="text" name="palpiteTime2" title="Palpite para {{partida.time_2.nome}}" maxlength="1" />
                                 <span class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome}}</span><br />
+                                <div class="computado" style="display:none;">Voto computado</div>                            
                                 <input type="submit" class="enviar" value="Enviar" title="Enviar palpite para {{partida.time_1.nome}} X {{partida.time_2.nome}}" />
                 	        </form>
         	            {% endif %}
     	                <div class="resultado-parcial{% if partida.realizada %} realizada{% endif %}">
-                            <h3 class="parcial">Resultado dos palpites (média):</h3>
+                            <h3 class="parcial">Resultado dos palpites:<span class="votos">Votos: {{partida.votos}}</span></h3>
             	            {% if partida.votos %}
                                 <span class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome}}</span>
                                 <span class="gols">{{partida.media_palpites_time_1}}</span>

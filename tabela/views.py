@@ -86,6 +86,6 @@ def registra_palpite(request):
     partida.palpites_time_2 += palpite_time_2
     partida.save()
     if json:
-        return HttpResponse('{"partida_id": "partida_%s", "gols_time_1": %s, "gols_time_2": %s}' % (partida.id, partida.media_palpites_time_1(), partida.media_palpites_time_2()), mimetype="text/json")
+        return HttpResponse('{"partida_id": "partida_%s", "gols_time_1": %s, "gols_time_2": %s, "votos": %s}' % (partida.id, partida.media_palpites_time_1(), partida.media_palpites_time_2(), partida.votos), mimetype="text/json")
 
     return HttpResponseRedirect('/rodada/%s' % rodada_id)
