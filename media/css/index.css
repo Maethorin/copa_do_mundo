@@ -1,0 +1,82 @@
+h1 {
+    font-family: helvetica;
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    background-color: #090;
+    padding: 10px 0 10px 25px;
+}
+
+h2 {
+    font-family: helvetica;
+    font-size: 18px;
+    color: white;
+    background-color: #090;
+    padding: 4px 0 4px 8px;
+}
+
+p {
+    font-family: helvetica;
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 18px;
+    text-indent: 15px;
+}
+
+p.descricao {
+    font-size: 18px;
+    padding: 5px 0 5px 25px;
+    background-color: #FF0;
+    border-bottom: 1px solid black;
+    margin-bottom: 15px;
+    text-indent: 0;
+}
+
+div.esquerdo {
+    float: left;
+    border: 1px solid gray;
+    margin: 0 5px 0 100px;
+    width: 170px;
+    padding: 6px;
+    letter-spacing: 1px;
+    line-height: 24px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+div.esquerdo li {
+    background-color: #EFEFEF;
+    border-top: 1px solid gray;
+    width: 170px;
+}
+
+div.esquerdo li:hover {
+    background-color: #DDD;
+}
+
+div.esquerdo a {
+    text-decoration: none;
+    font-family: arial;
+    font-size: 14px;
+    color: #090;
+}
+
+div.esquerdo a div {
+    padding-left: 8px;
+}
+
+div.centro {
+    float: left;
+    border: 1px solid gray;
+    margin: 0 5px;
+    width: 670px;
+    padding: 6px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+div.direito {
+    float: left;
+    margin: 0 100px 0 5px;
+    width: 160px;
+}
