@@ -2,7 +2,9 @@
 # encoding: utf-8
 
 import locale
+import datetime
 from django.db import models
+from copa_do_mundo import settings
 
 class Grupo(models.Model):
     id = models.AutoField(primary_key=True, db_column='grupo_id')
@@ -77,7 +79,15 @@ class Partida(models.Model):
             self.regra_para_times, 
             self.data.strftime(formato_data)
         )
-    
+
+    def em_andamento(self):
+        data_atual = datetime.datetime.today()
+        data_atual = data_atual + datetime.timedelta(hours=settings.SERVER_TIME_DIFF)
+        data_limite = self.data + datetime.timedelta(minutes=-3)
+        if data_limite <= data_atual and not self.realizada:
+            return True
+        return False
+
     def media_palpites_time_1(self):
         if not self.votos or self.votos < 0:
             return 0

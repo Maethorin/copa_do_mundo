@@ -8,6 +8,7 @@ import tabela
 DEBUG = True
 LOCAL_DEVELOPMENT = True
 TEMPLATE_DEBUG = True
+SERVER_TIME_DIFF = 0
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),

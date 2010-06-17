@@ -12,6 +12,7 @@ $(function() {
                      atual.$gols_time_2.html(resultado.gols_time_2);
                      atual.$votos.html('Total: ' + resultado.votos);
                      atual.$computado.show();
+                     atual.$parcial.show();
                      atual.$enviar.hide();
                  },
               });
@@ -50,6 +51,7 @@ function partida(partida_id) {
         $gols_time_2: $(gols_time_2),
         $computado: $computado,
         $votos: $votos,
-        $enviar: $enviar
+        $enviar: $enviar,
+        $parcial: $parcial
     };
 }

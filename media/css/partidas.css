@@ -50,6 +50,16 @@ li.partida div.computado {
     -webkit-border-radius: 3px;
 }
 
+li.partida div.encerrada {
+    padding: 3px;
+    background-color: #e37144;
+    font-size: 16px;
+    margin: 6px 40px 15px;
+    color: white;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
 h2.data {
     text-align: right;
     padding: 3px;
@@ -64,6 +74,12 @@ h2.data {
 h2.realizada {
     margin-bottom: 3px;
     background-color: #428855;
+}
+
+h2.andamento {
+    margin-bottom: 3px;
+    background-color: #FF0;
+    color: black;
 }
 
 li input.enviar {
@@ -95,10 +111,17 @@ li div.resultado-parcial {
     padding-bottom: 4px;
     margin-top: 8px;
     border: solid #FEE 1px;
+    display: none;
 }
 
 li div.realizada {
     margin-top: 46px;
+    display: block;
+}
+
+li div.andamento {
+    margin-top: 19px;
+    display: block;
 }
 
 li div.resultado-parcial h3.parcial {

@@ -77,6 +77,9 @@ def registra_palpite(request):
         palpite_time_2 = 0
 
     partida = Partida.objects.get(id=partida_id)
+    if partida.em_andamento():
+        return HttpResponseRedirect('/rodada/%s' % rodada_id)
+
     if not partida.votos:
         partida.votos = 0
         partida.palpites_time_1 = 0
