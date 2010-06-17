@@ -21,17 +21,18 @@ def obter_times_de_partidas(partidas):
         partida.time_1 = time1
         partida.time_2 = time2
 
-def obtem_times_de_partida_de_outras_fases(regra, perdedor=False):
+def obtem_times_de_partida_de_outras_fases(regra):
     ids = parser_regra.obtem_ids_de_partida_de_regra(regra)
     partida1 = Partida.objects.get(id=ids[0])
     partida2 = Partida.objects.get(id=ids[1])
-
+    perdedor = False
     if partida1.rodada == 'oitavas':
         partida1.time_1, partida1.time_2 = obtem_times_de_partida_de_oitavas(partida1.regra_para_times)
         partida2.time_1, partida2.time_2 = obtem_times_de_partida_de_oitavas(partida2.regra_para_times)
     elif parser_regra.eh_disputa_de_terceiro_lugar(regra):
-        partida1.time_1, partida1.time_2 = obtem_times_de_partida_de_outras_fases(partida1.regra_para_times, perdedor=True)
-        partida2.time_1, partida2.time_2 = obtem_times_de_partida_de_outras_fases(partida2.regra_para_times, perdedor=True)
+        partida1.time_1, partida1.time_2 = obtem_times_de_partida_de_outras_fases(partida1.regra_para_times)
+        partida2.time_1, partida2.time_2 = obtem_times_de_partida_de_outras_fases(partida2.regra_para_times)
+        perdedor = True
     else:
         partida1.time_1, partida1.time_2 = obtem_times_de_partida_de_outras_fases(partida1.regra_para_times)
         partida2.time_1, partida2.time_2 = obtem_times_de_partida_de_outras_fases(partida2.regra_para_times)
