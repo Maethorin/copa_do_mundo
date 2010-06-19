@@ -30,6 +30,7 @@ class Time(models.Model):
     empates = 0
     gols_feitos = 0
     gols_tomados = 0
+    saldo_de_gols = 0
 
     def derrotas(self):
         return self.jogos - (self.vitorias + self.empates)
@@ -85,6 +86,13 @@ class Partida(models.Model):
         data_atual = data_atual + datetime.timedelta(hours=settings.SERVER_TIME_DIFF)
         data_limite = self.data + datetime.timedelta(minutes=-3)
         if data_limite <= data_atual and not self.realizada:
+            return True
+        return False
+
+    def time_eh_diferente(self, time1, time2):
+        if self.time_1 and time1 and self.time_1.id != time1.id:
+            return True
+        if self.time_2 and time2 and self.time_2.id != time2.id:
             return True
         return False
 

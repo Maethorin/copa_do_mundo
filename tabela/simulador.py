@@ -17,9 +17,16 @@ def obter_times_de_partidas(partidas):
             time1, time2 = obtem_times_de_partida_de_oitavas(partida.regra_para_times)
         else:
             time1, time2 = obtem_times_de_partida_de_outras_fases(partida.regra_para_times)
+        
+        if not partida.realizada:
+            if partida.time_eh_diferente(time1, time2):
+                partida.palpites_time_1 = 0
+                partida.palpites_time_2 = 0
+                partida.votos = 0
 
-        partida.time_1 = time1
-        partida.time_2 = time2
+            partida.time_1 = time1
+            partida.time_2 = time2
+            partida.save()
 
 def obtem_times_de_partida_de_outras_fases(regra):
     ids = parser_regra.obtem_ids_de_partida_de_regra(regra)
@@ -57,7 +64,7 @@ def obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo):
     times = Time.objects.filter(grupo__nome__exact=nome_do_grupo)
     times_lista = []
     for time in times:
-        partidas = Partida.objects.filter(Q(time_1__id__exact=time.id) | Q(time_2__id__exact=time.id))
+        partidas = Partida.objects.filter(Q(rodada__startswith='rodada_') & (Q(time_1__id__exact=time.id) | Q(time_2__id__exact=time.id)))
         for partida in partidas:
             vitorioso, gols_time_1, gols_time_2 = obter_time_na_partida(partida)
             soma_gols_do_time(time, gols_time_1, gols_time_2, partida.time_1.id)
