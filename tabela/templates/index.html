@@ -34,7 +34,7 @@
 <body>
     <h1>Simulador da Copa do Mundo</h1>
     <p class="descricao">Este é um simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes.</p>
-    <div class="esquerdo">
+    <div class="layout-esquerdo">
         <ul class="indice">
             <li><a href="/grupos.html" title="Veja os grupos com suas classificações da primeira fase"><div>Grupos</div><a></li>
             <li><a href="/rodada/rodada_1/"><div>1ª rodada</div></a></li>
@@ -48,7 +48,7 @@
             <li><a href="/partidas.html" title="Se se navegador não suporta JavaScript, acesse esse link para ver todas as partidas de todas as rodadas."><div>Todas</div></a></li>
         </ul>
     </div>
-    <div class="centro">
+    <div class="layout-centro">
         <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida.</p>
         <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha e Suiça :D...</p>
         <p>A tabela com as partidas e seus resultados poderão ser acessadas nos links ao lado. As partidas não realizadas poderão receber os palpites.</p>
@@ -60,11 +60,11 @@
     	        <li class="partida" id="partida_{{partida.id}}">
     	            <h2 class="data{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">{{partida.data|date:"D d M Y H:i"}}{% if partida.realizada %} - Realizada{% endif %}{% if partida.em_andamento %} - Em jogo{% endif %}</h2><br />
     	            {% if partida.realizada or partida.em_andamento %}
-                        <span class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome}}</span>
+                        <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
                         <span class="gols">{{partida.gols_time_1|default:0}}</span>
                         X
                         <span class="gols">{{partida.gols_time_2|default:0}}</span>
-                        <span class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome}}</span>
+                        <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
                         {% if partida.em_andamento %}
                             <div class="encerrada">Votações encerradas</div>                      
                         {% endif %}                   
@@ -72,26 +72,22 @@
                         <form action="/registra_palpite/">
                             <input type="hidden" name="partida_id" value="{{partida.id}}" />
                             <input type="hidden" name="rodada_id" value="{{rodada.id}}" />
-                            <span class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome}}</span>
+                            <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
                             <input class="palpite" type="text" name="palpiteTime1" title="Palpite para {{partida.time_1.nome}}" maxlength="1" />
                             X
                             <input class="palpite" type="text" name="palpiteTime2" title="Palpite para {{partida.time_2.nome}}" maxlength="1" />
-                            <span class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome}}</span><br />
+                            <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div><br />
                             <div class="computado" style="display:none;">Palpite enviado</div>
                             <input type="submit" class="enviar" value="Enviar" title="Enviar palpite para {{partida.time_1.nome}} X {{partida.time_2.nome}}" />
             	        </form>
     	            {% endif %}
 	                <div class="resultado-parcial{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">
                         <h3 class="parcial">Resultado dos palpites:<span class="votos">Total: {{partida.votos}}</span></h3>
-        	            {% if partida.votos %}
-                            <span class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome}}</span>
-                            <span class="gols">{{partida.media_palpites_time_1}}</span>
-                            X
-                            <span class="gols">{{partida.media_palpites_time_2}}</span>
-                            <span class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome}}</span>
-                        {% else %}
-                            <span class="nenhum-palpite">Não há palpites para essa partida</span>
-        	            {% endif %}
+                        <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
+                        <span class="gols">{{partida.media_palpites_time_1}}</span>
+                        X
+                        <span class="gols">{{partida.media_palpites_time_2}}</span>
+                        <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
     	            </div>
     	        </li>
                 {% endfor %}
@@ -99,7 +95,7 @@
             </ul>
         </div>
     </div>
-    <div class="direito">
+    <div class="layout-direito">
         <script type="text/javascript"><!--
         google_ad_client = "pub-8167110538900295";
         /* 160x600, criado 17/06/10 */

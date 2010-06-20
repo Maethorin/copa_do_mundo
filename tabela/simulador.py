@@ -2,8 +2,20 @@
 # encoding: utf-8
 
 import parser_regra
-from copa_do_mundo.tabela.models import *
+
+from datetime import datetime
+
 from django.db.models import Q
+from lxml import html as lhtml
+
+from copa_do_mundo.tabela.models import *
+
+class InformacoesDePartida():
+    def __init__(self, placar, status):
+        placar = placar.split('-')
+        self.gols_time_1 = placar[0]
+        self.gols_time_2 = placar[1]
+        self.realizada = status == 'Finished'
 
 def obter_dados_de_times(grupos):
     for grupo in grupos:
@@ -26,7 +38,31 @@ def obter_times_de_partidas(partidas):
 
             partida.time_1 = time1
             partida.time_2 = time2
+            atualiza_informacoes_de_partida_em_andamento(partida)
             partida.save()
+
+def atualiza_informacoes_de_partida_em_andamento(partida):
+    if partida.em_andamento():
+        informacoes = obter_informacoes_da_partida_em_jogo(partida)
+        if informacoes:
+            partida.gols_time_1 = informacoes.gols_time_1
+            partida.gols_time_2 = informacoes.gols_time_2
+            partida.realizada = informacoes.realizada
+
+def obter_informacoes_da_partida_em_jogo(partida):
+    partidas_de_hoje = []
+    pagina_resultado = lhtml.parse('http://br.oleole.com/resultados-futebol-ao-vivo/ls.asp').getroot()
+    tabelas = pagina_resultado.cssselect('table')
+    linhas = tabelas[0].cssselect('tr.live_scores_row')
+    for linha in linhas:
+        nome_time1 = linha.cssselect('td.team1')[0].text_content()
+        nome_time2 = linha.cssselect('td.team2')[0].text_content()
+        if nome_time1 == partida.time_1.nome and nome_time2 == partida.time_2.nome:
+            placar = linha.cssselect('td.scores')[0].text_content()
+            status = linha.cssselect('td.status')[0].text_content()
+            informacoes = InformacoesDePartida(placar, status)
+            return informacoes
+    return None
 
 def obtem_times_de_partida_de_outras_fases(regra):
     ids = parser_regra.obtem_ids_de_partida_de_regra(regra)

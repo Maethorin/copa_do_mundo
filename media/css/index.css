@@ -32,7 +32,7 @@ p.descricao {
     text-indent: 0;
 }
 
-div.esquerdo {
+div.layout-esquerdo {
     float: left;
     border: 1px solid gray;
     margin: 0 5px 0 100px;
@@ -44,28 +44,28 @@ div.esquerdo {
     -webkit-border-radius: 3px;
 }
 
-div.esquerdo li {
+div.layout-esquerdo li {
     background-color: #EFEFEF;
     border-top: 1px solid gray;
     width: 170px;
 }
 
-div.esquerdo li:hover {
+div.layout-esquerdo li:hover {
     background-color: #DDD;
 }
 
-div.esquerdo a {
+div.layout-esquerdo a {
     text-decoration: none;
     font-family: arial;
     font-size: 14px;
     color: #090;
 }
 
-div.esquerdo a div {
+div.layout-esquerdo a div {
     padding-left: 8px;
 }
 
-div.centro {
+div.layout-centro {
     float: left;
     border: 1px solid gray;
     margin: 0 5px;
@@ -75,7 +75,7 @@ div.centro {
     -webkit-border-radius: 3px;
 }
 
-div.direito {
+div.layout-direito {
     float: left;
     margin: 0 100px 0 5px;
     width: 160px;

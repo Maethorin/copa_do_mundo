@@ -1,147 +1,151 @@
 
-span.time {
+div.time {
     font-size: 12px;
-    border: solid #EaEaEa 1px;
-    background-color: #EaEaEa;
+    border-top: solid #AAA 1px;
+    border-bottom: solid #AAA 1px;
+    background-color: #FAFAFA;
     background-repeat: no-repeat;
-    border-radius: 3px;
-    border-radius: 3px;
+    display: inline-block;
+    width: 92px;
+    padding: 3px;
 }
 
-span.esquerdo {
-    padding: 2px 2px 2px 19px;
-    background-position: center left;
-}
-
-span.direito {
-    padding: 2px 19px 2px 2px;
+div.esquerdo {
+    padding-right: 18px;
+    text-align: right;
     background-position: center right;
 }
 
-span.ar {
+div.direito {
+    padding-left: 18px;
+    text-align: left;
+    background-position: center left;
+}
+
+div.ar {
     background-image: url(/media/img/gif/ar.gif);
 }
 
-span.au {
+div.au {
     background-image: url(/media/img/gif/au.gif);
 }
 
-span.br {
+div.br {
     background-image: url(/media/img/gif/br.gif);
 }
 
-span.ch {
+div.ch {
     background-image: url(/media/img/gif/ch.gif);
 }
 
-span.ci {
+div.ci {
     background-image: url(/media/img/gif/ci.gif);
 }
 
-span.cl {
+div.cl {
     background-image: url(/media/img/gif/cl.gif);
 }
 
-span.cm {
+div.cm {
     background-image: url(/media/img/gif/cm.gif);
 }
 
-span.de {
+div.de {
     background-image: url(/media/img/gif/de.gif);
 }
 
-span.dk {
+div.dk {
     background-image: url(/media/img/gif/dk.gif);
 }
 
-span.dz {
+div.dz {
     background-image: url(/media/img/gif/dz.gif);
 }
 
-span.england {
+div.england {
     background-image: url(/media/img/gif/england.gif);
 }
 
-span.es {
+div.es {
     background-image: url(/media/img/gif/es.gif);
 }
 
-span.fr {
+div.fr {
     background-image: url(/media/img/gif/fr.gif);
 }
 
-span.ga {
+div.ga {
     background-image: url(/media/img/gif/ga.gif);
 }
 
-span.gr {
+div.gr {
     background-image: url(/media/img/gif/gr.gif);
 }
 
-span.hn {
+div.hn {
     background-image: url(/media/img/gif/hn.gif);
 }
 
-span.it {
+div.it {
     background-image: url(/media/img/gif/it.gif);
 }
 
-span.jp {
+div.jp {
     background-image: url(/media/img/gif/jp.gif);
 }
 
-span.kp {
+div.kp {
     background-image: url(/media/img/gif/kp.gif);
 }
 
-span.kr {
+div.kr {
     background-image: url(/media/img/gif/kr.gif);
 }
 
-span.mx {
+div.mx {
     background-image: url(/media/img/gif/mx.gif);
 }
 
-span.ng {
+div.ng {
     background-image: url(/media/img/gif/ng.gif);
 }
 
-span.nl {
+div.nl {
     background-image: url(/media/img/gif/nl.gif);
 }
 
-span.nz {
+div.nz {
     background-image: url(/media/img/gif/nz.gif);
 }
 
-span.pt {
+div.pt {
     background-image: url(/media/img/gif/pt.gif);
 }
 
-span.py {
+div.py {
     background-image: url(/media/img/gif/py.gif);
 }
 
-span.rs {
+div.rs {
     background-image: url(/media/img/gif/rs.gif);
 }
 
-span.si {
+div.si {
     background-image: url(/media/img/gif/si.gif);
 }
 
-span.sk {
+div.sk {
     background-image: url(/media/img/gif/sk.gif);
 }
 
-span.us {
+div.us {
     background-image: url(/media/img/gif/us.gif);
 }
 
-span.uy {
+div.uy {
     background-image: url(/media/img/gif/uy.gif);
 }
 
-span.za {
+div.za {
     background-image: url(/media/img/gif/za.gif);
 }

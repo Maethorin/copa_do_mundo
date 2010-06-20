@@ -36,11 +36,14 @@ def partidas(request):
         rodada['partidas'] = Partida.objects.filter(rodada__exact=rodada['id'])
         if not re.match('[1-3]', rodada['nome']):
             simulador.obter_times_de_partidas(rodada['partidas'])
+        else:
+            for partida in rodada['partidas']:
+                simulador.atualiza_informacoes_de_partida_em_andamento(partida)
+                partida.save()
   
     return render_to_response('partidas.html', {'rodadas': rodadas, 'index': index})
 
 def rodada(request, rodada_id, template='partidas.html'):
-
     rodadas = [
         {'id': 'rodada_1', 'nome': '1ª Rodada', 'index': 0}, 
         {'id': 'rodada_2', 'nome': '2ª Rodada', 'index': 1}, 
@@ -58,7 +61,11 @@ def rodada(request, rodada_id, template='partidas.html'):
             index = rodada['index']
             if not re.match('[1-3]', rodada['nome']):
                 simulador.obter_times_de_partidas(rodada['partidas'])
-        
+            else:
+                for partida in rodada['partidas']:
+                    simulador.atualiza_informacoes_de_partida_em_andamento(partida)
+                    partida.save()
+
     return render_to_response(template, {'rodadas': rodadas, 'rodada_id': rodada_id, 'index': index})
     
 def registra_palpite(request):
