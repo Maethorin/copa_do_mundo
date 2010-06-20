@@ -13,8 +13,11 @@ from copa_do_mundo.tabela.models import *
 class InformacoesDePartida():
     def __init__(self, placar, status):
         placar = placar.split('-')
-        self.gols_time_1 = placar[0]
-        self.gols_time_2 = placar[1]
+        self.gols_time_1 = 0
+        self.gols_time_2 = 0
+        if len(placar) == 2:
+            self.gols_time_1 = placar[0]
+            self.gols_time_2 = placar[1]
         self.realizada = status == 'Finished'
 
 def obter_dados_de_times(grupos):

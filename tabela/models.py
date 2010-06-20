@@ -81,6 +81,29 @@ class Partida(models.Model):
             self.data.strftime(formato_data)
         )
 
+    def vitorioso_certo(self):
+        vitorioso = None
+        if self.gols_time_1 > self.gols_time_2:
+            vitorioso = self.time_1
+        elif self.gols_time_2 > self.gols_time_1:
+            vitorioso = self.time_2
+        
+        palpite = None
+        if self.media_palpites_time_1() > self.media_palpites_time_2():
+            palpite = self.time_1
+        elif self.media_palpites_time_2() > self.media_palpites_time_1():
+            palpite = self.time_2
+
+        if vitorioso == palpite:
+            return True
+        if vitorioso and palpite:
+            if vitorioso.nome == palpite.nome:
+                return True
+        return False
+
+    def palpite_certo(self):
+        return self.media_palpites_time_1() == self.gols_time_1 and self.media_palpites_time_2() == self.gols_time_2
+
     def em_andamento(self):
         data_atual = datetime.datetime.today()
         data_atual = data_atual + datetime.timedelta(hours=settings.SERVER_TIME_DIFF)
