@@ -102,7 +102,7 @@ class Partida(models.Model):
         return False
 
     def palpite_certo(self):
-        return self.media_palpites_time_1() == self.gols_time_1 and self.media_palpites_time_2() == self.gols_time_2
+        return self.media_palpites_time_1() == int(self.gols_time_1) and self.media_palpites_time_2() == int(self.gols_time_2)
 
     def em_andamento(self):
         data_atual = datetime.datetime.today()

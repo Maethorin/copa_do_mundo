@@ -99,18 +99,20 @@ h2.data {
     font-size: 16px;
     font-weight: normal;
     color: #555;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 h2.realizada {
     background-color: #f1f1f1;
     background-image: url(/media/img/fundo_data_realizada.png);
+    margin-bottom: 8px;
 }
 
 h2.andamento {
     background-color: #FF0;
     background-image: url(/media/img/fundo_data_em_andamento.png);
     color: black;
+    margin-bottom: 8px;
 }
 
 li input.enviar {
@@ -136,6 +138,14 @@ input.palpite {
     width: 9px;
     font-size: 14px !important;
     text-align: right;
+}
+
+input.palpite.esquerdo {
+    margin-left: -3px;
+}
+
+input.palpite.direito {
+    margin-right: -3px;
 }
 
 li div.resultado-parcial {

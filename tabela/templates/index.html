@@ -70,9 +70,9 @@
                             <input type="hidden" name="partida_id" value="{{partida.id}}" />
                             <input type="hidden" name="rodada_id" value="{{rodada.id}}" />
                             <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
-                            <input class="palpite" type="text" name="palpiteTime1" title="Palpite para {{partida.time_1.nome}}" maxlength="1" />
+                            <input class="palpite esquerdo" type="text" name="palpiteTime1" title="Palpite para {{partida.time_1.nome}}" maxlength="1" />
                             X
-                            <input class="palpite" type="text" name="palpiteTime2" title="Palpite para {{partida.time_2.nome}}" maxlength="1" />
+                            <input class="palpite direito" type="text" name="palpiteTime2" title="Palpite para {{partida.time_2.nome}}" maxlength="1" />
                             <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
                             <div class="computado" style="display:none;">Palpite enviado</div>
                             <input type="submit" class="enviar" value="Enviar" title="Enviar palpite para {{partida.time_1.nome}} X {{partida.time_2.nome}}" />

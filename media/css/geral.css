@@ -6,146 +6,285 @@ div.time {
     background-color: #FAFAFA;
     background-repeat: no-repeat;
     display: inline-block;
-    width: 92px;
-    padding: 3px;
+    width: 89px;
+    padding: 2px;
+    background-image: url(/media/img/sprite_copa_bandeiras_18x12.png);
 }
 
 div.esquerdo {
-    padding-right: 18px;
+    margin-right: 4px;
+    padding-right: 22px;
     text-align: right;
-    background-position: center right;
+    background-position: 92px 1px;
 }
 
 div.direito {
-    padding-left: 18px;
+    margin-left: 4px;
+    padding-left: 22px;
     text-align: left;
-    background-position: center left;
+    background-position: 0px 1px;
 }
 
-div.ar {
-    background-image: url(/media/img/gif/ar.gif);
+div.resultado-parcial div.esquerdo {
+    margin-right: 0;
 }
 
-div.au {
-    background-image: url(/media/img/gif/au.gif);
+div.resultado-parcial div.direito {
+    margin-left: 0;
 }
 
-div.br {
-    background-image: url(/media/img/gif/br.gif);
+div.ar.esquerdo {
+    background-position: 92px -74px;
 }
 
-div.ch {
-    background-image: url(/media/img/gif/ch.gif);
+div.ar.direito {
+    background-position: 0px -74px;
 }
 
-div.ci {
-    background-image: url(/media/img/gif/ci.gif);
+div.au.esquerdo {
+    background-position: 92px -209px;
 }
 
-div.cl {
-    background-image: url(/media/img/gif/cl.gif);
+div.au.direito {
+    background-position: 0px -209px;
 }
 
-div.cm {
-    background-image: url(/media/img/gif/cm.gif);
+div.br.esquerdo {
+    background-position: 92px -374px;
 }
 
-div.de {
-    background-image: url(/media/img/gif/de.gif);
+div.br.direito {
+    background-position: 0px -374px;
 }
 
-div.dk {
-    background-image: url(/media/img/gif/dk.gif);
+div.ch.esquerdo {
+    background-position: 92px -449px;
 }
 
-div.dz {
-    background-image: url(/media/img/gif/dz.gif);
+div.ch.direito {
+    background-position: 0px -449px;
 }
 
-div.england {
-    background-image: url(/media/img/gif/england.gif);
+div.ci.esquerdo {
+    background-position: 92px -404px;
 }
 
-div.es {
-    background-image: url(/media/img/gif/es.gif);
+div.ci.direito {
+    background-position: 0px -404px;
 }
 
-div.fr {
-    background-image: url(/media/img/gif/fr.gif);
+div.cl.esquerdo {
+    background-position: 92px -479px;
 }
 
-div.ga {
-    background-image: url(/media/img/gif/ga.gif);
+div.cl.direito {
+    background-position: 0px -479px;
 }
 
-div.gr {
-    background-image: url(/media/img/gif/gr.gif);
+div.cm.esquerdo {
+    background-position: 92px -299px;
 }
 
-div.hn {
-    background-image: url(/media/img/gif/hn.gif);
+div.cm.direito {
+    background-position: 0px -299px;
 }
 
-div.it {
-    background-image: url(/media/img/gif/it.gif);
+div.de.esquerdo {
+    background-position: 92px -194px;
 }
 
-div.jp {
-    background-image: url(/media/img/gif/jp.gif);
+div.de.direito {
+    background-position: 0px -194px;
 }
 
-div.kp {
-    background-image: url(/media/img/gif/kp.gif);
+div.dk.esquerdo {
+    background-position: 92px -269px;
 }
 
-div.kr {
-    background-image: url(/media/img/gif/kr.gif);
+div.dk.direito {
+    background-position: 0px -269px;
 }
 
-div.mx {
-    background-image: url(/media/img/gif/mx.gif);
+div.dz.esquerdo {
+    background-position: 92px -164px;
 }
 
-div.ng {
-    background-image: url(/media/img/gif/ng.gif);
+div.dz.direito {
+    background-position: 0px -164px;
 }
 
-div.nl {
-    background-image: url(/media/img/gif/nl.gif);
+div.england.esquerdo {
+    background-position: 92px -134px;
 }
 
-div.nz {
-    background-image: url(/media/img/gif/nz.gif);
+div.england.direito {
+    background-position: 0px -134px;
 }
 
-div.pt {
-    background-image: url(/media/img/gif/pt.gif);
+div.es.esquerdo {
+    background-position: 92px -434px;
 }
 
-div.py {
-    background-image: url(/media/img/gif/py.gif);
+div.es.direito {
+    background-position: 0px -434px;
 }
 
-div.rs {
-    background-image: url(/media/img/gif/rs.gif);
+div.fr.esquerdo {
+    background-position: 92px -59px;
 }
 
-div.si {
-    background-image: url(/media/img/gif/si.gif);
+div.fr.direito {
+    background-position: 0px -59px;
 }
 
-div.sk {
-    background-image: url(/media/img/gif/sk.gif);
+div.ga.esquerdo {
+    background-position: 92px -239px;
 }
 
-div.us {
-    background-image: url(/media/img/gif/us.gif);
+div.ga.direito {
+    background-position: 0px -239px;
 }
 
-div.uy {
-    background-image: url(/media/img/gif/uy.gif);
+div.gr.esquerdo {
+    background-position: 92px -119px;
 }
 
-div.za {
-    background-image: url(/media/img/gif/za.gif);
+div.gr.direito {
+    background-position: 0px -119px;
+}
+
+div.hn.esquerdo {
+    background-position: 92px -464px;
+}
+
+div.hn.direito {
+    background-position: 0px -464px;
+}
+
+div.it.esquerdo {
+    background-position: 92px -314px;
+}
+
+div.it.direito {
+    background-position: 0px -314px;
+}
+
+div.jp.esquerdo {
+    background-position: 92px -284px;
+}
+
+div.jp.direito {
+    background-position: 0px -284px;
+}
+
+div.kp.esquerdo {
+    background-position: 92px -389px;
+}
+
+div.kp.direito {
+    background-position: 0px -389px;
+}
+
+div.kr.esquerdo {
+    background-position: 92px -105px;
+}
+
+div.kr.direito {
+    background-position: 0px -105px;
+}
+
+div.mx.esquerdo {
+    background-position: 92px -29px;
+}
+
+div.mx.direito {
+    background-position: 0px -29px;
+}
+
+div.ng.esquerdo {
+    background-position: 92px -89px;
+}
+
+div.ng.direito {
+    background-position: 0px -89px;
+}
+
+div.nl.esquerdo {
+    background-position: 92px -254px;
+}
+
+div.nl.direito {
+    background-position: 0px -254px;
+}
+
+div.nz.esquerdo {
+    background-position: 92px -344px;
+}
+
+div.nz.direito {
+    background-position: 0px -344px;
+}
+
+div.pt.esquerdo {
+    background-position: 92px -419px;
+}
+
+div.pt.direito {
+    background-position: 0px -419px;
+}
+
+div.py.esquerdo {
+    background-position: 92px -329px;
+}
+
+div.py.direito {
+    background-position: 0px -329px;
+}
+
+div.rs.esquerdo {
+    background-position: 92px -224px;
+}
+
+div.rs.direito {
+    background-position: 0px -224px;
+}
+
+div.si.esquerdo {
+    background-position: 92px -179px;
+}
+
+div.si.direito {
+    background-position: 0px -179px;
+}
+
+div.sk.esquerdo {
+    background-position: 92px -359px;
+}
+
+div.sk.direito {
+    background-position: 0px -359px;
+}
+
+div.us.esquerdo {
+    background-position: 92px -149px;
+}
+
+div.us.direito {
+    background-position: 0px -149px;
+}
+
+div.uy.esquerdo {
+    background-position: 92px -44px;
+}
+
+div.uy.direito {
+    background-position: 0px -44px;
+}
+
+div.za.esquerdo {
+    background-position: 92px -14px;
+}
+
+div.za.direito {
+    background-position: 0px -14px;
 }
