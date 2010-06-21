@@ -20,9 +20,9 @@ class InformacoesDePartida():
             self.gols_time_2 = placar[1]
         self.realizada = status == 'Finished'
 
-def obter_dados_de_times(grupos):
+def obter_dados_de_times(grupos, atual=False):
     for grupo in grupos:
-        grupo.times = obtem_times_do_grupo_ordenados_por_classificacao(grupo.nome)
+        grupo.times = obtem_times_do_grupo_ordenados_por_classificacao(grupo.nome, atual)
 
 def obter_times_de_partidas(partidas):
     for partida in partidas:
@@ -99,11 +99,14 @@ def obtem_time_do_grupo_na_classificacao(nome_do_grupo, classificacao):
     times = obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo) 
     return times[classificacao - 1]
 
-def obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo):
+def obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo, atual=False):
     times = Time.objects.filter(grupo__nome__exact=nome_do_grupo)
     times_lista = []
     for time in times:
-        partidas = Partida.objects.filter(Q(rodada__startswith='rodada_') & (Q(time_1__id__exact=time.id) | Q(time_2__id__exact=time.id)))
+        filtros = Q(rodada__startswith='rodada_') & (Q(time_1__id__exact=time.id) | Q(time_2__id__exact=time.id))
+        if atual:
+            filtros = filtros & Q(realizada=True)
+        partidas = Partida.objects.filter(filtros)
         for partida in partidas:
             vitorioso, gols_time_1, gols_time_2 = obter_time_na_partida(partida)
             soma_gols_do_time(time, gols_time_1, gols_time_2, partida.time_1.id)
@@ -204,3 +207,11 @@ def reposiciona_e_reordena_na_original(lista_de_empates, indices_dos_empatados, 
 def adiciona_item_a_lista(lista, item):
     if not item in lista:
         lista.append(item)
+
+def obter_partidas_em_andamento():
+    em_andamento = []
+    partidas = Partida.objects.all()
+    for partida in partidas:
+        if partida.em_andamento():
+            em_andamento.append(partida)
+    return em_andamento

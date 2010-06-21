@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
     <meta name="author" content="Márcio Duarte" />
     <meta name="description" content="Tabela com os grupos da Copa do Mundo e sua classificação de acordo com os jogos ou o resultado dos palpites enviados." />
-    <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos" />
+    <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos,placar,times na copa.classificacao" />
     <link rel="stylesheet" type="text/css" href="/media/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/media/css/geral.css" />
     <link rel="stylesheet" type="text/css" href="/media/css/grupos.css" />
@@ -30,7 +30,38 @@
     </script>
 </head>
 <body>
-    <p><a href="/index.html">Home</a></p>
+    <h1 class="titulo"><a href="/index.html">Simulador da Copa do Mundo</a></h1>
+    <p class="descricao">Este é um simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes.</p>
+    {% if atual %}
+        <h2>Classificação atual da Copa do Mundo</h2>
+    {% else %}
+        <h2>Classificação simulada da Copa do Mundo</h2>
+    {% endif %}
+    <div class="layout-esquerdo">
+        <ul class="indice">
+            <li><a href="/classificacao.html" title="Classificação segundo a simulação"><div>Classificação simulada</div></a></li>
+            <li><a href="/classificacao_atual.html" title="Classificação real"><div>Classificação real</div></a></li>
+            <li><a href="/rodada/rodada_1/"><div>1ª rodada</div></a></li>
+            <li><a href="/rodada/rodada_2/"><div>2ª rodada</div></a></li>
+            <li><a href="/rodada/rodada_3/"><div>3ª rodada</div></a></li>
+            <li><a href="/rodada/oitavas/"><div>Oitavas</div></a></li>
+            <li><a href="/rodada/quartas/"><div>Quartas</div></a></li>
+            <li><a href="/rodada/semifinais/"><div>Semifinais</div></a></li>
+            <li><a href="/rodada/terceiro_lugar/"><div>Terceiro lugar</div></a></li>
+            <li><a href="/rodada/final/"><div>Grande Final</div></a></li>
+            <li><a href="/partidas.html" title="Se se navegador não suporta JavaScript, acesse esse link para ver todas as partidas de todas as rodadas."><div>Todas</div></a></li>
+        </ul>
+    </div>
+    <div class="layout-centro">
+    {% if atual %}
+    <p>
+        A tabela abaixo usa o resultado real das partidas para mostrar a classificação atual.<br /><a href="classificacao.html" title="Classificação dos times na copa segundo a simulação.">Clique aqui para ver a classificação final</a> segundo a simulação do site.
+    </p>
+    {% else %}
+    <p>
+        A tabela abaixo usa a simulação calculada pelo site para mostrar a classificação final. Ela não representa a posição atual dos times na copa.<br /><a href="classificacao_atual.html" title="Classificação dos times na copa.">Clique aqui para ver a classificação atual.</a>
+    </p>
+    {% endif %}
     <ul class="grupo">
 	{% for grupo in grupos %}
 	    <li class="grupo">
@@ -87,5 +118,6 @@
         src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
         </script>
     </div>
+</div>
 </body>
 </html>

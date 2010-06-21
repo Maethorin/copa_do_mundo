@@ -1,3 +1,4 @@
+{% load partida_tag %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="pt-BR">
 <head>
@@ -5,7 +6,7 @@
 	<meta charset="UTF-8" />
     <meta name="author" content="Márcio Duarte" />
     <meta name="description" content="Simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida." />
-    <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos" />
+    <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos,placar,times da copa" />
     <link rel="stylesheet" type="text/css" href="/media/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/media/css/geral.css" />
     <link rel="stylesheet" type="text/css" href="/media/css/index.css" />
@@ -32,11 +33,12 @@
     </script>
 </head>
 <body>
-    <h1>Simulador da Copa do Mundo</h1>
+    <h1 class="titulo"><a href="/index.html">Simulador da Copa do Mundo</a></h1>
     <p class="descricao">Este é um simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes.</p>
     <div class="layout-esquerdo">
         <ul class="indice">
-            <li><a href="/grupos.html" title="Veja os grupos com suas classificações da primeira fase"><div>Grupos</div><a></li>
+            <li><a href="/classificacao.html" title="Classificação segundo a simulação"><div>Classificação simulada</div></a></li>
+            <li><a href="/classificacao_atual.html" title="Classificação real"><div>Classificação real</div></a></li>
             <li><a href="/rodada/rodada_1/"><div>1ª rodada</div></a></li>
             <li><a href="/rodada/rodada_2/"><div>2ª rodada</div></a></li>
             <li><a href="/rodada/rodada_3/"><div>3ª rodada</div></a></li>
@@ -50,58 +52,27 @@
     </div>
     <div class="layout-centro">
         <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida.</p>
-        <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha e Suiça :D...</p>
+        <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha x Suiça, Alemanha x Sérvia :D...</p>
         <p>A tabela com as partidas e seus resultados poderão ser acessadas nos links ao lado. As partidas não realizadas poderão receber os palpites.</p>
-        <h2 class="final">Por enquanto a final será:</h2>
+        <p>Acompanhe também, nessa página, o placar das partidas em andamento.</p>
         <div class="rodadas">
-            <ul class="partidas">
         	{% for rodada in rodadas %}
+        	    {% if rodada.partidas %}
+        	    <div class="partidas">
+        	        {% ifequal rodada.id 'final' %}
+                    <h2 class="final">Por enquanto a final será:</h2>
+                    {% endifequal %}
+        	        {% ifequal rodada.id 'em_andamento' %}
+                    <h2 class="em_andamento">Partidas em jogo:</h2>
+                    {% endifequal %}
                 {% for partida in rodada.partidas %}
-    	        <li class="partida" id="partida_{{partida.id}}">
-    	            <h2 class="data{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">{{partida.data|date:"D d M Y H:i"}}{% if partida.realizada %} - Realizada{% endif %}{% if partida.em_andamento %} - Em jogo{% endif %}</h2>
-    	            {% if partida.realizada or partida.em_andamento %}
-                        <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
-                        <span class="gols">{{partida.gols_time_1|default:0}}</span>
-                        X
-                        <span class="gols">{{partida.gols_time_2|default:0}}</span>
-                        <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
-                    {% else %}
-                        <form action="/registra_palpite/">
-                            <input type="hidden" name="partida_id" value="{{partida.id}}" />
-                            <input type="hidden" name="rodada_id" value="{{rodada.id}}" />
-                            <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
-                            <input class="palpite esquerdo" type="text" name="palpiteTime1" title="Palpite para {{partida.time_1.nome}}" maxlength="1" />
-                            X
-                            <input class="palpite direito" type="text" name="palpiteTime2" title="Palpite para {{partida.time_2.nome}}" maxlength="1" />
-                            <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
-                            <div class="computado" style="display:none;">Palpite enviado</div>
-                            <input type="submit" class="enviar" value="Enviar" title="Enviar palpite para {{partida.time_1.nome}} X {{partida.time_2.nome}}" />
-            	        </form>
-    	            {% endif %}
-	                <div class="resultado-parcial{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">
-                        <h3 class="parcial">Resultado dos palpites:<span class="votos">Total: {{partida.votos}}</span></h3>
-                        <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
-                        <span class="gols">{{partida.media_palpites_time_1}}</span>
-                        X
-                        <span class="gols">{{partida.media_palpites_time_2}}</span>
-                        <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
-        	            {% if partida.realizada or partida.em_andamento %}
-                            {% if partida.palpite_certo %}
-                                <div class="palpite certo"><div class="certo">Placar</div></div>
-                            {% else %}
-                                {% if partida.vitorioso_certo %}
-                                    <div class="palpite errado"><div class="errado">Placar</div></div>
-                                    <div class="palpite certo"><div class="certo">Ganhador</div></div>
-                                {% else %}
-                                    <div class="palpite errado"><div class="errado">Placar</div></div>
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-    	            </div>
-    	        </li>
+                    <ul class="partidas">
+                        {% partida_tag %}
+                    </ul>
                 {% endfor %}
+                </div>
+                {% endif %}
             {% endfor %}
-            </ul>
         </div>
     </div>
     <div class="layout-direito">

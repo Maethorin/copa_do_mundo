@@ -13,23 +13,29 @@ from copa_do_mundo.tabela.models import *
 from copa_do_mundo.tabela import simulador
 
 def index(request):
-    return rodada(request, 'final', template='index.html')
+    return rodada(request, 'final', template='index.html', inclui_partida_em_andamento=True)
  
 def grupos(request):
     grupos = Grupo.objects.all()
     simulador.obter_dados_de_times(grupos)
-    return render_to_response('grupos.html', {'grupos': grupos})
+    return render_to_response('grupos.html', {'grupos': grupos, 'atual': False})
+
+def grupos_atual(request):
+    grupos = Grupo.objects.all()
+    simulador.obter_dados_de_times(grupos, atual=True)
+    return render_to_response('grupos.html', {'grupos': grupos, 'atual': True})
 
 def partidas(request):
     rodadas = [
-        {'id': 'rodada_1', 'nome': '1ª Rodada', 'index': 0}, 
-        {'id': 'rodada_2', 'nome': '2ª Rodada', 'index': 1}, 
-        {'id': 'rodada_3', 'nome': '3ª Rodada', 'index': 2},
-        {'id': 'oitavas', 'nome': 'Oitavas', 'index': 3},
-        {'id': 'quartas', 'nome': 'Quartas', 'index': 4},
-        {'id': 'semifinais', 'nome': 'Semifinais', 'index': 5},
-        {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'index': 6},
-        {'id': 'final', 'nome': 'Final', 'index': 7}
+        {'id': 'em_andamento', 'nome': 'Em Andamento', 'index': 0},
+        {'id': 'rodada_1', 'nome': '1ª Rodada', 'index': 1}, 
+        {'id': 'rodada_2', 'nome': '2ª Rodada', 'index': 2}, 
+        {'id': 'rodada_3', 'nome': '3ª Rodada', 'index': 3},
+        {'id': 'oitavas', 'nome': 'Oitavas', 'index': 4},
+        {'id': 'quartas', 'nome': 'Quartas', 'index': 5},
+        {'id': 'semifinais', 'nome': 'Semifinais', 'index': 6},
+        {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'index': 7},
+        {'id': 'final', 'nome': 'Final', 'index': 8}
     ]
     index = 0
     for rodada in rodadas:
@@ -43,28 +49,30 @@ def partidas(request):
   
     return render_to_response('partidas.html', {'rodadas': rodadas, 'index': index})
 
-def rodada(request, rodada_id, template='partidas.html'):
+def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andamento=False):
     rodadas = [
-        {'id': 'rodada_1', 'nome': '1ª Rodada', 'index': 0}, 
-        {'id': 'rodada_2', 'nome': '2ª Rodada', 'index': 1}, 
-        {'id': 'rodada_3', 'nome': '3ª Rodada', 'index': 2},
-        {'id': 'oitavas', 'nome': 'Oitavas', 'index': 3},
-        {'id': 'quartas', 'nome': 'Quartas', 'index': 4},
-        {'id': 'semifinais', 'nome': 'Semifinais', 'index': 5},
-        {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'index': 6},
-        {'id': 'final', 'nome': 'Final', 'index': 7}
+        {'id': 'em_andamento', 'nome': 'Em Andamento', 'index': 0},
+        {'id': 'rodada_1', 'nome': '1ª Rodada', 'index': 1}, 
+        {'id': 'rodada_2', 'nome': '2ª Rodada', 'index': 2}, 
+        {'id': 'rodada_3', 'nome': '3ª Rodada', 'index': 3},
+        {'id': 'oitavas', 'nome': 'Oitavas', 'index': 4},
+        {'id': 'quartas', 'nome': 'Quartas', 'index': 5},
+        {'id': 'semifinais', 'nome': 'Semifinais', 'index': 6},
+        {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'index': 7},
+        {'id': 'final', 'nome': 'Final', 'index': 8}
     ]
     index = 0
+    rodadas[0]['partidas'] = simulador.obter_partidas_em_andamento()
+    for partida in rodadas[0]['partidas']:
+        simulador.atualiza_informacoes_de_partida_em_andamento(partida)
+        partida.save()
+
     for rodada in rodadas:
-        if rodada['id'] == rodada_id:
+        if rodada['id'] == rodada_id and rodada_id != 'em_andamento':
             rodada['partidas'] = Partida.objects.filter(rodada__exact=rodada['id'])
             index = rodada['index']
             if not re.match('[1-3]', rodada['nome']):
                 simulador.obter_times_de_partidas(rodada['partidas'])
-            else:
-                for partida in rodada['partidas']:
-                    simulador.atualiza_informacoes_de_partida_em_andamento(partida)
-                    partida.save()
 
     return render_to_response(template, {'rodadas': rodadas, 'rodada_id': rodada_id, 'index': index})
     
