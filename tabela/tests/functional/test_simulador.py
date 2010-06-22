@@ -73,5 +73,5 @@ def test_normalizar_lista_com_saldo_de_gols_recupera_saldo_quando_ha_empate():
 def test_obtem_times_de_partida_de_oitavas():
     time1, time2 = simulador.obtem_times_de_partida_de_oitavas('1Ax2B')
     
-    assert_equals(time1.nome, 'França')
-    assert_equals(time2.nome, 'Coreia do Sul')
+    assert_equals(time1.nome, 'Uruguai')
+    assert_equals(time2.nome, 'Coréia do Sul')
