@@ -1,4 +1,3 @@
-{% load partida_tag %}
 <!DOCTYPE HTML>
 <html lang="pt-BR">
 <head>
@@ -33,8 +32,7 @@
     </script>
 </head>
 <body>
-    <h1 class="titulo"><a href="/index.html">Simulador da Copa do Mundo</a></h1>
-    <p class="descricao">Este é um simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes.</p>
+    {% include "cabecalho.html" %}
     <div>
         <script type="text/javascript"><!--
         google_ad_client = "pub-8167110538900295";
@@ -59,7 +57,7 @@
         	    <h1 class="nome-rodada">{{rodada.nome}}</h1>
                 <ul class="partidas">
         	    {% for partida in rodada.partidas %}
-                    {% partida_tag %}
+                    {% include "partida_tag.html" %}
                 {% empty %}
                     <li>Não há partidas no momento.</li>
         	    {% endfor %}
@@ -73,5 +71,6 @@
             montaTabs({{index}});
         });
     </script>
+    {% include "rodape.html" %}
 </body>
 </html>

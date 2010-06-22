@@ -3,8 +3,8 @@ h1.titulo {
     font-size: 36px;
     font-weight: bold;
     color: white;
-    background-color: #090;
-    padding: 10px 0 10px 25px;
+    background-color: #00923E;
+    padding: 10px 0 8px 25px;
 }
 
 h1.titulo a {
@@ -24,20 +24,22 @@ p.descricao {
     font-family: helvetica;
     font-size: 18px;
     padding: 5px 0 5px 25px;
-    background-color: #FF0;
+    background-color: #28166F;
+    border-top: 12px solid #F8C100;
     border-bottom: 1px solid black;
     margin-bottom: 15px;
     text-indent: 0;
+    color: white;
 }
 
 div.layout-esquerdo {
     float: left;
-    border: 1px solid gray;
     margin: 0 5px 0 100px;
     width: 180px;
     padding: 6px;
     letter-spacing: 1px;
     line-height: 24px;
+    border: 1px solid gray;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 }
@@ -346,4 +348,32 @@ div.za.esquerdo {
 
 div.za.direito {
     background-position: 0px -14px;
+}
+
+div.rodape {
+    margin-top: 10px;
+    font-family: helvetica;
+    font-size: 11px;
+    clear: both;
+    text-align: center;
+    padding: 20px;
+    background-color: #FFA;
+}
+
+div.rodape ul {
+    margin: 0 0 15px 210px;
+    width: 890px;
+    overflow: auto;
+    text-align: center;
+}
+
+div.rodape ul li {
+    margin-left: 12px;
+    float: left;
+}
+
+div.rodape ul li a {
+    font-family: arial;
+    font-size: 12px;
+    color: blue;
 }

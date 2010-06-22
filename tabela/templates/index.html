@@ -1,4 +1,3 @@
-{% load partida_tag %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="pt-BR">
 <head>
@@ -33,8 +32,7 @@
     </script>
 </head>
 <body>
-    <h1 class="titulo"><a href="/index.html">Simulador da Copa do Mundo</a></h1>
-    <p class="descricao">Este é um simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes.</p>
+    {% include "cabecalho.html" %}
     <div class="layout-esquerdo">
         <ul class="indice">
             <li><a href="/classificacao.html" title="Classificação segundo a simulação"><div>Classificação simulada</div></a></li>
@@ -51,7 +49,7 @@
         </ul>
     </div>
     <div class="layout-centro">
-        <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida.</p>
+        <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na partida.</p>
         <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha x Suiça, Alemanha x Sérvia :D...</p>
         <p>A tabela com as partidas e seus resultados poderão ser acessadas nos links ao lado. As partidas não realizadas poderão receber os palpites.</p>
         <p>Acompanhe também, nessa página, o placar das partidas em andamento.</p>
@@ -67,7 +65,7 @@
                     {% endifequal %}
                 {% for partida in rodada.partidas %}
                     <ul class="partidas">
-                        {% partida_tag %}
+                        {% include "partida_tag.html" %}
                     </ul>
                 {% endfor %}
                 </div>
@@ -88,5 +86,6 @@
         src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
         </script>
     </div>
+    {% include "rodape.html" %}
 </body>
 </html>
