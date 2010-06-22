@@ -91,6 +91,12 @@ def registra_palpite(request):
     except ValueError:
         palpite_time_2 = 0
 
+    if palpite_time_1 > 7:
+        palpite_time_1 = 0
+
+    if palpite_time_2 > 7:
+        palpite_time_2 = 0
+
     partida = Partida.objects.get(id=partida_id)
     if partida.em_andamento():
         return HttpResponseRedirect('/rodada/%s' % rodada_id)
