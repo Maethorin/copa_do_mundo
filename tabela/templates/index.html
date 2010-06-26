@@ -36,25 +36,14 @@
 <body>
     {% include "cabecalho.html" %}
     <div class="layout-esquerdo">
-        <ul class="indice">
-            <li><a href="/classificacao.html" title="Classificação segundo a simulação"><div>Classificação simulada</div></a></li>
-            <li><a href="/classificacao_atual.html" title="Classificação real"><div>Classificação real</div></a></li>
-            <li><a href="/rodada/rodada_1/"><div>1ª rodada</div></a></li>
-            <li><a href="/rodada/rodada_2/"><div>2ª rodada</div></a></li>
-            <li><a href="/rodada/rodada_3/"><div>3ª rodada</div></a></li>
-            <li><a href="/rodada/oitavas/"><div>Oitavas</div></a></li>
-            <li><a href="/rodada/quartas/"><div>Quartas</div></a></li>
-            <li><a href="/rodada/semifinais/"><div>Semifinais</div></a></li>
-            <li><a href="/rodada/terceiro_lugar/"><div>Terceiro lugar</div></a></li>
-            <li><a href="/rodada/final/"><div>Grande Final</div></a></li>
-            <li><a href="/partidas.html" title="Se se navegador não suporta JavaScript, acesse esse link para ver todas as partidas de todas as rodadas."><div>Todas</div></a></li>
-        </ul>
+        {% include 'indice.html' %}
     </div>
     <div class="layout-centro">
         <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na partida.</p>
         <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha x Suiça, Alemanha x Sérvia :D...</p>
         <p>A tabela com as partidas e seus resultados poderão ser acessadas nos links ao lado. As partidas não realizadas poderão receber os palpites.</p>
         <p>Acompanhe também, nessa página, o placar das partidas em andamento.</p>
+        <p>Com a chegada das fases mata-mata, uma nova página foi lançada. Acesso pelo menu ao lado a página de Mata-mata.</p>
         <div class="rodadas">
         	{% for rodada in rodadas %}
         	    {% if rodada.partidas %}

@@ -1,4 +1,7 @@
-p {
+p.chaves {
+    margin-top: 15px;
+    padding: 10px 0;
+    border-top: 1px solid gray;
     border-bottom: 1px solid gray;
 }
 
@@ -9,61 +12,92 @@ h2.nome-rodada {
     margin-bottom: 5px;
 }
 
+h2.data {
+    font-size: 11px;
+}
+
+h3.parcial {
+    font-size: 12px!important;
+    font-weight: normal!important;
+    padding: 2px 6px!important;
+    border-bottom: 1px solid #EFEFEF;
+}
+
 div.rodada {
     float:left;
     text-align: center;
     width: 210px;
+    font-family: arial;
+    font-size: 14px;
 }
 
 li.partida {
     width: 200px;
-    height: 135px;
+    height: 123px;
     margin-bottom: 9px;
 }
 
 li#partida_57 {
     position: relative;
-    top: 376px;
+    top: 339px;
 }
 
 li#partida_58 {
     position: relative;
-    top: -65px;
+    top: -61px;
 }
 
 li#partida_59 {
     position: relative;
-    top: 383px;
+    top: 339px;
 }
 
 li#partida_60 {
     position: relative;
-    top: 535px;
+    top: 472px;
 }
 
 li#partida_61 {
     position: relative;
-    top: 229px;
+    top: 205px;
 }
 
 li#partida_62 {
     position: relative;
-    top: 675px;
+    top: 605px;
 }
 
 li.partida div.computado {
     margin:5px 40px 0;
 }
 
+li.partida div.palpite {
+    width: 90px;
+    height: 18px;
+    font-size: 12px;
+}
+
+li div.realizada {
+    margin-top: 4px!important;
+}
+
+li div.resultado-parcial span.gols {
+    font-size: 12px;
+}
+
+div#oitavas {
+    margin-left: 110px;
+}
+
 div#final {
     position: relative;
-    top: 453px;
+    top: 405px;
     width: 200px;
 }
 
 div#terceiro_lugar {
     position: relative;
-    top: 632px;
+    top: 570px;
     left: -200px;
     width: 200px;
 }
@@ -75,7 +109,7 @@ div.separador {
 }
 
 div.fundo-chaves {
-    height: 153px;
+    height: 131px;
     margin-bottom: 1px;
     border-top: 2px solid gray;
     border-right: 2px solid gray;
@@ -83,34 +117,34 @@ div.fundo-chaves {
 }
 
 div#chave_1 {
-    margin-top: 100px;
+    margin-top: 98px;
 }
 
 div#chave_2 {
-    margin-top: 140px;
+    margin-top: 131px;
 }
 
 div#chave_3 {
-    margin-top: 140px;
+    margin-top: 131px;
 }
 
 div#chave_4 {
-    margin-top: 140px;
+    margin-top: 131px;
 }
 
 div#chave_5 {
-    height: 302px;
-    margin-top: 177px;
+    height: 265px;
+    margin-top: 170px;
 }
 
 div#chave_6 {
-    height: 302px;
-    margin-top: 285px;
+    height: 265px;
+    margin-top: 263px;
 }
 
 div#chave_7 {
-    height: 593px;
-    margin-top: 322px;
+    height:531px;
+    margin-top:303px;
 }
 
 div.time {

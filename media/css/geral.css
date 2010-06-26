@@ -361,8 +361,10 @@ div.rodape {
 }
 
 div.rodape ul {
-    margin: 0 0 15px 210px;
-    width: 890px;
+    border: 1px solid #DDD;
+    padding: 15px 80px;
+    margin: 0 0 15px 78px;
+    width: 910px;
     overflow: auto;
     text-align: center;
 }

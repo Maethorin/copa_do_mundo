@@ -70,16 +70,18 @@ class Partida(models.Model):
         #locale.setlocale(locale.LC_ALL, 'pt_BR')
         formato_data = '%a %d %B - %H:%M'
         if self.time_1:
-            return '%s - %s x %s - %s' % (
+            return '%s - %s x %s - %s - %s' % (
                 self.rodada, 
                 self.time_1.nome, 
                 self.time_2.nome, 
-                self.data.strftime(formato_data)
+                self.data.strftime(formato_data),
+                self.realizada
             )
-        return '%s - %s - %s' % (
+        return '%s - %s - %s - %s' % (
             self.rodada, 
             self.regra_para_times, 
-            self.data.strftime(formato_data)
+            self.data.strftime(formato_data),
+            self.realizada
         )
 
     def vitorioso_certo(self):

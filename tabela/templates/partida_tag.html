@@ -32,13 +32,13 @@
         {% time_tag direito %}
         {% if partida.realizada or partida.em_andamento %}
             {% if partida.palpite_certo %}
-                <div class="palpite certo"><div class="certo">Placar</div></div>
+                <div class="palpite certo"><div class="certo">{% if chaves %}PLA{% else %}Placar{% endif %}</div></div>
             {% else %}
                 {% if partida.vitorioso_certo %}
-                    <div class="palpite errado"><div class="errado">Placar</div></div>
-                    <div class="palpite certo"><div class="certo">Ganhador</div></div>
+                    <div class="palpite errado"><div class="errado">{% if chaves %}PLA{% else %}Placar{% endif %}</div></div>
+                    <div class="palpite certo"><div class="certo">{% if chaves %}GAN{% else %}Ganhador{% endif %}</div></div>
                 {% else %}
-                    <div class="palpite errado"><div class="errado">Placar</div></div>
+                    <div class="palpite errado"><div class="errado">{% if chaves %}PLA{% else %}Placar{% endif %}</div></div>
                 {% endif %}
             {% endif %}
         {% endif %}
