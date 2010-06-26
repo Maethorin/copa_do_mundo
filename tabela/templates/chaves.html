@@ -1,22 +1,20 @@
 <!DOCTYPE HTML>
 <html lang="pt-BR">
 <head>
-	<title>Partidas - Simulador Copa do Mundo</title>
+	<title>Chaves - Simulador Copa do Mundo</title>
 	<meta charset="UTF-8" />
     <meta name="author" content="Márcio Duarte" />
-    <meta name="description" content="Tabela com as partidas e seus resultados. As partidas não realizadas poderão receber palpites. Esses palpites irão compor a simulação das próximas fases." />
+    <meta name="description" content="Tabela com as partidas e seus resultados organizados em chaves. Forma de visualização mais ampla, podendo observar melhor os possíveis adversários em cada uma das fases seguintes." />
     <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos" />
     <link rel="stylesheet" type="text/css" href="/media/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/media/css/geral.css" />
-    <link rel="stylesheet" type="text/css" href="/media/css/partidas.css" />
+    <link rel="stylesheet" type="text/css" href="/media/css/chaves.css" />
     <link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.8.1.custom.css" />	
 
     <script type="text/javascript" src="/media/js/lib/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="/media/js/lib/jquery-ui-1.8.1.custom.min.js"></script>    
     <script type="text/javascript" src="/media/js/lib/jquery.form.js"></script>
     <script type="text/javascript" src="/media/js/lib/jquery.meio.mask.js"></script>
-    <script type="text/javascript" src="/media/js/geral.js"></script>
-    <script type="text/javascript" src="/media/js/partidas.js"></script>
 
     <script type="text/javascript">
 
@@ -47,15 +45,14 @@
         src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
         </script>
     </div>
+    <p>
+        Visualização das partidas do mata-mata de acordo com a simulação de forma mais ampla para que seja possível ver as próximas partidas e os possíveis adversários em uma única página.
+    </p>
+    <br />
     <div id="tabs" class="rodadas">
-        <ul class="indice">
-        	{% for rodada in rodadas %}
-                <li><a href="#{{rodada.id}}">{{rodada.nome}}</a></li>
-            {% endfor %}
-        </ul>
     	{% for rodada in rodadas %}
             <div id="{{rodada.id}}" class="rodada">
-        	    <h1 class="nome-rodada">{{rodada.nome}}</h1>
+        	    <h2 class="nome-rodada">{{rodada.nome}}</h2>
                 <ul class="partidas">
         	    {% for partida in rodada.partidas %}
                     {% include "partida_tag.html" %}
@@ -64,14 +61,42 @@
         	    {% endfor %}
                 </ul>
             </div>
+            {% ifnotequal rodada.id 'terceiro_lugar' %}
+                {% ifnotequal rodada.id 'final' %}
+                    <div class="separador">
+                        {% ifequal rodada.id 'oitavas' %}
+                        <div id="chave_1" class="fundo-chaves">
+                            &nbsp;
+                        </div>
+                        <div id="chave_2" class="fundo-chaves">
+                            &nbsp;
+                        </div>
+                        <div id="chave_3" class="fundo-chaves">
+                            &nbsp;
+                        </div>
+                        <div id="chave_4" class="fundo-chaves">
+                            &nbsp;
+                        </div>
+                        {% endifequal %}
+                        {% ifequal rodada.id 'quartas' %}
+                        <div id="chave_5" class="fundo-chaves">
+                            &nbsp;
+                        </div>
+                        <div id="chave_6" class="fundo-chaves">
+                            &nbsp;
+                        </div>
+                        {% endifequal %}
+                        {% ifequal rodada.id 'semifinais' %}
+                        <div id="chave_7" class="fundo-chaves">
+                            &nbsp;
+                        </div>
+                        {% endifequal %}
+                    </div>
+                {% endifnotequal %}
+            {% endifnotequal %}
             <hr />
     	{% endfor %}
     </div>
-    <script type="text/javascript">
-        $(function() {
-            montaTabs({{index}});
-        });
-    </script>
     {% include "rodape.html" %}
 </body>
 </html>

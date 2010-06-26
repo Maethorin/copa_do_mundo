@@ -54,7 +54,14 @@ def atualiza_informacoes_de_partida_em_andamento(partida):
 
 def obter_informacoes_da_partida_em_jogo(partida):
     partidas_de_hoje = []
-    pagina_resultado = lhtml.parse('http://br.oleole.com/resultados-futebol-ao-vivo/ls.asp').getroot()
+    pagina_resultado = None
+    try:
+        pagina_resultado = lhtml.parse('http://br.oleole.com/resultados-futebol-ao-vivo/ls.asp').getroot()
+    except IOError:
+        return None
+    if pagina_resultado is None:
+        return None
+
     tabelas = pagina_resultado.cssselect('table')
     linhas = tabelas[0].cssselect('tr.live_scores_row')
     for linha in linhas:
@@ -215,3 +222,16 @@ def obter_partidas_em_andamento():
         if partida.em_andamento():
             em_andamento.append(partida)
     return em_andamento
+
+def reordena_partidas_para_chave(rodada):
+    lista_acima = []
+    lista_abaixo = []
+    regras_juntas = [['1Ax2B', '1Cx2D', '1Ex2F', '1Gx2H'], ['1Dx2C', '1Bx2A', '1Fx2E', '1Hx2G']]
+    if rodada['id']  == 'oitavas':
+        for partida in rodada['partidas']:
+            if partida.regra_para_times in regras_juntas[0]:
+                lista_acima.append(partida)
+            if partida.regra_para_times in regras_juntas[1]:
+                lista_abaixo.append(partida)
+        lista_acima.extend(lista_abaixo)
+        rodada['partidas'] = lista_acima

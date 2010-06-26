@@ -93,7 +93,7 @@ def test_obter_time_de_partidas_com_partidas_de_outras_fases_e_de_oitavas():
     mox = Mox()
     mox.StubOutWithMock(simulador, 'obtem_times_de_partida_de_outras_fases')
     mox.StubOutWithMock(simulador, 'obtem_times_de_partida_de_oitavas')
-
+    mox.StubOutWithMock(simulador, 'atualiza_informacoes_de_partida_em_andamento')
     time1 = FakeModel('time1')
     time2 = FakeModel('time2')
     regra = 'Q43x44'
@@ -102,16 +102,25 @@ def test_obter_time_de_partidas_com_partidas_de_outras_fases_e_de_oitavas():
     partida1.vitorioso = time1
     partida1.rodada = 'quartas'
     partida1.regra_para_times = regra
+    partida1.realizada = False
+    partida1.time_eh_diferente = lambda time1, time2 : False
+    partida1.save = lambda : None
 
     partida2 = FakeModel('partida2')
     partida2.vitorioso = None
     partida2.rodada = 'oitavas'
     partida2.regra_para_times = regra
+    partida2.realizada = False
+    partida2.time_eh_diferente = lambda time1, time2 : False
+    partida2.save = lambda : None
 
     partidas = [partida1, partida2]
 
     simulador.obtem_times_de_partida_de_outras_fases.__call__(regra).AndReturn([time1, time2])
     simulador.obtem_times_de_partida_de_oitavas.__call__(regra).AndReturn([time2, time1])
+
+    simulador.atualiza_informacoes_de_partida_em_andamento.__call__(partida1)
+    simulador.atualiza_informacoes_de_partida_em_andamento.__call__(partida2)
 
     mox.ReplayAll()
     try:
@@ -281,31 +290,31 @@ def test_obtem_times_de_partida_de_disputa_de_terceiro_lugar():
 
     simulador.Partida.objects.get(id='53').AndReturn(partida1)
     simulador.Partida.objects.get(id='54').AndReturn(partida2)
-
-    simulador.parser_regra.eh_disputa_de_terceiro_lugar(regra).AndReturn(True)
-
+     
+    simulador.parser_regra.eh_disputa_de_terceiro_lugar('O53x54').AndReturn(True)
+     
     simulador.parser_regra.obtem_ids_de_partida_de_regra(partida1.regra_para_times).AndReturn(['56', '57'])
     simulador.Partida.objects.get(id='56').AndReturn(partida3)
     simulador.Partida.objects.get(id='57').AndReturn(partida4)
-
+    
     simulador.obtem_times_de_partida_de_oitavas('O53x54').AndReturn((time1, time2))
     simulador.obtem_times_de_partida_de_oitavas('O58x59').AndReturn((time2, time1))
-
-    simulador.obter_time_na_partida(partida3, True).AndReturn((time1, 2, 3))
-    simulador.obter_time_na_partida(partida4, True).AndReturn((time2, 2, 3))
-
+     
+    simulador.obter_time_na_partida(partida3, False).AndReturn((time1, 2, 3))
+    simulador.obter_time_na_partida(partida4, False).AndReturn((time2, 2, 3))
+    
     simulador.parser_regra.obtem_ids_de_partida_de_regra(partida2.regra_para_times).AndReturn(['51', '52'])
     simulador.Partida.objects.get(id='51').AndReturn(partida3)
     simulador.Partida.objects.get(id='52').AndReturn(partida4)
-
+     
     simulador.obtem_times_de_partida_de_oitavas('O53x54').AndReturn((time1, time2))
     simulador.obtem_times_de_partida_de_oitavas('O58x59').AndReturn((time2, time1))
-
-    simulador.obter_time_na_partida(partida3, True).AndReturn((time1, 2, 3))
-    simulador.obter_time_na_partida(partida4, True).AndReturn((time2, 2, 3))
-
-    simulador.obter_time_na_partida(partida1, False).AndReturn((time1, 2, 3))
-    simulador.obter_time_na_partida(partida2, False).AndReturn((time2, 2, 3))
+     
+    simulador.obter_time_na_partida(partida3, False).AndReturn((time1, 2, 3))
+    simulador.obter_time_na_partida(partida4, False).AndReturn((time2, 2, 3))
+    
+    simulador.obter_time_na_partida(partida1, True).AndReturn((time1, 2, 3))
+    simulador.obter_time_na_partida(partida2, True).AndReturn((time2, 2, 3))
 
     mox.ReplayAll()
     try:
@@ -366,6 +375,7 @@ def test_obtem_times_do_grupo_ordenados_por_classificacao():
     partidas = [partida1, partida2]
 
     for time in times:
+        simulador.Q.__call__(rodada__startswith='rodada_').AndReturn(True)
         simulador.Q.__call__(time_1__id__exact=time.id).AndReturn(True)
         simulador.Q.__call__(time_2__id__exact=time.id).AndReturn(True)
         simulador.Partida.objects.filter(True | True).AndReturn(partidas)

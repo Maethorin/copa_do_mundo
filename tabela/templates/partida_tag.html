@@ -1,31 +1,35 @@
+{% load time_tag %}
 <li class="partida" id="partida_{{partida.id}}">
     <h2 class="data{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">{{partida.data|date:"D d M Y H:i"}}{% if partida.realizada %} - Realizada{% endif %}{% if partida.em_andamento %} - Em jogo{% endif %}</h2>
     {% if partida.realizada or partida.em_andamento %}
-        <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
+        {% time_tag esquerdo %}
         <span class="gols">{{partida.gols_time_1|default:0}}</span>
         X
         <span class="gols">{{partida.gols_time_2|default:0}}</span>
-        <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
+        {% time_tag direito %}
     {% else %}
         <form action="/registra_palpite/">
+            {% if chaves %}
+            <input type="hidden" name="chaves" value="chaves" />
+            {% endif %}
             <input type="hidden" name="partida_id" value="{{partida.id}}" />
             <input type="hidden" name="rodada_id" value="{{rodada.id}}" />
-            <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
+            {% time_tag esquerdo %}
             <input class="palpite esquerdo" type="text" name="palpiteTime1" title="Palpite para {{partida.time_1.nome}}" maxlength="1" />
             X
             <input class="palpite direito" type="text" name="palpiteTime2" title="Palpite para {{partida.time_2.nome}}" maxlength="1" />
-            <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
+            {% time_tag direito %}
             <div class="computado" style="display:none;">Palpite enviado</div>
             <input type="submit" class="enviar" value="Enviar" title="Enviar palpite para {{partida.time_1.nome}} X {{partida.time_2.nome}}" />
         </form>
     {% endif %}
     <div class="resultado-parcial{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">
-        <h3 class="parcial">Resultado dos palpites:<span class="votos">Total: {{partida.votos}}</span></h3>
-        <div class="time esquerdo {{partida.time_1.abreviatura}}" title="{{partida.time_1.nome}}">{{partida.time_1.nome|default:'Não definido'}}</div>
+        <h3 class="parcial">Palpites:<span class="votos">Total: {{partida.votos}}</span></h3>
+        {% time_tag esquerdo %}
         <span class="gols">{{partida.media_palpites_time_1}}</span>
         X
         <span class="gols">{{partida.media_palpites_time_2}}</span>
-        <div class="time direito {{partida.time_2.abreviatura}}" title="{{partida.time_2.nome}}">{{partida.time_2.nome|default:'Não definido'}}</div>
+        {% time_tag direito %}
         {% if partida.realizada or partida.em_andamento %}
             {% if partida.palpite_certo %}
                 <div class="palpite certo"><div class="certo">Placar</div></div>

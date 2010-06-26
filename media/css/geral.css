@@ -247,11 +247,11 @@ div.kp.direito {
 }
 
 div.kr.esquerdo {
-    background-position: 92px -105px;
+    background-position: 92px -104px;
 }
 
 div.kr.direito {
-    background-position: 0px -105px;
+    background-position: 0px -104px;
 }
 
 div.mx.esquerdo {
@@ -376,4 +376,172 @@ div.rodape ul li a {
     font-family: arial;
     font-size: 12px;
     color: blue;
+}
+
+li input.enviar {
+    margin-top: 5px;
+    background: transparent url(/media/img/bkg_form_btns.png) no-repeat;
+    background-position: 0 -127px;
+    border: 1px solid #f0f0f0;
+    border-width:0 1px 0 1px;
+    color: #1F79FF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    padding: 2px 9px 5px;
+    position: relative;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+input.palpite {
+    width: 9px;
+    font-size: 14px !important;
+    text-align: right;
+}
+
+input.palpite.esquerdo {
+    margin-left: -3px;
+}
+
+input.palpite.direito {
+    margin-right: -3px;
+}
+
+
+li.partida {
+    margin-bottom: 20px;
+    margin-right: 5px;
+    width: 290px;
+    height: 150px;
+    border-bottom: 1px solid gray;
+    background-color: #FAFAFA;
+}
+
+li.partida div.computado {
+    padding: 3px;
+    background: #FFA url(/media/img/fundo_enviado.png) repeat-x;
+    border: 1px solid #363;
+    font-size: 16px;
+    margin: 5px 65px 0px;
+    color: #363;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+li.partida div.encerrada {
+    padding: 3px;
+    background-color: #D00;
+    border: 1px solid gray;
+    font-size: 16px;
+    margin: 6px 40px 0;
+    color: white;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+li.partida div.palpite {
+    border: 1px solid;
+    font-size: 16px;
+    margin: 6px 0 0 0;
+    display: inline-block;
+    width: 125px;
+    background-repeat: no-repeat;
+    background-position: 1px -3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+li.partida div.certo {
+    border-color: #2b442b;
+    color: #2b442b;
+    background: #a4dc8e url(/media/img/fundo_certo.png) repeat-x;
+}
+
+li.partida div.errado {
+    border-color: #6f1d1d;
+    color: #6f1d1d;
+    background: #e8bdbd url(/media/img/fundo_errado.png) repeat-x;
+}
+
+li.partida div.palpite div.certo {
+    padding: 3px;
+    background: transparent url(/media/img/thumbs_up.png) 2px -3px no-repeat;
+}
+
+li.partida div.palpite div.errado {
+    padding: 3px;
+    background: transparent url(/media/img/thumbs_down.png) 1px -3px no-repeat;
+}
+
+h2.data {
+    text-align: right;
+    border-bottom: 1px solid #DDD;
+    padding: 3px 2px;
+    background: #F1F1F1 url(/media/img/fundo_data.png) repeat-x;
+    font-size: 16px;
+    font-weight: normal;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+h2.realizada {
+    background-color: #f1f1f1;
+    background-image: url(/media/img/fundo_data_realizada.png);
+    margin-bottom: 8px;
+}
+
+h2.andamento {
+    background-color: #FF0;
+    background-image: url(/media/img/fundo_data_em_andamento.png);
+    color: black;
+    margin-bottom: 8px;
+}
+
+li div.resultado-parcial {
+    padding-bottom: 4px;
+    margin-top: 6px;
+    display: none;
+}
+
+li div.realizada {
+    margin-top: 8px;
+    display: block;
+}
+
+li div.andamento {
+    margin-top: 8px;
+    display: block;
+}
+
+li div.resultado-parcial h3.parcial {
+    color: gray;
+    background: #DFDFDF url(/media/img/fundo_resultado.png) repeat-x;
+    padding: 4px;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+li div.resultado-parcial span.votos {
+    text-align: right;
+    font-size: 12px;
+    font-weight: normal;
+    padding-left: 49px;
+}
+
+li div.resultado-parcial span.gols {
+    padding: 0px 1px 0 2px;
+    border: solid #228822 1px;
+    background-color: #FEE;
+    color: #228822;
+    font-size: 16px;
+}
+
+li div.resultado-parcial span.nenhum-palpite {
+    font-size: 14px;
 }

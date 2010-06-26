@@ -24,6 +24,7 @@ class Time(models.Model):
     pontos = models.IntegerField(blank=True, default=0)
     grupo = models.ForeignKey(Grupo)
     abreviatura = models.CharField(max_length=15, unique=True, blank=True, null=True)
+    sigla = models.CharField(max_length=3, unique=True, blank=True, null=True)
     
     jogos = 0
     vitorias = 0
@@ -113,9 +114,13 @@ class Partida(models.Model):
         return False
 
     def time_eh_diferente(self, time1, time2):
-        if self.time_1 and time1 and self.time_1.id != time1.id:
+        if self.time_1 is None:
             return True
-        if self.time_2 and time2 and self.time_2.id != time2.id:
+        if self.time_2 is None:
+            return True
+        if time1 and self.time_1.id != time1.id:
+            return True
+        if time2 and self.time_2.id != time2.id:
             return True
         return False
 
