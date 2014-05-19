@@ -2,32 +2,34 @@
 # encoding: utf-8
 import re
 
-from simplejson import dumps
-
 from django.shortcuts import *
-from django.http import HttpResponseRedirect, HttpResponse, Http404
 
 from copa_do_mundo import settings
 
 from copa_do_mundo.tabela.models import *
 from copa_do_mundo.tabela import simulador
 
+
 def index(request):
     return rodada(request, 'final', template='index.html', inclui_partida_em_andamento=True)
- 
+
+
 def grupos(request):
     grupos = Grupo.objects.all()
     simulador.obter_dados_de_times(grupos)
     return render_to_response('grupos.html', {'grupos': grupos, 'atual': False})
+
 
 def grupos_atual(request):
     grupos = Grupo.objects.all()
     simulador.obter_dados_de_times(grupos, atual=True)
     return render_to_response('grupos.html', {'grupos': grupos, 'atual': True})
 
+
 def chaves(request):
     rodadas = _obter_rodadas(mata_mata=True)
     return partidas(request, rodadas, template='chaves.html', eh_chaves=True)
+
 
 def partidas(request, rodadas=None, template='partidas.html', eh_chaves=False):
     if not rodadas:
@@ -45,6 +47,7 @@ def partidas(request, rodadas=None, template='partidas.html', eh_chaves=False):
             simulador.reordena_partidas_para_chave(rodada)
     return render_to_response(template, {'rodadas': rodadas, 'index': index, 'chaves': eh_chaves})
 
+
 def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andamento=False):
     rodadas = _obter_rodadas()
     index = 0
@@ -61,7 +64,8 @@ def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andam
                 simulador.obter_times_de_partidas(rodada['partidas'])
 
     return render_to_response(template, {'rodadas': rodadas, 'rodada_id': rodada_id, 'index': index})
-    
+
+
 def registra_palpite(request):
     json = request.GET.get('json', '') == 'json'
     chaves = request.GET.get('chaves', '') == 'chaves'
@@ -92,6 +96,7 @@ def registra_palpite(request):
 
     return HttpResponseRedirect('/rodada/%s' % rodada_id)
 
+
 def _obtem_palpites(request):
     try:
         palpite_time_1 = int(request.GET['palpiteTime1'])
@@ -111,6 +116,7 @@ def _obtem_palpites(request):
         palpite_time_2 = 0
         
     return palpite_time_1, palpite_time_2
+
 
 def _obter_rodadas(mata_mata=False):
     rodadas = []

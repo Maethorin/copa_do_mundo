@@ -3,12 +3,10 @@
 
 import parser_regra
 
-from datetime import datetime
-
 from django.db.models import Q
 from lxml import html as lhtml
+from tabela.models import Partida, Time
 
-from copa_do_mundo.tabela.models import *
 
 class InformacoesDePartida():
     def __init__(self, placar, status):
@@ -20,14 +18,14 @@ class InformacoesDePartida():
             self.gols_time_2 = placar[1]
         self.realizada = status == 'Finished'
 
+
 def obter_dados_de_times(grupos, atual=False):
     for grupo in grupos:
         grupo.times = obtem_times_do_grupo_ordenados_por_classificacao(grupo.nome, atual)
 
+
 def obter_times_de_partidas(partidas):
     for partida in partidas:
-        time1 = None
-        time2 = None
         if partida.rodada == 'oitavas':
             time1, time2 = obtem_times_de_partida_de_oitavas(partida.regra_para_times)
         else:
@@ -44,6 +42,7 @@ def obter_times_de_partidas(partidas):
             atualiza_informacoes_de_partida_em_andamento(partida)
             partida.save()
 
+
 def atualiza_informacoes_de_partida_em_andamento(partida):
     if partida.em_andamento():
         informacoes = obter_informacoes_da_partida_em_jogo(partida)
@@ -52,9 +51,8 @@ def atualiza_informacoes_de_partida_em_andamento(partida):
             partida.gols_time_2 = informacoes.gols_time_2
             partida.realizada = informacoes.realizada
 
+
 def obter_informacoes_da_partida_em_jogo(partida):
-    partidas_de_hoje = []
-    pagina_resultado = None
     try:
         pagina_resultado = lhtml.parse('http://br.oleole.com/resultados-futebol-ao-vivo/ls.asp').getroot()
     except IOError:
@@ -73,6 +71,7 @@ def obter_informacoes_da_partida_em_jogo(partida):
             informacoes = InformacoesDePartida(placar, status)
             return informacoes
     return None
+
 
 def obtem_times_de_partida_de_outras_fases(regra):
     ids = parser_regra.obtem_ids_de_partida_de_regra(regra)
@@ -94,17 +93,20 @@ def obtem_times_de_partida_de_outras_fases(regra):
     
     return time1, time2
 
+
 def obtem_times_de_partida_de_oitavas(regra):
     grupos = parser_regra.obtem_grupos_de_regra(regra)
     classificacoes = parser_regra.obtem_classificacoes_de_regra(regra)
     time1 = obtem_time_do_grupo_na_classificacao(grupos[0], classificacoes[0])
     time2 = obtem_time_do_grupo_na_classificacao(grupos[1], classificacoes[1])
     return time1, time2
-    
+
+
 def obtem_time_do_grupo_na_classificacao(nome_do_grupo, classificacao):
     classificacao = int(classificacao)
     times = obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo) 
     return times[classificacao - 1]
+
 
 def obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo, atual=False):
     times = Time.objects.filter(grupo__nome__exact=nome_do_grupo)
@@ -118,7 +120,7 @@ def obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo, atual=False)
             vitorioso, gols_time_1, gols_time_2 = obter_time_na_partida(partida)
             soma_gols_do_time(time, gols_time_1, gols_time_2, partida.time_1.id)
             time.jogos += 1
-            if vitorioso == None:
+            if vitorioso is None:
                 time.pontos += 1
                 time.empates += 1
             elif vitorioso.id == time.id:
@@ -132,11 +134,13 @@ def obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo, atual=False)
     normalizar_lista_com_saldo_de_gols(times_lista)
     return times_lista
 
+
 def obter_time_na_partida(partida, perdedor=False):
     if partida.realizada:
         return analiza_resultado_e_acumula_gols(partida.gols_time_1, partida.gols_time_2, 1, partida, perdedor)
 
     return analiza_resultado_e_acumula_gols(partida.palpites_time_1, partida.palpites_time_2, partida.votos, partida, perdedor)
+
 
 def analiza_resultado_e_acumula_gols(valor_1, valor_2, votos, partida, perdedor):
     if not valor_1:
@@ -160,6 +164,7 @@ def analiza_resultado_e_acumula_gols(valor_1, valor_2, votos, partida, perdedor)
         return partida.time_1, gols_time_1, gols_time_2        
     return partida.time_2, gols_time_1, gols_time_2
 
+
 def soma_gols_do_time(time, gols_time_1, gols_time_2, time_1_id):
     if time.id == time_1_id:
         time.gols_feitos += gols_time_1
@@ -167,6 +172,7 @@ def soma_gols_do_time(time, gols_time_1, gols_time_2, time_1_id):
     else:
         time.gols_feitos += gols_time_2
         time.gols_tomados += gols_time_1
+
 
 def normalizar_lista_com_saldo_de_gols(times):
     for i in range(0, len(times)):
@@ -196,11 +202,13 @@ def normalizar_lista_com_saldo_de_gols(times):
         ordenar_por_saldo_de_gols_removendo_empatados_da_original(lista_de_empates, times)
         reposiciona_e_reordena_na_original(lista_de_empates, indices_dos_empatados, times)
 
+
 def ordenar_por_saldo_de_gols_removendo_empatados_da_original(lista_de_empates, times):
     for times_empatados in lista_de_empates:
         for time in times_empatados:
             times.remove(time)
         times_empatados.sort(lambda x, y: cmp(y.saldo_de_gols, x.saldo_de_gols))
+
 
 def reposiciona_e_reordena_na_original(lista_de_empates, indices_dos_empatados, times):  
     for i in range(0, len(lista_de_empates)):
@@ -211,9 +219,11 @@ def reposiciona_e_reordena_na_original(lista_de_empates, indices_dos_empatados, 
 
     times.sort(lambda x, y: cmp(x.posicao, y.posicao))
 
+
 def adiciona_item_a_lista(lista, item):
     if not item in lista:
         lista.append(item)
+
 
 def obter_partidas_em_andamento():
     em_andamento = []
@@ -222,6 +232,7 @@ def obter_partidas_em_andamento():
         if partida.em_andamento():
             em_andamento.append(partida)
     return em_andamento
+
 
 def reordena_partidas_para_chave(rodada):
     lista_acima = []

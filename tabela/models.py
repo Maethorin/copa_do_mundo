@@ -6,6 +6,7 @@ import datetime
 from django.db import models
 from copa_do_mundo import settings
 
+
 class Grupo(models.Model):
     id = models.AutoField(primary_key=True, db_column='grupo_id')
     nome = models.CharField(max_length=1, unique=True)
@@ -17,6 +18,7 @@ class Grupo(models.Model):
 
     def __unicode__(self):
         return self.nome
+
 
 class Time(models.Model):
     id = models.AutoField(primary_key=True, db_column='time_id')
@@ -46,6 +48,7 @@ class Time(models.Model):
 
     def __unicode__(self):
         return '%s - Grupo %s. Pontos %d' % (self.nome, self.grupo.nome, self.pontos)
+
 
 class Partida(models.Model):
     id = models.AutoField(primary_key=True, db_column='partida_id')

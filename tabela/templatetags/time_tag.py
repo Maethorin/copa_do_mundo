@@ -13,7 +13,7 @@ class TimeTag(Node):
         if self.lado == 'direito':
             time = 'partida.time_2'
             
-        time_template = '<div class="time %(lado)s {{%(time)s.abreviatura}}" title="{{%(time)s.nome}}">{%% if chaves %%}{{%(time)s.sigla|default:"NDF"}}{%% else %%}{{%(time)s.nome|default:"Não definido"}}{%% endif %%}</div>' % {'time': time, 'lado': self.lado}
+        time_template = u'<div class="time %(lado)s {{%(time)s.sigla}}" title="{{%(time)s.nome}}">{%% if chaves %%}{{%(time)s.abreviatura|default:"NDF"}}{%% else %%}{{%(time)s.nome|default:"Não definido"}} {%% endif %%}</div>' % {'time': time, 'lado': self.lado}
         template = Template(time_template)
         
         return template.render(context)
