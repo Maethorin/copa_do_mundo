@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+        <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na partida.</p>
+        <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha x Suiça, Alemanha x Sérvia :D...</p>
+        <p>A tabela com as partidas e seus resultados poderão ser acessadas nos links ao lado. As partidas não realizadas poderão receber os palpites.</p>
+        <p>Acompanhe também, nessa página, o placar das partidas em andamento.</p>
+        <p>Com a chegada das fases mata-mata, uma nova página foi lançada. Acesso pelo menu ao lado a página de Mata-mata.</p>
+        <div class="rodadas">
+        	{% for rodada in rodadas %}
+        	    {% if rodada.partidas %}
+        	    <div class="partidas">
+        	        {% ifequal rodada.id 'final' %}
+                    <h2 class="final">Por enquanto a final será:</h2>
+                    {% endifequal %}
+        	        {% ifequal rodada.id 'em_andamento' %}
+                    <h2 class="em_andamento">Partidas em jogo:</h2>
+                    {% endifequal %}
+                {% for partida in rodada.partidas %}
+                    <ul class="partidas">
+                        {% include "partida_tag.html" %}
+                    </ul>
+                {% endfor %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock conteudo %}

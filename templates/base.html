@@ -1,0 +1,143 @@
+{% load staticfiles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="pt-BR">
+<head>
+	<meta name="google-site-verification" content="ufF_BgXpalYSqe6Ligt2uELxA22cyIj_5tFIuGNk158" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    <meta name="author" content="Márcio Duarte" />
+    <meta name="description" content="Simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida." />
+    <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos,placar,times da copa" />
+
+	<title>Simulador da Copa do Mundo</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/geral.css' %}" />
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17020062-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Navegue</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">SimulaCopa</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    {% include 'indice.html' %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            {% for grupo in grupos %}
+            <div class="col-md-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title text-center">{{ grupo }}</h3>
+                    </div>
+                    <div class="panel-body mini">
+                        <div class="row">
+                            <div class="col-md-3">
+                                {{ grupo.time_set.all.0.sigla }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ grupo.time_set.all.1.sigla }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ grupo.time_set.all.2.sigla }}
+                            </div>
+                            <div class="col-md-3">
+                                {{ grupo.time_set.all.3.sigla }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="time abreviatura">{{ grupo.time_set.all.0.abreviatura }}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="time abreviatura">{{ grupo.time_set.all.1.abreviatura }}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="time abreviatura">{{ grupo.time_set.all.2.abreviatura }}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span class="time abreviatura">{{ grupo.time_set.all.3.abreviatura }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <script type="text/javascript"><!--
+                google_ad_client = "pub-8167110538900295";
+                /* 728x90, criado 17/06/10 */
+                google_ad_slot = "1475428285";
+                google_ad_width = 728;
+                google_ad_height = 90;
+                //-->
+                </script>
+                <script type="text/javascript"
+                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="layout-esquerdo">
+        {% include 'indice.html' %}
+    </div>
+    <div class="layout-centro">
+        {% block conteudo %}
+        {% endblock conteudo %}
+    </div>
+    <div class="layout-direito">
+        <script type="text/javascript"><!--
+        google_ad_client = "pub-8167110538900295";
+        /* 160x600, criado 17/06/10 */
+        google_ad_slot = "7420975388";
+        google_ad_width = 160;
+        google_ad_height = 600;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
+    {% include "rodape.html" %}
+
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui-1.10.4.custom.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/partidas.js' %}"></script>
+
+{#    <script type="text/javascript" src="/media/js/lib/jquery.form.js"></script>#}
+
+
+</body>
+</html>

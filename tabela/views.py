@@ -4,10 +4,8 @@ import re
 
 from django.shortcuts import *
 
-from copa_do_mundo import settings
-
-from copa_do_mundo.tabela.models import *
-from copa_do_mundo.tabela import simulador
+from tabela.models import *
+from tabela import simulador
 
 
 def index(request):
@@ -48,7 +46,12 @@ def partidas(request, rodadas=None, template='partidas.html', eh_chaves=False):
     return render_to_response(template, {'rodadas': rodadas, 'index': index, 'chaves': eh_chaves})
 
 
+def mostra_rodada(request, rodada_id):
+    return rodada(request, rodada_id)
+
+
 def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andamento=False):
+    grupos = Grupo.objects.all()
     rodadas = _obter_rodadas()
     index = 0
     rodadas[0]['partidas'] = simulador.obter_partidas_em_andamento()
@@ -63,7 +66,7 @@ def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andam
             if not re.match('[1-3]', rodada['nome']):
                 simulador.obter_times_de_partidas(rodada['partidas'])
 
-    return render_to_response(template, {'rodadas': rodadas, 'rodada_id': rodada_id, 'index': index})
+    return render_to_response(template, {'rodadas': rodadas, 'rodada_id': rodada_id, 'index': index, 'grupos': grupos })
 
 
 def registra_palpite(request):

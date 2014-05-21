@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import locale
 import datetime
+from django.conf import settings
 from django.db import models
-from copa_do_mundo import settings
 
 
 class Grupo(models.Model):
@@ -17,7 +16,7 @@ class Grupo(models.Model):
         db_table = 'grupos'
 
     def __unicode__(self):
-        return self.nome
+        return "Grupo {}".format(self.nome)
 
 
 class Time(models.Model):
@@ -27,7 +26,7 @@ class Time(models.Model):
     grupo = models.ForeignKey(Grupo)
     abreviatura = models.CharField(max_length=15, unique=True, blank=True, null=True)
     sigla = models.CharField(max_length=3, unique=True, blank=True, null=True)
-    
+
     jogos = 0
     vitorias = 0
     empates = 0
@@ -74,15 +73,15 @@ class Partida(models.Model):
         formato_data = '%a %d %B - %H:%M'
         if self.time_1:
             return '%s - %s x %s - %s - %s' % (
-                self.rodada, 
-                self.time_1.nome, 
-                self.time_2.nome, 
+                self.rodada,
+                self.time_1.nome,
+                self.time_2.nome,
                 self.data.strftime(formato_data),
                 self.realizada
             )
         return '%s - %s - %s - %s' % (
-            self.rodada, 
-            self.regra_para_times, 
+            self.rodada,
+            self.regra_para_times,
             self.data.strftime(formato_data),
             self.realizada
         )
@@ -93,7 +92,7 @@ class Partida(models.Model):
             vitorioso = self.time_1
         elif self.gols_time_2 > self.gols_time_1:
             vitorioso = self.time_2
-        
+
         palpite = None
         if self.media_palpites_time_1() > self.media_palpites_time_2():
             palpite = self.time_1
