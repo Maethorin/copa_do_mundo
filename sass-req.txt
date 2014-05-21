@@ -1,0 +1,3 @@
+sudo apt-get install ruby-full rubygems1.8
+sudo gem install sass
+sudo gem install compass

@@ -13,7 +13,7 @@
 	<title>Simulador da Copa do Mundo</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/geral.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
 
     <script type="text/javascript">
 
@@ -51,45 +51,29 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-2"></div>
+            <div class="col-md-8">
             {% for grupo in grupos %}
-            <div class="col-md-1">
-                <div class="panel panel-default">
+                <div class="panel panel-default grupos">
                     <div class="panel-heading">
                         <h3 class="panel-title text-center">{{ grupo }}</h3>
                     </div>
                     <div class="panel-body mini">
                         <div class="row">
-                            <div class="col-md-3">
-                                {{ grupo.time_set.all.0.sigla }}
-                            </div>
-                            <div class="col-md-3">
-                                {{ grupo.time_set.all.1.sigla }}
-                            </div>
-                            <div class="col-md-3">
-                                {{ grupo.time_set.all.2.sigla }}
-                            </div>
-                            <div class="col-md-3">
-                                {{ grupo.time_set.all.3.sigla }}
-                            </div>
+                            <div class="col-md-3">{{ grupo.time_set.all.0.sigla }}</div>
+                            <div class="col-md-3">{{ grupo.time_set.all.1.sigla }}</div>
+                            <div class="col-md-3">{{ grupo.time_set.all.2.sigla }}</div>
+                            <div class="col-md-3">{{ grupo.time_set.all.3.sigla }}</div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
-                                <span class="time abreviatura">{{ grupo.time_set.all.0.abreviatura }}</span>
-                            </div>
-                            <div class="col-md-3">
-                                <span class="time abreviatura">{{ grupo.time_set.all.1.abreviatura }}</span>
-                            </div>
-                            <div class="col-md-3">
-                                <span class="time abreviatura">{{ grupo.time_set.all.2.abreviatura }}</span>
-                            </div>
-                            <div class="col-md-3">
-                                <span class="time abreviatura">{{ grupo.time_set.all.3.abreviatura }}</span>
-                            </div>
+                            <div class="col-md-3 abreviatura">{{ grupo.time_set.all.0.abreviatura }}</div>
+                            <div class="col-md-3 abreviatura">{{ grupo.time_set.all.1.abreviatura }}</div>
+                            <div class="col-md-3 abreviatura">{{ grupo.time_set.all.2.abreviatura }}</div>
+                            <div class="col-md-3 abreviatura">{{ grupo.time_set.all.3.abreviatura }}</div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
+            </div>
             <div class="col-md-2"></div>
         </div>
         <div class="row">

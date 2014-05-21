@@ -1,0 +1,25 @@
+/* line 1, ../../../sass/base.scss */
+body {
+  padding-top: 70px;
+}
+
+/* line 3, ../../../sass/base.scss */
+.abreviatura {
+  font-size: 12px;
+}
+
+/* line 7, ../../../sass/base.scss */
+.mini {
+  padding: 5px;
+}
+/* line 9, ../../../sass/base.scss */
+.mini .col-md-3 {
+  padding: 0 3px;
+}
+
+/* line 14, ../../../sass/base.scss */
+.grupos {
+  width: 140px;
+  float: left;
+  margin: 0 5px;
+}
