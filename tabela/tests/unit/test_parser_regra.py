@@ -4,7 +4,8 @@
 from mox import *
 from nose.tools import assert_equals
 
-from copa_do_mundo.tabela import parser_regra
+from tabela import parser_regra
+
 
 def test_parser_regra_retorna_true_se_regra_da_partida_eh_da_primeira_fase():
     mox = Mox()

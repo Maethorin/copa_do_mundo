@@ -4,7 +4,7 @@ import re
 
 from django.shortcuts import *
 
-from tabela.models import *
+from tabela.models import Grupo, Partida
 from tabela import simulador
 
 

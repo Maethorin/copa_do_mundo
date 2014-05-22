@@ -1,3 +1,5 @@
+mox
+nose
 Django
 South
 MySql-python

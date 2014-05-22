@@ -69,21 +69,21 @@ class Partida(models.Model):
         db_table = 'partidas'
 
     def __unicode__(self):
-        #locale.setlocale(locale.LC_ALL, 'pt_BR')
         formato_data = '%a %d %B - %H:%M'
+        situacao = "Realizada" if self.realizada else u"Não realizada"
         if self.time_1:
             return '%s - %s x %s - %s - %s' % (
                 self.rodada,
                 self.time_1.nome,
                 self.time_2.nome,
                 self.data.strftime(formato_data),
-                self.realizada
+                situacao
             )
         return '%s - %s - %s - %s' % (
             self.rodada,
             self.regra_para_times,
             self.data.strftime(formato_data),
-            self.realizada
+            situacao
         )
 
     def vitorioso_certo(self):

@@ -4,7 +4,7 @@
 from mox import *
 from nose.tools import assert_equals
 import django
-from copa_do_mundo.tabela import views
+from tabela import views
 
 class FakeModel():
     def __init__(self, nome):
@@ -295,9 +295,9 @@ def test_registra_palpite_com_retorno_json():
     assert_equals(partida.palpites_time_1, 6)
     assert_equals(partida.palpites_time_2, 7)
 
+
 def test_obtem_dados_de_rodada_pelo_id():
     mox = Mox()
-    mox.StubOutWithMock(views, 'Partida')
     mox.StubOutWithMock(views, 're')
     mox.StubOutWithMock(views, 'render_to_response')
     mox.StubOutWithMock(views, '_obter_rodadas')
@@ -318,12 +318,12 @@ def test_obtem_dados_de_rodada_pelo_id():
         {'id': 'final', 'nome': 'Final', 'index': 7, 'partidas': [partida11, partida12]}
     ]
 
+    views.Grupo.objects = mox.CreateMockAnything()
+    grupos = ["A", "B"]
+    views.Grupo.objects.all().AndReturn(grupos)
     views._obter_rodadas.__call__().AndReturn(rodadas)
-
-    views.Partida.objects = mox.CreateMockAnything()
-    views.Partida.objects.filter(rodada__exact='final').AndReturn([partida11, partida12])
     views.re.match('[1-3]', 'Final').AndReturn('AlgumaCoisa')
-    views.render_to_response.__call__('partidas.html', {'rodadas': rodadas, 'rodada_id': 'final', 'index': 7})
+    views.render_to_response.__call__('partidas.html', {'rodadas': rodadas, 'rodada_id': 'final', 'index': 7, 'grupos': grupos})
 
     mox.ReplayAll()
     try:
@@ -331,4 +331,3 @@ def test_obtem_dados_de_rodada_pelo_id():
         mox.VerifyAll()
     finally:
         mox.UnsetStubs()
-    

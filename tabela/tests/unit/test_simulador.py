@@ -3,7 +3,8 @@
 
 from mox import *
 from nose.tools import assert_equals
-from copa_do_mundo.tabela import simulador
+from tabela import simulador
+
 
 class FakeModel():
     def __init__(self, nome):
@@ -14,9 +15,11 @@ class FakeModel():
         self.derrotas = 0
         self.gols_feitos = 0
         self.gols_tomados = 0
+        self.realizada = True
     
     def __repr__(self):
         return self.nome
+
 
 def test_obter_time_de_partidas_com_partidas_de_oitavas():
 
@@ -53,6 +56,7 @@ def test_obter_time_de_partidas_com_partidas_de_oitavas():
     finally:
         mox.UnsetStubs()
 
+
 def test_obter_time_de_partidas_com_partidas_de_outras_fases():
 
     mox = Mox()
@@ -87,6 +91,7 @@ def test_obter_time_de_partidas_com_partidas_de_outras_fases():
         mox.VerifyAll()
     finally:
         mox.UnsetStubs()
+
 
 def test_obter_time_de_partidas_com_partidas_de_outras_fases_e_de_oitavas():
 
@@ -133,6 +138,7 @@ def test_obter_time_de_partidas_com_partidas_de_outras_fases_e_de_oitavas():
     finally:
         mox.UnsetStubs()
 
+
 def test_obtem_times_de_partida_de_oitavas():
 
     mox = Mox()
@@ -161,6 +167,7 @@ def test_obtem_times_de_partida_de_oitavas():
         mox.VerifyAll()
     finally:
         mox.UnsetStubs()
+
 
 def test_obtem_times_de_partida_de_outras_fases_com_regra_de_oitavas():
     mox = Mox()
@@ -198,6 +205,7 @@ def test_obtem_times_de_partida_de_outras_fases_com_regra_de_oitavas():
         mox.VerifyAll()
     finally:
         mox.UnsetStubs()
+
 
 def test_obtem_times_de_partida_de_outras_fases_com_regra_de_outras_fases():
     mox = Mox()
@@ -262,6 +270,7 @@ def test_obtem_times_de_partida_de_outras_fases_com_regra_de_outras_fases():
     finally:
         mox.UnsetStubs()
 
+
 def test_obtem_times_de_partida_de_disputa_de_terceiro_lugar():
     mox = Mox()
     mox.StubOutWithMock(simulador, 'obtem_time_do_grupo_na_classificacao')
@@ -325,6 +334,7 @@ def test_obtem_times_de_partida_de_disputa_de_terceiro_lugar():
     finally:
         mox.UnsetStubs()
 
+
 def test_obtem_time_do_grupo_na_classificacao():
     mox = Mox()
 
@@ -339,7 +349,8 @@ def test_obtem_time_do_grupo_na_classificacao():
         assert_equals(retorno, 'timeA')
     finally:
         mox.UnsetStubs()
-    
+
+
 def test_obtem_times_do_grupo_ordenados_por_classificacao():
     mox = Mox()
 
@@ -392,6 +403,7 @@ def test_obtem_times_do_grupo_ordenados_por_classificacao():
     finally:
         mox.UnsetStubs()
 
+
 def test_obter_vitorioso_na_partida_realizada():
     mox = Mox()
     mox.StubOutWithMock(simulador, 'analiza_resultado_e_acumula_gols')
@@ -411,6 +423,7 @@ def test_obter_vitorioso_na_partida_realizada():
         mox.VerifyAll()
     finally:
         mox.UnsetStubs()
+
 
 def test_obter_vitorioso_na_partida_nao_realizada():
     mox = Mox()
@@ -433,6 +446,7 @@ def test_obter_vitorioso_na_partida_nao_realizada():
     finally:
         mox.UnsetStubs()
 
+
 def test_analiza_resultado_retorna_none_quando_empate():
     partida = FakeModel('partida')
     partida.time_1 = FakeModel('time1')
@@ -444,6 +458,7 @@ def test_analiza_resultado_retorna_none_quando_empate():
 
     assert_equals(time, None)
 
+
 def test_analiza_resultado_retorna_time_1_perdedor():
     partida = FakeModel('partida')
     partida.time_1 = FakeModel('time1')
@@ -454,6 +469,7 @@ def test_analiza_resultado_retorna_time_1_perdedor():
     time, gol1, gol2 = simulador.analiza_resultado_e_acumula_gols(partida.gols_time_1, partida.gols_time_2, 1, partida, True)
 
     assert_equals(time, partida.time_1)
+
 
 def test_analiza_resultado_retorna_time_1():
     partida = FakeModel('partida')
@@ -477,6 +493,7 @@ def test_analiza_resultado_retorna_time_2():
 
     assert_equals(time, partida.time_2)
 
+
 def test_normalizar_lista_com_saldo_de_gols_quando_nao_ha_empate_nada_faz():
     time1 = FakeModel('time1')
     time1.id = 1
@@ -494,6 +511,7 @@ def test_normalizar_lista_com_saldo_de_gols_quando_nao_ha_empate_nada_faz():
     assert_equals(times[0], time1)
     assert_equals(times[1], time2)
     assert_equals(times[2], time3)
+
 
 def test_normalizar_lista_com_saldo_de_gols_recupera_saldo_quando_ha_empate():
 
