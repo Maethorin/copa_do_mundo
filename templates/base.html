@@ -70,7 +70,12 @@
     </nav>
     <div class="container-fluid">
         <div class="row cabecalho fundo-grama flex">
-            <div class="col-md-3 titulo text-right"><h1>Simula Copa</h1></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2 text-right">
+                <a href="{% url 'index' %}">
+                    <div class="titulo"></div>
+                </a>
+            </div>
             <div class="col-md-6 text-center">
                 <!-- Copa do Mundo Responsive -->
                 <ins class="adsbygoogle"
@@ -83,7 +88,7 @@
                 </script>
 
             </div>
-            <div class="col-md-3 pagina"><h2>{{ titulo_da_pagina }}</h2></div>
+            <div class="col-md-3 pagina"><h1>{{ titulo_da_pagina }}</h1></div>
         </div>
         <div class="row conteudo flex">
             <div class="col-md-1 lateral esquerdo fundo-grama">

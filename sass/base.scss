@@ -1,24 +1,24 @@
 body {padding: 50px 0;}
 
-.abreviatura {
-  font-size: 12px;
+.titulo {
+  background: url('../img/logo-simulacopa.png') no-repeat;
+  width: 260px;
+  height: 95px;
 }
 
-.mini {
-  padding: 5px;
-  .col-md-3 {
-    padding: 0 3px;
+.pagina {
+  color: #EFEFEF;
+  font-weight: bold;
+  h1 {
+    font-size: 50px;
   }
-}
-
-.grupos {
-  width: 140px;
-  float: left;
-  margin: 0 5px;
 }
 
 footer {
   font-size: 10px;
+  .logo {
+    padding: 8px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -37,7 +37,7 @@ footer {
   background-color: $verde-campo;
   padding: 10px 0;
   border-bottom: 1px solid $navbar-default-border;
-  div {
+  div[class] {
     background-color: $fundo-cabecalho;
     padding: 5px 10px;
   }
