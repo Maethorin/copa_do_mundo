@@ -1,12 +1,4 @@
     {% for grupo in grupos %}
-    <li><a href="#">{{ grupo }}</a></li>
+    <li class="{% if grupo.nome == pagina_atual %}active{% endif %}"><a href="{% url 'grupo' grupo.nome %}">{{ grupo }}</a></li>
     {% endfor %}
-    <li class="active"><a href="{% url 'rodada' 'oitavas' %}"><div>Oitavas</div></a></li>
-    <li><a href="{% url 'rodada' 'quartas' %}"><div>Quartas</div></a></li>
-    <li><a href="{% url 'rodada' 'semifinais' %}"><div>Semifinais</div></a></li>
-    <li><a href="{% url 'rodada' 'terceiro_lugar' %}"><div>Terceiro lugar</div></a></li>
-    <li><a href="{% url 'rodada' 'final' %}"><div>Final</div></a></li>
-{#    <li><a href="{% url 'chaves' %}" title="Rodadas do mata-mata em chaves"><div>Mata-mata</div></a></li>#}
-{#    <li><a href="{% url 'classificacao' %}" title="Classificação segundo a simulação"><div>Classificação simulada</div></a></li>#}
-{#    <li><a href="{% url 'classificacao_atual' %}" title="Classificação real"><div>Classificação real</div></a></li>#}
-{#    <li><a href="{% url 'partidas' %}" title="Se se navegador não suporta JavaScript, acesse esse link para ver todas as partidas de todas as rodadas."><div>Todas</div></a></li>#}
+    {% include 'menu-comum.html' %}

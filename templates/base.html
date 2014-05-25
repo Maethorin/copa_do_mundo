@@ -14,42 +14,42 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
 
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-17020062-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
+{#    <script type="text/javascript">#}
+{##}
+{#      var _gaq = _gaq || [];#}
+{#      _gaq.push(['_setAccount', 'UA-17020062-1']);#}
+{#      _gaq.push(['_trackPageview']);#}
+{##}
+{#      (function() {#}
+{#        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;#}
+{#        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';#}
+{#        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);#}
+{#      })();#}
+{##}
+{#    </script>#}
     <script type="application/javascript" src="{% static 'js/angular.min.js' %}"></script>
 </head>
 <body>
     <div id="fb-root"></div>
-    <script type="application/javascript">
-        window.fbAsyncInit = function() {
-            FB.init({
-                cookie: true,
-                status: true,
-                appId: '880437195316693',
-                xfbml: true,
-                version: 'v2.0'
-            });
-        };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/pt_BR/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
+{#    <script type="application/javascript">#}
+{#        window.fbAsyncInit = function() {#}
+{#            FB.init({#}
+{#                cookie: true,#}
+{#                status: true,#}
+{#                appId: '880437195316693',#}
+{#                xfbml: true,#}
+{#                version: 'v2.0'#}
+{#            });#}
+{#        };#}
+{##}
+{#      (function(d, s, id){#}
+{#         var js, fjs = d.getElementsByTagName(s)[0];#}
+{#         if (d.getElementById(id)) {return;}#}
+{#         js = d.createElement(s); js.id = id;#}
+{#         js.src = "//connect.facebook.net/pt_BR/sdk.js";#}
+{#         fjs.parentNode.insertBefore(js, fjs);#}
+{#       }(document, 'script', 'facebook-jssdk'));#}
+{#    </script>#}
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -78,14 +78,14 @@
             </div>
             <div class="col-md-6 text-center">
                 <!-- Copa do Mundo Responsive -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-8167110538900295"
-                     data-ad-slot="4410258051"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+{#                <ins class="adsbygoogle"#}
+{#                     style="display:block"#}
+{#                     data-ad-client="ca-pub-8167110538900295"#}
+{#                     data-ad-slot="4410258051"#}
+{#                     data-ad-format="auto"></ins>#}
+{#                <script>#}
+{#                    (adsbygoogle = window.adsbygoogle || []).push({});#}
+{#                </script>#}
 
             </div>
             <div class="col-md-3 pagina"><h1>{{ titulo_da_pagina }}</h1></div>
@@ -102,30 +102,30 @@
                 <div class="bola"></div>
             </div>
             <div class="col-md-1 ad-sense fundo-grama">
-                <ins class="adsbygoogle"
-                     style="display:block;"
-                     data-ad-client="ca-pub-8167110538900295"
-                     data-ad-slot="7420975388"
-                     data-ad-format="auto"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+{#                <ins class="adsbygoogle"#}
+{#                     style="display:block;"#}
+{#                     data-ad-client="ca-pub-8167110538900295"#}
+{#                     data-ad-slot="7420975388"#}
+{#                     data-ad-format="auto"></ins>#}
+{#                <script>#}
+{#                    (adsbygoogle = window.adsbygoogle || []).push({});#}
+{#                </script>#}
             </div>
         </div>
         <div class="row social fundo-grama">
-            <div class="branco">
-                <div class="col-md-7"></div>
-                <div class="col-md-1">
-                    <div class="fb-share-button" data-type="button_count"></div>
-                </div>
-                <div class="col-md-1">
-                    <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
-                </div>
-                <div class="col-md-1">
-                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-                </div>
-                <div class="col-md-2"></div>
-            </div>
+{#            <div class="branco">#}
+{#                <div class="col-md-7"></div>#}
+{#                <div class="col-md-1">#}
+{#                    <div class="fb-share-button" data-type="button_count"></div>#}
+{#                </div>#}
+{#                <div class="col-md-1">#}
+{#                    <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>#}
+{#                </div>#}
+{#                <div class="col-md-1">#}
+{#                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>#}
+{#                </div>#}
+{#                <div class="col-md-2"></div>#}
+{#            </div>#}
         </div>
     </div>
     <footer>
@@ -150,7 +150,7 @@
     <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery-ui-1.10.4.custom.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+{#    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
     <script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/partidas.js' %}"></script>
 

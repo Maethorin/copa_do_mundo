@@ -6,6 +6,7 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns(
     'tabela.views',
     url(r'^/?$', 'index', name='index'),
+    url(r'^grupo/(?P<nome>\w+)/?$', 'grupo', name='grupo'),
     url(r'^classificacao/?$', 'grupos', name='classificacao'),
     url(r'^classificacao/atual/?$', 'grupos_atual', name='classificacao_atual'),
     url(r'^chaves/?$', 'chaves', name='chaves'),

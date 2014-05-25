@@ -49,12 +49,40 @@ class Time(models.Model):
         return '%s - Grupo %s. Pontos %d' % (self.nome, self.grupo.nome, self.pontos)
 
 
+class Fase(models.Model):
+    class Meta:
+        verbose_name_plural = 'Fases'
+        db_table = 'fases'
+
+    id = models.AutoField(primary_key=True, db_column='fase_id')
+    nome = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return u"%s" % self.nome
+
+
+class Estadio(models.Model):
+    class Meta:
+        ordering = ('nome',)
+        verbose_name_plural = 'Estadios'
+        db_table = 'estadios'
+
+    id = models.AutoField(primary_key=True, db_column='estadio_id')
+    nome = models.CharField(max_length=20)
+    estado = models.CharField(max_length=2)
+    cidade = models.CharField(max_length=200, default='')
+
+    def __unicode__(self):
+        return u"%s (%s-%s)" % (self.nome, self.cidade, self.estado)
+
+
 class Partida(models.Model):
     id = models.AutoField(primary_key=True, db_column='partida_id')
     time_1 = models.ForeignKey(Time, related_name='time_1', null=True, blank=True)
     time_2 = models.ForeignKey(Time, related_name='time_2', null=True, blank=True)
     data = models.DateTimeField()
-    rodada = models.CharField(max_length=200)
+    local = models.ForeignKey(Estadio, null=True)
+    fase = models.ForeignKey(Fase, null=True)
     regra_para_times = models.CharField(max_length=20, null=True, blank=True)
     gols_time_1 = models.IntegerField(null=True, blank=True)
     gols_time_2 = models.IntegerField(null=True, blank=True)
@@ -72,18 +100,20 @@ class Partida(models.Model):
         formato_data = '%a %d %B - %H:%M'
         situacao = "Realizada" if self.realizada else u"Não realizada"
         if self.time_1:
-            return '%s - %s x %s - %s - %s' % (
-                self.rodada,
+            return u'%s - %s x %s - %s - %s - %s' % (
+                self.fase,
                 self.time_1.nome,
                 self.time_2.nome,
                 self.data.strftime(formato_data),
-                situacao
+                situacao,
+                self.local
             )
-        return '%s - %s - %s - %s' % (
-            self.rodada,
+        return u'%s - %s - %s - %s - %s' % (
+            self.fase,
             self.regra_para_times,
             self.data.strftime(formato_data),
-            situacao
+            situacao,
+            self.local
         )
 
     def vitorioso_certo(self):

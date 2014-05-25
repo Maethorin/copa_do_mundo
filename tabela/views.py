@@ -12,6 +12,13 @@ def index(request):
     return rodada(request, 'final', template='index.html', inclui_partida_em_andamento=True)
 
 
+def grupo(request, nome):
+    grupos = Grupo.objects.all()
+    grupo = Grupo.objects.get(nome=nome)
+    partidas_do_grupo = simulador.obtem_partidas_de_grupo(grupo)
+    return render_to_response('grupo.html', {'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome, 'partidas': partidas_do_grupo})
+
+
 def grupos(request):
     grupos = Grupo.objects.all()
     simulador.obter_dados_de_times(grupos)

@@ -5,7 +5,7 @@ import parser_regra
 
 from django.db.models import Q
 from lxml import html as lhtml
-from tabela.models import Partida, Time
+from tabela.models import Partida, Time, Fase
 
 
 class InformacoesDePartida():
@@ -19,6 +19,13 @@ class InformacoesDePartida():
         self.realizada = status == 'Finished'
 
 
+def obtem_partidas_de_grupo(grupo):
+    fase = Fase.objects.get(nome='Classificação')
+    times_query = Q(fase=fase, time_1__in=grupo.time_set.all()) | Q(fase=fase, time_2__in=grupo.time_set.all())
+    partidas = Partida.objects.filter(times_query)
+    return partidas
+
+
 def obter_dados_de_times(grupos, atual=False):
     for grupo in grupos:
         grupo.times = obtem_times_do_grupo_ordenados_por_classificacao(grupo.nome, atual)
@@ -26,7 +33,7 @@ def obter_dados_de_times(grupos, atual=False):
 
 def obter_times_de_partidas(partidas):
     for partida in partidas:
-        if partida.rodada == 'oitavas':
+        if partida.fase.nome == 'Oitavas':
             time1, time2 = obtem_times_de_partida_de_oitavas(partida.regra_para_times)
         else:
             time1, time2 = obtem_times_de_partida_de_outras_fases(partida.regra_para_times)
@@ -78,7 +85,7 @@ def obtem_times_de_partida_de_outras_fases(regra):
     partida1 = Partida.objects.get(id=ids[0])
     partida2 = Partida.objects.get(id=ids[1])
     perdedor = False
-    if partida1.rodada == 'oitavas':
+    if partida1.fase.nome == 'Oitavas':
         partida1.time_1, partida1.time_2 = obtem_times_de_partida_de_oitavas(partida1.regra_para_times)
         partida2.time_1, partida2.time_2 = obtem_times_de_partida_de_oitavas(partida2.regra_para_times)
     elif parser_regra.eh_disputa_de_terceiro_lugar(regra):

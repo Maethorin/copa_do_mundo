@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+    <div class="row">
+        {% for partida in partidas %}
+            {% if forloop.counter0|divisibleby:2 %}
+            {% if forloop.counter0 > 0 %}
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-md-4">
+                <div class="rodada">
+                    <h3 class="well-sm">{% if forloop.counter == 1 %}1{% elif forloop.counter == 3 %}2{% else %}3{% endif %}&#170; Rodada</h3>
+            {% endif %}
+                <div class="panel panel-default partida">
+                    <div class="panel-heading">
+                        <div class="panel-title">{{ partida.data|date:"d M - H:i" }}</div>
+                    </div>
+                    <div class="panel-body text-center">
+                        {{ partida.time_1.abreviatura }}
+                        <icon class="bandeira {{ partida.time_1.sigla }}"></icon>
+                        x
+                        <icon class="bandeira {{ partida.time_2.sigla }}"></icon>
+                        {{ partida.time_2.abreviatura }}
+                    </div>
+                    <div class="panel-footer small">
+                        {{ partida.local }}
+                    </div>
+                </div>
+            {% if forloop.last %}
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock conteudo %}
