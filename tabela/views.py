@@ -50,7 +50,7 @@ def mostra_rodada(request, rodada_id):
     return rodada(request, rodada_id)
 
 
-def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andamento=False):
+def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andamento=False, titulo_da_pagina="Inicial"):
     grupos = Grupo.objects.all()
     rodadas = _obter_rodadas()
     index = 0
@@ -66,7 +66,16 @@ def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andam
             if not re.match('[1-3]', rodada['nome']):
                 simulador.obter_times_de_partidas(rodada['partidas'])
 
-    return render_to_response(template, {'rodadas': rodadas, 'rodada_id': rodada_id, 'index': index, 'grupos': grupos })
+    return render_to_response(
+        template,
+        {
+            'rodadas': rodadas,
+            'rodada_id': rodada_id,
+            'index': index,
+            'grupos': grupos,
+            'titulo_da_pagina': titulo_da_pagina
+        }
+    )
 
 
 def registra_palpite(request):

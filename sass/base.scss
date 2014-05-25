@@ -1,4 +1,4 @@
-body {padding-top: 70px;}
+body {padding: 50px 0;}
 
 .abreviatura {
   font-size: 12px;
@@ -19,4 +19,80 @@ body {padding-top: 70px;}
 
 footer {
   font-size: 10px;
+}
+
+@media (max-width: 768px) {
+  .conteudo {
+    .esquerdo, .direito {
+      display: none;
+    }
+  }
+}
+
+.fundo-grama {
+  background-image: url(../img/grama.jpg);
+}
+
+.cabecalho {
+  background-color: $verde-campo;
+  padding: 10px 0;
+  border-bottom: 1px solid $navbar-default-border;
+  div {
+    background-color: $fundo-cabecalho;
+    padding: 5px 10px;
+  }
+}
+
+.central {
+  background-image: url(../img/fundo-inicial.jpg);
+  padding: 20px 20px 0 20px;
+}
+
+.bola {
+  background-image: url('../img/bola.png');
+  width: 70px;
+  height: 64px;
+  margin-top: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ad-sense {
+  padding: 10px 5px;
+}
+
+.introducao {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background-color: rgba(white, .65);
+  p {
+    margin: 20px 0;
+    color: #0d3a02;
+    font-size: 14px;
+  }
+}
+
+.andamento {
+  .panel-body {
+    height: 65px;
+  }
+}
+
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 0 auto;
+}
+
+.social {
+  border-top: 1px solid $navbar-default-border;
+}
+
+.branco {
+  background-color: rgba(white, .6);
+  padding: 5px 0;
+  overflow: hidden;
 }

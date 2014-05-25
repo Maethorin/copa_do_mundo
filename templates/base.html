@@ -30,16 +30,36 @@
     <script type="application/javascript" src="{% static 'js/angular.min.js' %}"></script>
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
+    <div id="fb-root"></div>
+    <script type="application/javascript">
+        window.fbAsyncInit = function() {
+            FB.init({
+                cookie: true,
+                status: true,
+                appId: '880437195316693',
+                xfbml: true,
+                version: 'v2.0'
+            });
+        };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/pt_BR/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-nav-bar">
-                <span class="sr-only">Navegue</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                    <span class="sr-only">Navegue</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">SimulaCopa</a>
             </div>
             <div class="collapse navbar-collapse" id="top-nav-bar">
                 <ul class="nav navbar-nav">
@@ -49,38 +69,57 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3"></div>
+        <div class="row cabecalho fundo-grama flex">
+            <div class="col-md-3 titulo text-right"><h1>Simula Copa</h1></div>
             <div class="col-md-6 text-center">
-                <script type="text/javascript"><!--
-                google_ad_client = "pub-8167110538900295";
-                /* 728x90, criado 17/06/10 */
-                google_ad_slot = "1475428285";
-                google_ad_width = 728;
-                google_ad_height = 90;
-                //-->
+                <!-- Copa do Mundo Responsive -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8167110538900295"
+                     data-ad-slot="4410258051"
+                     data-ad-format="auto"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
-                <script type="text/javascript"
-                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-                </script>
+
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-3 pagina"><h2>{{ titulo_da_pagina }}</h2></div>
         </div>
-        <div class="row">
-            <div class="col-md-10">
+        <div class="row conteudo flex">
+            <div class="col-md-1 lateral esquerdo fundo-grama">
+                <div class="bola"></div>
+            </div>
+            <div class="col-md-9 central">
                 {% block conteudo %}
                 {% endblock conteudo %}
             </div>
-            <div class="col-md-2">
-                <script type="text/javascript"><!--
-                    google_ad_client = "pub-8167110538900295";
-                    /* 160x600, criado 17/06/10 */
-                    google_ad_slot = "7420975388";
-                    google_ad_width = 160;
-                    google_ad_height = 600;
-                //-->
+            <div class="col-md-1 lateral direito fundo-grama">
+                <div class="bola"></div>
+            </div>
+            <div class="col-md-1 ad-sense fundo-grama">
+                <ins class="adsbygoogle"
+                     style="display:block;"
+                     data-ad-client="ca-pub-8167110538900295"
+                     data-ad-slot="7420975388"
+                     data-ad-format="auto"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
-                <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+            </div>
+        </div>
+        <div class="row social fundo-grama">
+            <div class="branco">
+                <div class="col-md-7"></div>
+                <div class="col-md-1">
+                    <div class="fb-share-button" data-type="button_count"></div>
+                </div>
+                <div class="col-md-1">
+                    <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+                </div>
+                <div class="col-md-1">
+                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+                </div>
+                <div class="col-md-2"></div>
             </div>
         </div>
     </div>
@@ -106,8 +145,10 @@
     <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery-ui-1.10.4.custom.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/partidas.js' %}"></script>
+
 
 {#    <script type="text/javascript" src="/media/js/lib/jquery.form.js"></script>#}
 
