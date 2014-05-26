@@ -9,7 +9,14 @@ from tabela import simulador
 
 
 def index(request):
-    return rodada(request, 'final', template='index.html', inclui_partida_em_andamento=True)
+    return render_to_response(
+        'index.html',
+        {
+            'grupos': Grupo.objects.all(),
+            'titulo_da_pagina': 'Inicial',
+            'css_fundo': 'inicial'
+        }
+    )
 
 
 def grupo(request, nome):
@@ -47,7 +54,7 @@ def partidas(request, rodadas=None, template='partidas.html', eh_chaves=False):
         rodadas = _obter_rodadas()
     index = 0
     for rodada in rodadas:
-        rodada['partidas'] = Partida.objects.filter(rodada__exact=rodada['id'])
+        rodada['partidas'] = Partida.objects.filter(fase__nome=rodada['id'])
         if not re.match('[1-3]', rodada['nome']):
             simulador.obter_times_de_partidas(rodada['partidas'])
         else:
@@ -74,7 +81,7 @@ def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andam
 
     for rodada in rodadas:
         if rodada['id'] == rodada_id and rodada_id != 'em_andamento':
-            rodada['partidas'] = Partida.objects.filter(rodada__exact=rodada['id'])
+            rodada['partidas'] = Partida.objects.filter(fase__nome=rodada['id'])
             index = rodada['index']
             if not re.match('[1-3]', rodada['nome']):
                 simulador.obter_times_de_partidas(rodada['partidas'])

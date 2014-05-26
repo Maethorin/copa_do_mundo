@@ -1,40 +1,42 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-    <div class="introducao well-sm">
-        <p>O SimulaCopa funciona com a média de gols nas votações. A idéia é ter a maior precisão de resultados com uma quantidade de variáveis maior.</p>
-        <p>Num simples caso de escolher entre 3 opções (Time A, Time B ou Empate) e decidir pelo número de vitórias de cada time, o fator de quantidade de gols fica desconsiderada.</p>
-        <p>Mas se você considerar que o palpite na quantidade de gols que cada time poderá fazer naquela partida for mais importante do que simplesmente dizer se ele irá ganhar, perder ou empatar, então o resultado dessa partida seria decidido pela média dos palpites dos gols</p>
-        <p>Pelao ao menos essa é a teoria :D</p>
-        <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na partida.</p>
-        <p>Caso você queira que seu resultado seja guardado, faça login pelo Facebook.</p>
-        <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha x Suiça, Alemanha x Sérvia :D...</p>
-        <p>A tabela com as partidas e seus resultados poderão ser acessadas no menu acima. Apenas as partidas não realizadas poderão receber os palpites.</p>
-        <p>A medida que as partidas forem acontecendo, os palpites serão fechados e o resultado real passa a contar na computação para as próximas fases. Nesses casos, o resultado e os palpites serão exibidos.</p>
-        <p>Acompanhe também, nessa página, o placar das partidas em andamento.</p>
-    </div>
-    <div class="panel panel-default andamento">
-        <div class="panel-heading">
-            <h3 class="panel-title">Partidas em andamento</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="introducao well-sm">
+                <p>O SimulaCopa funciona com a média de gols nas votações. A idéia é ter a maior precisão de resultados com uma quantidade de variáveis maior.</p>
+                <p>Num simples caso de escolher entre 3 opções (Time A, Time B ou Empate) e decidir pelo número de vitórias de cada time, o fator de quantidade de gols fica desconsiderada.</p>
+                <p>Mas se você considerar que o palpite na quantidade de gols que cada time poderá fazer naquela partida for mais importante do que simplesmente dizer se ele irá ganhar, perder ou empatar, então o resultado dessa partida seria decidido pela média dos palpites dos gols</p>
+                <p>Pelao ao menos essa é a teoria :D</p>
+                <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na partida.</p>
+                <p>Caso você queira que seu resultado seja guardado, faça login pelo Facebook.</p>
+                <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha x Suiça, Alemanha x Sérvia :D...</p>
+                <p>A tabela com as partidas e seus resultados poderão ser acessadas no menu acima. Apenas as partidas não realizadas poderão receber os palpites.</p>
+                <p>A medida que as partidas forem acontecendo, os palpites serão fechados e o resultado real passa a contar na computação para as próximas fases. Nesses casos, o resultado e os palpites serão exibidos.</p>
+                <p>Acompanhe também, nessa página, o placar das partidas em andamento.</p>
+            </div>
         </div>
-        <div class="panel-body">
-            <div class="rodadas hidden">
-                {% for rodada in rodadas %}
-                    {% if rodada.partidas %}
-                    <div class="partidas">
-                        {% ifequal rodada.id 'final' %}
-                        <h2 class="final">Por enquanto a final será:</h2>
-                        {% endifequal %}
-                        {% ifequal rodada.id 'em_andamento' %}
-                        <h2 class="em_andamento">Partidas em jogo:</h2>
-                        {% endifequal %}
-                    {% for partida in rodada.partidas %}
-                        <ul class="partidas">
-                            {% include "partida_tag.html" %}
-                        </ul>
-                    {% endfor %}
-                    </div>
-                    {% endif %}
-                {% endfor %}
+    </div>
+    <div class="row partidas-index">
+        <div class="col-md-6">
+            <div class="panel panel-default andamento">
+                <div class="panel-heading slide-up">
+                    <h3 class="panel-title">
+                        Partidas em andamento
+                    </h3>
+                </div>
+                <div class="panel-body" style="display: none;">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default proximas">
+                <div class="panel-heading slide-up">
+                    <h3 class="panel-title">
+                        Próximas partidas
+                    </h3>
+                </div>
+                <div class="panel-body" style="display: none;">
+                </div>
             </div>
         </div>
     </div>

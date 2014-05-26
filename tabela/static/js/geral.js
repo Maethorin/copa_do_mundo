@@ -41,3 +41,7 @@ function partida(partida_id) {
         $parcial: $parcial
     };
 }
+
+$('.partidas-index').on('click', '.slide-up', function() {
+    var $body = $(this).parent().find('.panel-body').slideToggle();
+});

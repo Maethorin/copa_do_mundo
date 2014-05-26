@@ -57,6 +57,7 @@ footer {
 }
 
 .bola {
+  cursor: pointer;
   background-image: url('../img/bola.png');
   width: 70px;
   height: 64px;
@@ -74,15 +75,9 @@ footer {
   margin-bottom: 20px;
   background-color: rgba(white, .65);
   p {
-    margin: 20px 0;
+    margin: 24px 0;
     color: #0d3a02;
     font-size: 14px;
-  }
-}
-
-.andamento {
-  .panel-body {
-    height: 65px;
   }
 }
 
@@ -104,4 +99,31 @@ footer {
   padding: 5px 0;
   overflow: hidden;
   min-height: 43px;
+}
+
+.slide-up {
+  cursor: pointer;
+  &:hover {
+    background-color: darken($panel-default-heading-bg, 20%);
+  }
+}
+
+.partidas-index {
+  .col-md-6 {
+    position: relative;
+    height: 60px;
+  }
+  .panel-default {
+    position: absolute;
+    bottom: 0;
+    width: 578px;
+  }
+  .panel-body {
+    width: 578px;
+    height: 500px;
+  }
+}
+
+.aberto {
+  height: 400px;
 }
