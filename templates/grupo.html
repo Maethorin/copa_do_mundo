@@ -12,6 +12,7 @@
                     <h3>{% if forloop.counter == 1 %}1{% elif forloop.counter == 3 %}2{% else %}3{% endif %}&#170; Rodada</h3>
             {% endif %}
                     <div class="panel panel-default partida">
+                        <div class="barras"></div>
                         <div class="panel-heading">
                             <div class="panel-title">{{ partida.data|date:"d M - H:i" }}</div>
                         </div>
