@@ -94,7 +94,7 @@
             <div class="col-md-1 lateral esquerdo fundo-grama">
                 <div class="bola"></div>
             </div>
-            <div class="col-md-9 central">
+            <div class="col-md-9 central {{ css_fundo }}">
                 {% block conteudo %}
                 {% endblock conteudo %}
             </div>
@@ -113,19 +113,19 @@
             </div>
         </div>
         <div class="row social fundo-grama">
-{#            <div class="branco">#}
-{#                <div class="col-md-7"></div>#}
-{#                <div class="col-md-1">#}
-{#                    <div class="fb-share-button" data-type="button_count"></div>#}
-{#                </div>#}
-{#                <div class="col-md-1">#}
-{#                    <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>#}
-{#                </div>#}
-{#                <div class="col-md-1">#}
-{#                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>#}
-{#                </div>#}
-{#                <div class="col-md-2"></div>#}
-{#            </div>#}
+            <div class="branco">
+                <div class="col-md-7"></div>
+                <div class="col-md-1">
+                    <div class="fb-share-button" data-type="button_count"></div>
+                </div>
+                <div class="col-md-1">
+                    <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+                </div>
+                <div class="col-md-1">
+                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
         </div>
     </div>
     <footer>

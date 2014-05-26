@@ -16,7 +16,13 @@ def grupo(request, nome):
     grupos = Grupo.objects.all()
     grupo = Grupo.objects.get(nome=nome)
     partidas_do_grupo = simulador.obtem_partidas_de_grupo(grupo)
-    return render_to_response('grupo.html', {'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome, 'partidas': partidas_do_grupo})
+    return render_to_response(
+        'grupo.html',
+        {
+            'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome,
+            'partidas': partidas_do_grupo, 'css_fundo': 'grupos'
+        }
+    )
 
 
 def grupos(request):
@@ -80,7 +86,8 @@ def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andam
             'rodada_id': rodada_id,
             'index': index,
             'grupos': grupos,
-            'titulo_da_pagina': titulo_da_pagina
+            'titulo_da_pagina': titulo_da_pagina,
+            'css_fundo': 'inicial'
         }
     )
 

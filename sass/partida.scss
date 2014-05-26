@@ -1,11 +1,27 @@
 .partida {
-  width: 300px;
+  width: 325px;
   float: left;
   margin: 20px 10px;
 }
 
 .rodada {
+  text-align: center;
   overflow: hidden;
   margin: 5px;
-  background-color: rgba(white, 0.2);
+  background-color: rgba(black, 0.4);
+  h3 {
+    background-color: rgba(green, 0.8);
+    margin: -9px;
+    padding: 7px;
+    color: #ffff00;
+  }
+}
+
+.palpite {
+  width: 45px;
+  display: inline-block;
+}
+
+.botao-palpite {
+  margin-top: 10px;
 }
