@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block conteudo %}
     <div class="row">
         {% for partida in partidas %}
@@ -7,12 +8,12 @@
                 </div>
             </div>
             {% endif %}
-            <div class="col-md-4">
+            <div class="col-md-4 rodada-container">
                 <div class="rodada well-sm">
                     <h3>{% if forloop.counter == 1 %}1{% elif forloop.counter == 3 %}2{% else %}3{% endif %}&#170; Rodada</h3>
             {% endif %}
                     <div class="panel panel-default partida">
-                        <div class="barras"></div>
+{#                        <div class="barras"></div>#}
                         <div class="panel-heading">
                             <div class="panel-title">{{ partida.data|date:"d M - H:i" }}</div>
                         </div>
@@ -47,3 +48,7 @@
         {% endfor %}
     </div>
 {% endblock conteudo %}
+
+{% block js %}
+    <script type="application/javascript" src="{% static 'js/grupo.js' %}"></script>
+{% endblock js %}
