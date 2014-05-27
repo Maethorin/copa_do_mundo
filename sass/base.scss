@@ -48,6 +48,7 @@ footer {
 
 .inicial {
   background-image: url(../img/fundo-inicial.jpg);
+  overflow: hidden;
 }
 
 .grupos {
@@ -79,6 +80,11 @@ footer {
   margin-bottom: 20px;
   background-color: rgba(white, .65);
   overflow: hidden;
+  position: relative;
+  top: -75px;
+  .texto {
+    display: none;
+  }
   p {
     margin: 24px 0;
     color: #0d3a02;
@@ -139,4 +145,16 @@ footer {
 
 .aberto {
   height: 400px;
+}
+
+.barras {
+  width: 50%;
+  margin-bottom: -30px;
+  height: 45px;
+  position: relative;
+  top: -105px;
+  left: 25%;
+  border-width: 0 15px ;
+  border-style: solid;
+  border-image: linear-gradient(to left, black, #AAA) 1 100%;
 }
