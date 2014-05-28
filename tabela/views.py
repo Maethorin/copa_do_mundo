@@ -27,7 +27,7 @@ def grupo(request, nome):
         'grupo.html',
         {
             'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome,
-            'partidas': partidas_do_grupo, 'css_fundo': 'grupos'
+            'partidas': partidas_do_grupo, 'css_fundo': 'grupos', 'titulo_da_pagina': "Grupo {}".format(grupo.nome)
         }
     )
 

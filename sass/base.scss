@@ -1,5 +1,5 @@
 body {
-  padding: 50px 0;
+  padding: 0 0 50px 0;
   font-family: 'Arvo', serif;
 }
 
@@ -76,7 +76,6 @@ footer {
 }
 
 .introducao {
-  padding: 10px 20px;
   margin-bottom: 20px;
   background-color: rgba(black, 0.4);
   overflow: hidden;
@@ -89,14 +88,6 @@ footer {
     margin: 24px 0;
     color: #EFEFEF;
     font-size: 14px;
-  }
-  h3 {
-    background-color: rgb(0, 128, 0);
-    margin: -10px -20px;
-    padding: 7px;
-    color: #ffff00;
-    position: relative;
-    top: 0;
   }
 }
 
@@ -123,7 +114,8 @@ footer {
 .slide-up {
   cursor: pointer;
   &:hover {
-    background-color: darken($panel-default-heading-bg, 20%);
+
+    background-color: darken($painel-header-bg, 5%);
   }
 }
 
@@ -132,14 +124,17 @@ footer {
     position: relative;
     height: 60px;
   }
-  .panel-default {
+  .painel {
     position: absolute;
-    bottom: 0;
-    width: 578px;
-  }
-  .panel-body {
-    width: 578px;
-    height: 500px;
+    left: 5.2%;
+    width: 90%;
+    bottom: -52px;
+    display: none;
+    .corpo-painel {
+      display: none;
+      color: #EFEFEF;
+      height: 300px;
+    }
   }
 }
 
@@ -147,7 +142,7 @@ footer {
   height: 400px;
 }
 
-.barras {
+.barras, .barras-baixo {
   width: 50%;
   margin-bottom: -30px;
   height: 45px;
@@ -157,4 +152,25 @@ footer {
   border-width: 0 15px ;
   border-style: solid;
   border-image: linear-gradient(to left, black, #AAA) 1 100%;
+}
+
+.barras-baixo {
+  top: 66px;
+  height: 60px;
+  display: none;
+}
+
+.painel {
+  background-color: rgba(black, 0.4);
+  border-width: 4px;
+  border-style: solid;
+  border-color: #9A9A9A;
+  h3 {
+    background-color: $painel-header-bg;
+    margin: -9px;
+    padding: 7px;
+    color: #ffff00;
+    position: relative;
+    top: 0;
+  }
 }

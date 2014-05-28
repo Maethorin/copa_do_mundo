@@ -43,5 +43,5 @@ function partida(partida_id) {
 }
 
 $('.partidas-index').on('click', '.slide-up', function() {
-    var $body = $(this).parent().find('.panel-body').slideToggle();
+    var $body = $(this).parent().find('.corpo-painel').slideToggle();
 });
