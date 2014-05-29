@@ -119,7 +119,8 @@ def obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo, atual=False)
     times = Time.objects.filter(grupo__nome__exact=nome_do_grupo)
     times_lista = []
     for time in times:
-        filtros = Q(rodada__startswith='rodada_') & (Q(time_1__id__exact=time.id) | Q(time_2__id__exact=time.id))
+        fase = Fase.objects.get(nome=u'Classificação')
+        filtros = Q(fase=fase) & (Q(time_1__id__exact=time.id) | Q(time_2__id__exact=time.id))
         if atual:
             filtros = filtros & Q(realizada=True)
         partidas = Partida.objects.filter(filtros)

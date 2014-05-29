@@ -56,6 +56,7 @@ class Fase(models.Model):
 
     id = models.AutoField(primary_key=True, db_column='fase_id')
     nome = models.CharField(max_length=20)
+    slug = models.SlugField(null=True)
 
     def __unicode__(self):
         return u"%s" % self.nome

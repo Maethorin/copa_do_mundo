@@ -5,6 +5,14 @@
   display: none;
 }
 
+.oitavas .partida,
+.quartas .partida,
+.semifinais .partida,
+.terceiro_lugar .partida,
+.final .partida {
+  display: block;
+}
+
 .rodada {
   text-align: center;
   overflow: hidden;
