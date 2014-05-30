@@ -1,77 +1,22 @@
-<!DOCTYPE HTML>
-<html lang="pt-BR">
-<head>
-	<title>Partidas - Simulador Copa do Mundo</title>
-	<meta charset="UTF-8" />
-    <meta name="author" content="Márcio Duarte" />
-    <meta name="description" content="Tabela com as partidas e seus resultados. As partidas não realizadas poderão receber palpites. Esses palpites irão compor a simulação das próximas fases." />
-    <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos" />
-    <link rel="stylesheet" type="text/css" href="/media/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/media/css/geral.css" />
-    <link rel="stylesheet" type="text/css" href="/media/css/partidas.css" />
-    <link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.8.1.custom.css" />	
+{% extends 'base.html' %}
+{% block conteudo %}
 
-    <script type="text/javascript" src="/media/js/lib/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="/media/js/lib/jquery-ui-1.8.1.custom.min.js"></script>    
-    <script type="text/javascript" src="/media/js/lib/jquery.form.js"></script>
-    <script type="text/javascript" src="/media/js/lib/jquery.meio.mask.js"></script>
-    <script type="text/javascript" src="/media/js/geral.js"></script>
-    <script type="text/javascript" src="/media/js/partidas.js"></script>
-
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-17020062-1']);
-      _gaq.push(['_trackPageview']);
-      
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
-</head>
-<body>
-    {% include "cabecalho.html" %}
-    <div>
-        <script type="text/javascript"><!--
-        google_ad_client = "pub-8167110538900295";
-        /* 728x90, criado 17/06/10 */
-        google_ad_slot = "1475428285";
-        google_ad_width = 728;
-        google_ad_height = 90;
-        //-->
-        </script>
-        <script type="text/javascript"
-        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-        </script>
-    </div>
-    <div id="tabs" class="rodadas">
-        <ul class="indice">
-        	{% for rodada in rodadas %}
-                <li><a href="#{{rodada.id}}">{{rodada.nome}}</a></li>
-            {% endfor %}
-        </ul>
-    	{% for rodada in rodadas %}
-            <div id="{{rodada.id}}" class="rodada">
-        	    <h1 class="nome-rodada">{{rodada.nome}}</h1>
-                <ul class="partidas">
-        	    {% for partida in rodada.partidas %}
-                    {% include "partida_tag.html" %}
-                {% empty %}
-                    <li>Não há partidas no momento.</li>
-        	    {% endfor %}
-                </ul>
+    <div class="row">
+        {% for partida in partidas %}
+            {% if forloop.counter0|divisibleby:2 %}
+            {% if forloop.counter0 > 0 %}
+                </div>
             </div>
-            <hr />
-    	{% endfor %}
+            {% endif %}
+            <div class="col-md-4">
+                <div class="painel rodada well-sm">
+            {% endif %}
+            {% include 'includes/partida.html' %}
+            {% if forloop.last %}
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
     </div>
-    <script type="text/javascript">
-        $(function() {
-            montaTabs({{index}});
-        });
-    </script>
-    {% include "rodape.html" %}
-</body>
-</html>
+
+{% endblock conteudo %}

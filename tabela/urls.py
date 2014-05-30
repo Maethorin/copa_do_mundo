@@ -12,5 +12,5 @@ urlpatterns = patterns(
     url(r'^chaves/?$', 'chaves', name='chaves'),
     url(r'^partidas/?$', 'partidas', name='partidas'),
     url(r'^registra_palpite/?$', 'registra_palpite', name='registra_palpite'),
-    url(r'^rodada/(?P<rodada_id>\w+)/?$', 'mostra_rodada', name='rodada'),
+    url(r'^rodada/(?P<slug>\w+)/?$', 'mostra_rodada', name='rodada'),
 )

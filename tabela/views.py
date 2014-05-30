@@ -50,51 +50,46 @@ def chaves(request):
 
 
 def partidas(request, rodadas=None, template='partidas.html', eh_chaves=False):
-    if not rodadas:
-        rodadas = _obter_rodadas()
-    index = 0
-    for rodada in rodadas:
-        rodada['partidas'] = Partida.objects.filter(fase__nome=rodada['id'])
-        if not re.match('[1-3]', rodada['nome']):
-            simulador.obter_times_de_partidas(rodada['partidas'])
-        else:
-            for partida in rodada['partidas']:
-                simulador.atualiza_informacoes_de_partida_em_andamento(partida)
-                partida.save()
-        if eh_chaves:
-            simulador.reordena_partidas_para_chave(rodada)
+    partidas = Partida.objects.filter(fase__nome=rodada['id'])
+    if not re.match('[1-3]', rodada['nome']):
+        simulador.obter_times_de_partidas(rodada['partidas'])
+    else:
+        for partida in rodada['partidas']:
+            simulador.atualiza_informacoes_de_partida_em_andamento(partida)
+            partida.save()
+    if eh_chaves:
+        simulador.reordena_partidas_para_chave(rodada)
     return render_to_response(template, {'rodadas': rodadas, 'index': index, 'chaves': eh_chaves})
 
 
-def mostra_rodada(request, rodada_id):
-    return rodada(request, rodada_id)
+def mostra_rodada(request, slug):
+    return rodada(request, slug)
 
 
-def rodada(request, rodada_id, template='partidas.html', inclui_partida_em_andamento=False, titulo_da_pagina="Inicial"):
+def rodada(request, slug, template='partidas.html', inclui_partida_em_andamento=False, titulo_da_pagina="Inicial"):
     grupos = Grupo.objects.all()
-    rodadas = _obter_rodadas()
-    index = 0
-    rodadas[0]['partidas'] = simulador.obter_partidas_em_andamento()
-    for partida in rodadas[0]['partidas']:
+    partidas_em_andamento = simulador.obter_partidas_em_andamento()
+    for partida in partidas_em_andamento:
         simulador.atualiza_informacoes_de_partida_em_andamento(partida)
         partida.save()
 
-    for rodada in rodadas:
-        if rodada['id'] == rodada_id and rodada_id != 'em_andamento':
-            rodada['partidas'] = Partida.objects.filter(fase__nome=rodada['id'])
-            index = rodada['index']
-            if not re.match('[1-3]', rodada['nome']):
-                simulador.obter_times_de_partidas(rodada['partidas'])
+    partidas = Partida.objects.filter(fase__slug=slug)
+    simulador.obter_times_de_partidas(partidas)
+
+    titulos = {
+        'oitavas': 'Oitavas'
+    }
+
+    if slug in titulos:
+        titulo_da_pagina = titulos[slug]
 
     return render_to_response(
         template,
         {
-            'rodadas': rodadas,
-            'rodada_id': rodada_id,
-            'index': index,
+            'partidas': partidas,
             'grupos': grupos,
             'titulo_da_pagina': titulo_da_pagina,
-            'css_fundo': 'inicial'
+            'css_fundo': slug
         }
     )
 

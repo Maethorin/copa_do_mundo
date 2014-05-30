@@ -13,34 +13,7 @@
                 <div class="painel rodada well-sm">
                     <h3>{% if forloop.counter == 1 %}1{% elif forloop.counter == 3 %}2{% else %}3{% endif %}&#170; Rodada</h3>
             {% endif %}
-                    <div class="panel panel-default partida">
-                        <div class="panel-heading">
-                            <div class="panel-title">{{ partida.data|date:"d M - H:i" }}</div>
-                        </div>
-                        <div class="panel-body text-center">
-                            <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal" role="form">
-                                <div class="campos-palpite">
-                                    {{ partida.time_1.abreviatura }}
-                                    <icon class="bandeira {{ partida.time_1.sigla }}"></icon>
-                                    <div class="palpite">
-                                        <input class="form-control input-sm" placeholder="0" type="number" name="time_1" min="1" max="9" />
-                                    </div>
-                                    x
-                                    <div class="palpite">
-                                        <input class="form-control input-sm" placeholder="0" type="number" name="time_2" min="1" max="9" />
-                                    </div>
-                                    <icon class="bandeira {{ partida.time_2.sigla }}"></icon>
-                                    {{ partida.time_2.abreviatura }}
-                                </div>
-                                <div class="botao-palpite">
-                                    <button type="submit" class="btn btn-primary btn-sm">enviar</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="panel-footer small">
-                            {{ partida.local }}
-                        </div>
-                    </div>
+            {% include 'includes/partida.html' %}
             {% if forloop.last %}
                 </div>
             </div>
