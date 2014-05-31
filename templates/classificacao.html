@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    {% if atual %}
+    <p>
+        A tabela abaixo usa o resultado real das partidas para mostrar a classificação atual.<br /><a href="classificacao.html" title="Classificação dos times na copa segundo a simulação.">Clique aqui para ver a classificação final</a> segundo a simulação do site.
+    </p>
+    {% else %}
+    <p>
+        A tabela abaixo usa a simulação calculada pelo site para mostrar a classificação final. Ela não representa a posição atual dos times na copa.<br /><a href="classificacao_atual.html" title="Classificação dos times na copa.">Clique aqui para ver a classificação atual.</a>
+    </p>
+    {% endif %}
+    <ul class="nav nav-pills">
+	{% for grupo in grupos %}
+	    <li{% if forloop.counter == 1 %} class="active"{% endif %}><a href="#grupo-{{ grupo.nome }}" data-toggle="tab">Grupo {{ grupo.nome }}</a></li>
+	{% endfor %}
+    </ul>
+    <div class="tab-content">
+	{% for grupo in grupos %}
+        <div class="tab-pane fade{% if forloop.counter == 1 %}in active{% endif %}" id="grupo-{{ grupo.nome }}">
+            <div class="panel panel-default">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td colspan="2" title="Grupo {{grupo.nome}}"></td>
+                            <td class="pontos" title="Pontos">P</td>
+                            <td class="jogos" title="Jogos">J</td>
+                            <td class="vitorias" title="Vitórias">V</td>
+                            <td class="empates" title="Empates">E</td>
+                            <td class="derrotas" title="Derrotas">D</td>
+                            <td class="gols-feitos" title="Gols Pró">GP</td>
+                            <td class="gols-tomados" title="Gols Contra">GC</td>
+                            <td class="saldo-de-gols" title="Saldo de Gols">SG</td>
+                            <td class="aproveitamento" title="Aproveitamento">%</td>
+                        </tr>
+                    </thead>
+                    <tbody class="grupo_a">
+                    {% for time in grupo.times %}
+                        <tr class="">
+                            <td class="classificacao">
+                                {{forloop.counter}}º
+                            </td>
+                            <td class="nome-time">
+                                <div class="time esquerdo {{time.abreviatura}}" title="{{time.nome}}">{{time.nome}}</div>
+                            </td>
+                            <td class="pontos">{{time.pontos}}</td>
+                            <td class="jogos">{{time.jogos}}</td>
+                            <td class="vitorias">{{time.vitorias}}</td>
+                            <td class="empates">{{time.empates}}</td>
+                            <td class="derrotas">{{time.derrotas}}</td>
+                            <td class="gols-feitos">{{time.gols_feitos}}</td>
+                            <td class="gols-tomados">{{time.gols_tomados}}</td>
+                            <td class="saldo-de-gols">{{time.saldo_de_gols}}</td>
+                            <td class="aproveitamento">{{time.aproveitamento}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+	{% endfor %}
+    </div>
+{% endblock conteudo %}

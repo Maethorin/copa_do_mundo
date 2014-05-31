@@ -26,22 +26,25 @@ def grupo(request, nome):
     return render_to_response(
         'grupo.html',
         {
-            'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome,
+            'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome, 'em_grupos': True,
             'partidas': partidas_do_grupo, 'css_fundo': 'grupos', 'titulo_da_pagina': "Grupo {}".format(grupo.nome)
         }
     )
 
 
-def grupos(request):
+def classificacao(request):
     grupos = Grupo.objects.all()
     simulador.obter_dados_de_times(grupos)
-    return render_to_response('grupos.html', {'grupos': grupos, 'atual': False})
+    return render_to_response('classificacao.html', {
+        'grupos': grupos, 'atual': False, 'em_classificacao': True, 'titulo_da_pagina': "Classificação",
+        'css_fundo': 'classificacao', 'pagina_atual': 'classificacao_simulada',
+    })
 
 
 def grupos_atual(request):
     grupos = Grupo.objects.all()
     simulador.obter_dados_de_times(grupos, atual=True)
-    return render_to_response('grupos.html', {'grupos': grupos, 'atual': True})
+    return render_to_response('classificacao.html', {'grupos': grupos, 'atual': True})
 
 
 def chaves(request):
@@ -69,12 +72,12 @@ def mostra_rodada(request, slug):
 def rodada(request, slug, template='partidas.html', inclui_partida_em_andamento=False, titulo_da_pagina="Inicial"):
     grupos = Grupo.objects.all()
     partidas_em_andamento = simulador.obter_partidas_em_andamento()
-    for partida in partidas_em_andamento:
-        simulador.atualiza_informacoes_de_partida_em_andamento(partida)
-        partida.save()
+    # for partida in partidas_em_andamento:
+    #     simulador.atualiza_informacoes_de_partida_em_andamento(partida)
+    #     partida.save()
 
     partidas = Partida.objects.filter(fase__slug=slug)
-    simulador.obter_times_de_partidas(partidas)
+    # simulador.obter_times_de_partidas(partidas)
 
     titulos = {
         'oitavas': 'Oitavas'
@@ -89,7 +92,8 @@ def rodada(request, slug, template='partidas.html', inclui_partida_em_andamento=
             'partidas': partidas,
             'grupos': grupos,
             'titulo_da_pagina': titulo_da_pagina,
-            'css_fundo': slug
+            'css_fundo': slug,
+            'pagina_atual': slug
         }
     )
 

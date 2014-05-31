@@ -1,7 +1,0 @@
-{% load staticfiles %}
-    <li><a href="{% url 'rodada' 'eliminatorias' %}"><div>Eliminatórias</div></a></li>
-    {% include 'menu-comum.html' %}
-    <li><a href="{% url 'chaves' %}" title="Rodadas do mata-mata em chaves"><div>Mata-mata</div></a></li>
-    <li><a href="{% url 'classificacao' %}" title="Classificação segundo a simulação"><div>Classificação simulada</div></a></li>
-    <li><a href="{% url 'classificacao_atual' %}" title="Classificação real"><div>Classificação real</div></a></li>
-    <li><a href="{% url 'partidas' %}" title="Se se navegador não suporta JavaScript, acesse esse link para ver todas as partidas de todas as rodadas."><div>Todas</div></a></li>

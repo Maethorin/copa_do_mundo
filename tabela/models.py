@@ -73,6 +73,9 @@ class Estadio(models.Model):
     estado = models.CharField(max_length=2)
     cidade = models.CharField(max_length=200, default='')
 
+    def cidade_e_estado(self):
+        return u"%s-%s" % (self.cidade, self.estado)
+
     def __unicode__(self):
         return u"%s (%s-%s)" % (self.nome, self.cidade, self.estado)
 

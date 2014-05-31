@@ -5,12 +5,27 @@
   display: none;
 }
 
-.oitavas .partida,
-.quartas .partida,
-.semifinais .partida,
-.terceiro_lugar .partida,
-.final .partida {
-  display: block;
+.oitavas,
+.quartas,
+.semifinais,
+.terceiro_lugar,
+.final {
+  overflow: hidden;
+  .partida {
+    display: none;
+  }
+  .rodada {
+    top: -165px;
+  }
+}
+
+.oitavas {
+  .barras {
+    top: -190px;
+  }
+  .baixo {
+    top: -170px;
+  }
 }
 
 .rodada {

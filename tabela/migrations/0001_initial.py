@@ -30,6 +30,7 @@ class Migration(SchemaMigration):
         db.create_table('fases', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True, db_column='fase_id')),
             ('nome', self.gf('django.db.models.fields.CharField')(max_length=20)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, null=True)),
         ))
         db.send_create_signal(u'tabela', ['Fase'])
 
@@ -38,6 +39,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True, db_column='estadio_id')),
             ('nome', self.gf('django.db.models.fields.CharField')(max_length=20)),
             ('estado', self.gf('django.db.models.fields.CharField')(max_length=2)),
+            ('cidade', self.gf('django.db.models.fields.CharField')(default='', max_length=200)),
         ))
         db.send_create_signal(u'tabela', ['Estadio'])
 
@@ -47,7 +49,7 @@ class Migration(SchemaMigration):
             ('time_1', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='time_1', null=True, to=orm['tabela.Time'])),
             ('time_2', self.gf('django.db.models.fields.related.ForeignKey')(blank=True, related_name='time_2', null=True, to=orm['tabela.Time'])),
             ('data', self.gf('django.db.models.fields.DateTimeField')()),
-            ('local', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
+            ('local', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tabela.Estadio'], null=True)),
             ('fase', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tabela.Fase'], null=True)),
             ('regra_para_times', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
             ('gols_time_1', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
@@ -79,7 +81,8 @@ class Migration(SchemaMigration):
 
     models = {
         u'tabela.estadio': {
-            'Meta': {'object_name': 'Estadio', 'db_table': "'estadios'"},
+            'Meta': {'ordering': "('nome',)", 'object_name': 'Estadio', 'db_table': "'estadios'"},
+            'cidade': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '200'}),
             'estado': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True', 'db_column': "'estadio_id'"}),
             'nome': ('django.db.models.fields.CharField', [], {'max_length': '20'})
@@ -87,7 +90,8 @@ class Migration(SchemaMigration):
         u'tabela.fase': {
             'Meta': {'object_name': 'Fase', 'db_table': "'fases'"},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True', 'db_column': "'fase_id'"}),
-            'nome': ('django.db.models.fields.CharField', [], {'max_length': '20'})
+            'nome': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'null': 'True'})
         },
         u'tabela.grupo': {
             'Meta': {'ordering': "['nome']", 'object_name': 'Grupo', 'db_table': "'grupos'"},
@@ -101,7 +105,7 @@ class Migration(SchemaMigration):
             'gols_time_1': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'gols_time_2': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True', 'db_column': "'partida_id'"}),
-            'local': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True'}),
+            'local': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['tabela.Estadio']", 'null': 'True'}),
             'palpites_time_1': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'palpites_time_2': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'realizada': ('django.db.models.fields.BooleanField', [], {}),

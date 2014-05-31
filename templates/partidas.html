@@ -1,22 +1,68 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block conteudo %}
-
+    {% if partidas|length == 2 %}
     <div class="row">
+        <div class="col-md-2"></div>
+        {% for partida in partidas %}
+            <div class="col-md-4">
+                <div class="barras"></div>
+                <div class="painel rodada well-sm">
+                    <h3>{{ partida.data|date:"d M - H:i" }}</h3>
+            {% with mata_mata=True %}
+            {% include 'includes/partida.html' %}
+            {% endwith %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="col-md-2"></div>
+    </div>
+    {% else %}
+    <div class="row">
+        {% if partidas|length > 4 %}
+            <div class="col-md-2"></div>
+        {% elif partidas|length > 2 %}
+            <div class="col-md-2"></div>
+        {% else %}
+            <div class="col-md-4"></div>
+        {% endif %}
         {% for partida in partidas %}
             {% if forloop.counter0|divisibleby:2 %}
             {% if forloop.counter0 > 0 %}
                 </div>
             </div>
             {% endif %}
-            <div class="col-md-4">
-                <div class="painel rodada well-sm">
+            {% if forloop.counter0 == 4 %}
+            <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+            <div class="col-md-2"></div>
             {% endif %}
+            <div class="col-md-{% if partidas|length > 4 %}4{% elif partidas|length > 2 %}4{% else %}4{% endif %}">
+                <div class="barras{% if forloop.counter > 4 %} baixo{% else %} acima{% endif %}"></div>
+                <div class="painel rodada well-sm">
+                    <h3>{{ partida.data|date:"d M - H:i" }}</h3>
+            {% endif %}
+            {% with mata_mata=True %}
             {% include 'includes/partida.html' %}
+            {% endwith %}
             {% if forloop.last %}
                 </div>
             </div>
             {% endif %}
         {% endfor %}
+        {% if partidas|length > 4 %}
+            <div class="col-md-2"></div>
+        {% elif partidas|length > 2 %}
+            <div class="col-md-2"></div>
+        {% else %}
+            <div class="col-md-3"></div>
+        {% endif %}
     </div>
+    {% endif %}
 
 {% endblock conteudo %}
+
+{% block js %}
+    <script type="application/javascript" src="{% static 'js/oitavas.js' %}"></script>
+{% endblock js %}

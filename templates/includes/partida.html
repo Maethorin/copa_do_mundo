@@ -1,12 +1,23 @@
                     <div class="panel panel-default partida">
                         <div class="panel-heading">
+                            {% if mata_mata %}
+                            <div class="panel-title">
+                                <h4 class="estadio">
+                                    {{ partida.local.nome }}
+                                </h4>
+                                <div class="cidade">
+                                    {{ partida.local.cidade_e_estado }}
+                                </div>
+                            </div>
+                            {% else %}
                             <div class="panel-title">{{ partida.data|date:"d M - H:i" }}</div>
+                            {% endif %}
                         </div>
                         <div class="panel-body text-center">
                             <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal" role="form">
                                 <div class="campos-palpite">
-                                    {{ partida.time_1.abreviatura }}
-                                    <icon class="bandeira {{ partida.time_1.sigla }}"></icon>
+                                    {{ partida.time_1.abreviatura|default:"NDF" }}
+                                    <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
                                     <div class="palpite">
                                         <input class="form-control input-sm" placeholder="0" type="number" name="time_1" min="1" max="9" />
                                     </div>
@@ -14,8 +25,8 @@
                                     <div class="palpite">
                                         <input class="form-control input-sm" placeholder="0" type="number" name="time_2" min="1" max="9" />
                                     </div>
-                                    <icon class="bandeira {{ partida.time_2.sigla }}"></icon>
-                                    {{ partida.time_2.abreviatura }}
+                                    <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
+                                    {{ partida.time_2.abreviatura|default:"NDF" }}
                                 </div>
                                 <div class="botao-palpite">
                                     <button type="submit" class="btn btn-primary btn-sm">enviar</button>
@@ -23,6 +34,15 @@
                             </form>
                         </div>
                         <div class="panel-footer small">
-                            {{ partida.local }}
+                        {% if not mata_mata %}
+                            <h4 class="estadio">
+                                {{ partida.local.nome }}
+                            </h4>
+                            <div class="cidade">
+                                {{ partida.local.cidade_e_estado }}
+                            </div>
+                        {% else %}
+                            {{ partida.data|date:"H:i" }}
+                        {% endif %}
                         </div>
                     </div>

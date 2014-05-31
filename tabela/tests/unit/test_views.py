@@ -29,11 +29,11 @@ def test_obtem_lista_de_grupos():
     
     render_to_response = views.render_to_response
     views.render_to_response = mox.CreateMockAnything()
-    views.render_to_response.__call__('grupos.html', {'grupos': grupos, 'atual': False})
+    views.render_to_response.__call__('classificacao.html', {'grupos': grupos, 'atual': False})
 
     mox.ReplayAll()
     try:
-        views.grupos(request_mock)
+        views.classificacao(request_mock)
         mox.VerifyAll()
     finally:
         mox.UnsetStubs()

@@ -1,4 +1,0 @@
-    {% for grupo in grupos %}
-    <li class="{% if grupo.nome == pagina_atual %}active{% endif %}"><a href="{% url 'grupo' grupo.nome %}">{{ grupo }}</a></li>
-    {% endfor %}
-    {% include 'menu-comum.html' %}
