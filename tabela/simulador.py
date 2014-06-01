@@ -242,15 +242,15 @@ def obter_partidas_em_andamento():
     return em_andamento
 
 
-def reordena_partidas_para_chave(rodada):
+def reordena_partidas_para_chave(fase):
     lista_acima = []
     lista_abaixo = []
     regras_juntas = [['1Ax2B', '1Cx2D', '1Ex2F', '1Gx2H'], ['1Dx2C', '1Bx2A', '1Fx2E', '1Hx2G']]
-    if rodada['id']  == 'oitavas':
-        for partida in rodada['partidas']:
+    if fase.slug == 'oitavas':
+        for partida in fase.partida_set.all():
             if partida.regra_para_times in regras_juntas[0]:
                 lista_acima.append(partida)
             if partida.regra_para_times in regras_juntas[1]:
                 lista_abaixo.append(partida)
         lista_acima.extend(lista_abaixo)
-        rodada['partidas'] = lista_acima
+        fase.partidas = lista_acima

@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import re
+from django.core.context_processors import csrf
 
 from django.shortcuts import *
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
-from tabela.models import Grupo, Partida
+from tabela.models import Grupo, Partida, Fase
 from tabela import simulador
 
 
@@ -19,50 +21,47 @@ def index(request):
     )
 
 
+@csrf_protect
 def grupo(request, nome):
     grupos = Grupo.objects.all()
     grupo = Grupo.objects.get(nome=nome)
     partidas_do_grupo = simulador.obtem_partidas_de_grupo(grupo)
-    return render_to_response(
-        'grupo.html',
-        {
-            'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome, 'em_grupos': True,
+    contexto =         {
+            'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome, 'em_grupos': True, 'ja_votou': True,
             'partidas': partidas_do_grupo, 'css_fundo': 'grupos', 'titulo_da_pagina': "Grupo {}".format(grupo.nome)
         }
+
+    contexto.update(csrf(request))
+    return render_to_response(
+        'grupo.html',
+        contexto
     )
 
 
-def classificacao(request):
+def classificacao(request, atual=None):
+    atual = atual == 'atual'
     grupos = Grupo.objects.all()
-    simulador.obter_dados_de_times(grupos)
+    simulador.obter_dados_de_times(grupos, atual=atual)
     return render_to_response('classificacao.html', {
-        'grupos': grupos, 'atual': False, 'em_classificacao': True, 'titulo_da_pagina': "Classificação",
-        'css_fundo': 'classificacao', 'pagina_atual': 'classificacao_simulada',
+        'grupos': grupos, 'atual': atual, 'em_classificacao': True, 'titulo_da_pagina': "Classificação",
+        'css_fundo': 'classificacao', 'pagina_atual': 'classificacao_real' if atual else 'classificacao_simulada',
     })
 
 
-def grupos_atual(request):
+def classificacao_atual(request):
     grupos = Grupo.objects.all()
     simulador.obter_dados_de_times(grupos, atual=True)
     return render_to_response('classificacao.html', {'grupos': grupos, 'atual': True})
 
 
 def chaves(request):
-    rodadas = _obter_rodadas(mata_mata=True)
-    return partidas(request, rodadas, template='chaves.html', eh_chaves=True)
-
-
-def partidas(request, rodadas=None, template='partidas.html', eh_chaves=False):
-    partidas = Partida.objects.filter(fase__nome=rodada['id'])
-    if not re.match('[1-3]', rodada['nome']):
-        simulador.obter_times_de_partidas(rodada['partidas'])
-    else:
-        for partida in rodada['partidas']:
-            simulador.atualiza_informacoes_de_partida_em_andamento(partida)
-            partida.save()
-    if eh_chaves:
-        simulador.reordena_partidas_para_chave(rodada)
-    return render_to_response(template, {'rodadas': rodadas, 'index': index, 'chaves': eh_chaves})
+    fases = Fase.objects.all().exclude(slug='classificacao')
+    for fase in fases:
+        simulador.reordena_partidas_para_chave(fase)
+    return render_to_response("chaves.html", {
+        'rodadas': fases, 'index': index, 'chaves': True,
+        'css_fundo': 'chaves', 'pagina_atual': 'chaves', 'titulo_da_pagina': "Chaves"
+    })
 
 
 def mostra_rodada(request, slug):
@@ -99,18 +98,15 @@ def rodada(request, slug, template='partidas.html', inclui_partida_em_andamento=
 
 
 def registra_palpite(request):
-    json = request.GET.get('json', '') == 'json'
-    chaves = request.GET.get('chaves', '') == 'chaves'
-    partida_id = request.GET['partida_id']
-    rodada_id = request.GET['rodada_id']
-    palpite_time_1 = 0
-    palpite_time_2 = 0
+    json = request.POST.get('json', '') == 'json'
+    chaves = request.POST.get('chaves', '') == 'chaves'
+    partida_id = request.POST['partida_id']
 
     palpite_time_1, palpite_time_2 = _obtem_palpites(request)
 
     partida = Partida.objects.get(id=partida_id)
     if partida.em_andamento():
-        return HttpResponseRedirect('/rodada/%s' % rodada_id)
+        return HttpResponseRedirect('/rodada/%s' % partida.fase.slug)
 
     if not partida.votos:
         partida.votos = 0
@@ -126,17 +122,17 @@ def registra_palpite(request):
     if chaves:
         return HttpResponseRedirect('/chaves.html')
 
-    return HttpResponseRedirect('/rodada/%s' % rodada_id)
+    return HttpResponseRedirect('/rodada/%s' % partida.fase.slug)
 
 
 def _obtem_palpites(request):
     try:
-        palpite_time_1 = int(request.GET['palpiteTime1'])
+        palpite_time_1 = int(request.POST['time_1'])
         if palpite_time_1 < 0: palpite_time_1 = 0
     except ValueError:
         palpite_time_1 = 0
     try:
-        palpite_time_2 = int(request.GET['palpiteTime2'])
+        palpite_time_2 = int(request.POST['time_2'])
         if palpite_time_2 < 0: palpite_time_2 = 0
     except ValueError:
         palpite_time_2 = 0

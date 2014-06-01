@@ -1,5 +1,5 @@
 {% load time_tag %}
-<li class="partida" id="partida_{{partida.id}}">
+<li class="chaves-partida" id="partida_{{partida.id}}">
     <h2 class="data{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">{{partida.data|date:"D d M Y H:i"}}{% if partida.realizada %} - Realizada{% endif %}{% if partida.em_andamento %} - Em jogo{% endif %}</h2>
     {% if partida.realizada or partida.em_andamento %}
         {% time_tag esquerdo %}
@@ -24,7 +24,7 @@
         </form>
     {% endif %}
     <div class="resultado-parcial{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">
-        <h3 class="parcial">Palpites:<span class="votos">Total: {{partida.votos}}</span></h3>
+        <h3 class="parcial">Palpites:<span class="votos">Total: {{ partida.votos }}</span></h3>
         {% time_tag esquerdo %}
         <span class="gols">{{partida.media_palpites_time_1}}</span>
         X

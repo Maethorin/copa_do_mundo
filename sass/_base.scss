@@ -46,8 +46,15 @@ footer {
   }
 }
 
-.inicial {
+.inicial, .classificacao {
   background-image: url(../img/fundo-inicial.jpg), $fundo-gradient;
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+}
+
+.classificacao {
+  background-image: url(../img/fundo-classificacao.jpg), $fundo-gradient;
   background-repeat: no-repeat;
   background-position: center center;
   overflow: hidden;

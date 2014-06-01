@@ -38,6 +38,8 @@ class Time(models.Model):
         return self.jogos - (self.vitorias + self.empates)
 
     def aproveitamento(self):
+        if self.jogos == 0:
+            return 0
         return round(float(self.vitorias) / float(self.jogos) * 100, 1)
 
     class Meta:
@@ -133,15 +135,19 @@ class Partida(models.Model):
         elif self.media_palpites_time_2() > self.media_palpites_time_1():
             palpite = self.time_2
 
+        if not vitorioso or not palpite:
+            return "EMPATE"
+
         if vitorioso == palpite:
-            return True
+            return "CERTO"
+
         if vitorioso and palpite:
             if vitorioso.nome == palpite.nome:
-                return True
-        return False
+                return "CERTO"
+        return "ERRADO"
 
     def palpite_certo(self):
-        return self.media_palpites_time_1() == int(self.gols_time_1) and self.media_palpites_time_2() == int(self.gols_time_2)
+        return self.media_palpites_time_1() == int(self.gols_time_1 or 0) and self.media_palpites_time_2() == int(self.gols_time_2)
 
     def em_andamento(self):
         data_atual = datetime.datetime.today()

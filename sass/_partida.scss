@@ -1,0 +1,85 @@
+.partida {
+  width: 95%;
+  float: left;
+  margin: 20px 10px;
+  display: none;
+}
+
+.oitavas,
+.quartas,
+.semifinais,
+.terceiro_lugar,
+.final {
+  overflow: hidden;
+  .partida {
+    display: none;
+  }
+  .rodada {
+    top: -165px;
+  }
+}
+
+.oitavas {
+  .barras {
+    top: -190px;
+  }
+  .baixo {
+    top: -170px;
+  }
+}
+
+.rodada {
+  text-align: center;
+  overflow: hidden;
+  margin: 5px;
+  position: relative;
+  top: -70px;
+}
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.palpite {
+  width: 28px;
+  display: inline-block;
+  input {
+    padding: 5px 7px;
+    font-family: 'Graduate', cursive;
+    font-size: 18px;
+    font-weight: bold;
+    height: 37px;
+  }
+}
+
+.botao-palpite {
+  margin-top: 10px;
+}
+
+.gols {
+  padding: 2px 4px;
+  border-radius: 3px;
+  border: 1px solid $btn-primary-border;
+  font-family: 'Graduate', cursive;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: $verde-claro;
+}
+
+.resultado-simulado {
+  background-color: $gray-lighter;
+  margin: 20px -14px 0 -14px;
+  padding: 4px 0;
+}
+
+.resultado-real {
+  background-color: $gray-lighter;
+  padding: 4px 0;
+  margin: -7px -14px 4px;
+}
+

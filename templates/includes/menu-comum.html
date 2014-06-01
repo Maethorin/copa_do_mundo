@@ -11,11 +11,11 @@
     <li class="{% if pagina_atual == 'semifinais' %}active{% endif %}"><a href="{% url 'rodada' 'semifinais' %}"><div>Semifinais</div></a></li>
     <li class="{% if pagina_atual == 'terceiro_lugar' %}active{% endif %}"><a href="{% url 'rodada' 'terceiro_lugar' %}"><div>Terceiro lugar</div></a></li>
     <li class="{% if pagina_atual == 'final' %}active{% endif %}"><a href="{% url 'rodada' 'final' %}"><div>Final</div></a></li>
-    <li><a href="{% url 'chaves' %}" title="Rodadas do mata-mata em chaves"><div>Mata-mata</div></a></li>
     <li class="dropdown {% if em_classificacao %} active{% endif %}">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Classificação <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Classificação Grupos <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li{% if pagina_atual == 'classificacao_simulada' %} class="active"{% endif %}><a href="{% url 'classificacao' %}" title="Classificação segundo a simulação"><div>Simulada</div></a></li>
-            <li><a href="{% url 'classificacao_atual' %}" title="Classificação real"><div>Real</div></a></li>
+            <li{% if pagina_atual == 'classificacao_real' %} class="active"{% endif %}><a href="{% url 'classificacao' 'atual' %}" title="Classificação real"><div>Real</div></a></li>
         </ul>
     </li>
+{#    <li><a href="{% url 'chaves' %}" title="Rodadas do mata-mata em chaves"><div>Mata-mata</div></a></li>#}

@@ -1,9 +1,11 @@
-var tabs = null;
-function montaTabs(index) {
-    tabs = $('#tabs').tabs();
-    tabs.tabs('select', index);
-    $('ul.indice li a').each(function() {
-        var rodada_id = this.href.split('#');
-        this.href = '/rodada/' + rodada_id[1];
+$(window).load(function() {
+    var primeira = false;
+    $('.acima').animate({top: -20}, 600);
+    $('.baixo').animate({top: -5}, 600);
+    $('.rodada').animate({top: 0}, 600, function() {
+        if (!primeira) {
+            $('.partida').slideToggle(600);
+        }
+        primeira = true;
     });
-}
+});

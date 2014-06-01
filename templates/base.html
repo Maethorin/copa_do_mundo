@@ -13,7 +13,8 @@
 	<title>Simulador da Copa do Mundo</title>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
-
+    {% block css %}
+    {% endblock css %}
 {#    <script type="text/javascript">#}
 {##}
 {#      var _gaq = _gaq || [];#}
@@ -162,8 +163,6 @@
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 {#    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
     <script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/partidas.js' %}"></script>
-
 
 {#    <script type="text/javascript" src="/media/js/lib/jquery.form.js"></script>#}
     {% block js %}

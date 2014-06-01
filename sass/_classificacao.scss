@@ -1,0 +1,46 @@
+.classificacao {
+  overflow: hidden;
+}
+
+.classificacoes {
+  background-color: $gray-lighter;
+  .desclassificado {
+    background-color: lighten($table-tr-danger-bg, 13%);
+  }
+  .primeiro {
+    background-color: lighten($brand-success, 13%);
+  }
+  .segundo {
+    background-color: lighten($brand-info, 13%);
+  }
+  .posicao {
+    width: 1%;
+  }
+  .pontos, .jogos, .vitorias, .empates, .derrotas, .gols-feitos, .gols-tomados, .saldo-de-gols, .aproveitamento {
+    width: 8%;
+  }
+  .label {
+    padding: 1px 8%;
+  }
+}
+
+.label-gols-pro {
+  background-color: darken($brand-success, 10%);
+}
+.label-gols-contra {
+  background-color: darken($brand-danger, 10%);
+}
+
+.tabela-classificacao {
+  position: relative;
+  top: -85px;
+  .corpo {
+    display: none;
+    margin-top: 25px;
+  }
+}
+
+.legenda {
+  margin-top: 5px;
+  background-color: $gray-lighter;
+}

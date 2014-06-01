@@ -1,63 +1,78 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block conteudo %}
-    {% if atual %}
-    <p>
-        A tabela abaixo usa o resultado real das partidas para mostrar a classificação atual.<br /><a href="classificacao.html" title="Classificação dos times na copa segundo a simulação.">Clique aqui para ver a classificação final</a> segundo a simulação do site.
-    </p>
-    {% else %}
-    <p>
-        A tabela abaixo usa a simulação calculada pelo site para mostrar a classificação final. Ela não representa a posição atual dos times na copa.<br /><a href="classificacao_atual.html" title="Classificação dos times na copa.">Clique aqui para ver a classificação atual.</a>
-    </p>
-    {% endif %}
-    <ul class="nav nav-pills">
-	{% for grupo in grupos %}
-	    <li{% if forloop.counter == 1 %} class="active"{% endif %}><a href="#grupo-{{ grupo.nome }}" data-toggle="tab">Grupo {{ grupo.nome }}</a></li>
-	{% endfor %}
-    </ul>
-    <div class="tab-content">
-	{% for grupo in grupos %}
-        <div class="tab-pane fade{% if forloop.counter == 1 %}in active{% endif %}" id="grupo-{{ grupo.nome }}">
-            <div class="panel panel-default">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td colspan="2" title="Grupo {{grupo.nome}}"></td>
-                            <td class="pontos" title="Pontos">P</td>
-                            <td class="jogos" title="Jogos">J</td>
-                            <td class="vitorias" title="Vitórias">V</td>
-                            <td class="empates" title="Empates">E</td>
-                            <td class="derrotas" title="Derrotas">D</td>
-                            <td class="gols-feitos" title="Gols Pró">GP</td>
-                            <td class="gols-tomados" title="Gols Contra">GC</td>
-                            <td class="saldo-de-gols" title="Saldo de Gols">SG</td>
-                            <td class="aproveitamento" title="Aproveitamento">%</td>
-                        </tr>
-                    </thead>
-                    <tbody class="grupo_a">
-                    {% for time in grupo.times %}
-                        <tr class="">
-                            <td class="classificacao">
-                                {{forloop.counter}}º
-                            </td>
-                            <td class="nome-time">
-                                <div class="time esquerdo {{time.abreviatura}}" title="{{time.nome}}">{{time.nome}}</div>
-                            </td>
-                            <td class="pontos">{{time.pontos}}</td>
-                            <td class="jogos">{{time.jogos}}</td>
-                            <td class="vitorias">{{time.vitorias}}</td>
-                            <td class="empates">{{time.empates}}</td>
-                            <td class="derrotas">{{time.derrotas}}</td>
-                            <td class="gols-feitos">{{time.gols_feitos}}</td>
-                            <td class="gols-tomados">{{time.gols_tomados}}</td>
-                            <td class="saldo-de-gols">{{time.saldo_de_gols}}</td>
-                            <td class="aproveitamento">{{time.aproveitamento}}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+    <div class="barras"></div>
+    <div class="painel tabela-classificacao well-sm">
+        <h3>Classificação {% if atual %}atual{% else %}simulada{% endif %}</h3>
+        <div class="corpo">
+            <div class="classificacoes well-sm">
+                <ul class="nav nav-pills">
+                {% for grupo in grupos %}
+                    <li{% if forloop.counter == 1 %} class="active"{% endif %}><a href="#grupo-{{ grupo.nome }}" data-toggle="tab">Grupo {{ grupo.nome }}</a></li>
+                {% endfor %}
+                </ul>
+                <div class="tab-content">
+                {% for grupo in grupos %}
+                    <div class="tab-pane fade{% if forloop.counter == 1 %} in active{% endif %}" id="grupo-{{ grupo.nome }}">
+                        <div class="panel panel-default">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <td colspan="2">Times</td>
+                                        <td class="pontos" title="Pontos"><span class="label label-info">P</span></td>
+                                        <td class="jogos" title="Jogos"><span class="label label-info">J</span></td>
+                                        <td class="vitorias" title="Vitórias"><span class="label label-success">V</span></td>
+                                        <td class="empates" title="Empates"><span class="label label-warning">E</span></td>
+                                        <td class="derrotas" title="Derrotas"><span class="label label-danger">D</span></td>
+                                        <td class="gols-feitos" title="Gols Pró"><span class="label label-gols-pro">GP</span></td>
+                                        <td class="gols-tomados" title="Gols Contra"><span class="label label-gols-contra">GC</span></td>
+                                        <td class="saldo-de-gols" title="Saldo de Gols"><span class="label label-info">SG</span></td>
+                                        <td class="aproveitamento" title="Aproveitamento"><span class="label label-info">%</span></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for time in grupo.times %}
+                                    <tr class="{% if forloop.counter == 1 %}primeiro{% elif forloop.counter == 2 %}segundo{% else %}desclassificado{% endif %}">
+                                        <td class="posicao">
+                                            {{forloop.counter}}º
+                                        </td>
+                                        <td class="nome-time">
+                                            <icon class="bandeira {{ time.sigla }}"></icon> {{time.abreviatura}}
+                                        </td>
+                                        <td class="pontos">{{time.pontos}}</td>
+                                        <td class="jogos">{{time.jogos}}</td>
+                                        <td class="vitorias">{{time.vitorias}}</td>
+                                        <td class="empates">{{time.empates}}</td>
+                                        <td class="derrotas">{{time.derrotas}}</td>
+                                        <td class="gols-feitos">{{time.gols_feitos}}</td>
+                                        <td class="gols-tomados">{{time.gols_tomados}}</td>
+                                        <td class="saldo-de-gols">{{time.saldo_de_gols}}</td>
+                                        <td class="aproveitamento">{{time.aproveitamento}}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="legenda well-sm">
+                <strong>Legenda</strong>:
+                <span class="label label-info"><strong>P</strong></span>: Pontos |
+                <span class="label label-info"><strong>J</strong></span>: Quantidade de Jogos |
+                <span class="label label-success"><strong>V</strong></span>: Vitórias |
+                <span class="label label-warning"><strong>E</strong></span>: Empates |
+                <span class="label label-danger"><strong>D</strong></span>: Derrotas |
+                <span class="label label-gols-pro"><strong>GP</strong></span>: Gols Pró |
+                <span class="label label-gols-contra"><strong>GC</strong></span>: Gols Contra |
+                <span class="label label-info"><strong>SG</strong></span>: Saldo de Gols |
+                <span class="label label-info"><strong >%</strong></span>: Aproveitamento
             </div>
         </div>
-	{% endfor %}
     </div>
 {% endblock conteudo %}
+
+{% block js %}
+    <script type="application/javascript" src="{% static 'js/classificacao.js' %}"></script>
+{% endblock js %}

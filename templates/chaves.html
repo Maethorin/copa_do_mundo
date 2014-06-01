@@ -1,61 +1,20 @@
-<!DOCTYPE HTML>
-<html lang="pt-BR">
-<head>
-	<title>Chaves - Simulador Copa do Mundo</title>
-	<meta charset="UTF-8" />
-    <meta name="author" content="Márcio Duarte" />
-    <meta name="description" content="Lista das partidas em mata-mata. Tabela com as partidas e seus resultados organizados em chaves. Forma de visualização mais ampla, podendo observar melhor os possíveis adversários em cada uma das fases seguintes." />
-    <meta name="keywords" content="mata-mata,mata mata,simulador,futebol,copa,copa do mundo,fifa 2010,África do Sul 2010,jogos,resultados,tabela da copa,partidas,grupos" />
-    <link rel="stylesheet" type="text/css" href="/media/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/media/css/geral.css" />
-    <link rel="stylesheet" type="text/css" href="/media/css/chaves.css" />
-    <link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.8.1.custom.css" />	
-
-    <script type="text/javascript" src="/media/js/lib/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="/media/js/lib/jquery-ui-1.8.1.custom.min.js"></script>    
-    <script type="text/javascript" src="/media/js/lib/jquery.form.js"></script>
-    <script type="text/javascript" src="/media/js/lib/jquery.meio.mask.js"></script>
-
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-17020062-1']);
-      _gaq.push(['_trackPageview']);
-      
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
-</head>
-<body>
-    {% include "cabecalho.html" %}
-    <div>
-        <script type="text/javascript"><!--
-        google_ad_client = "pub-8167110538900295";
-        /* 728x90, criado 17/06/10 */
-        google_ad_slot = "1475428285";
-        google_ad_width = 728;
-        google_ad_height = 90;
-        //-->
-        </script>
-        <script type="text/javascript"
-        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-        </script>
-    </div>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/chaves.css" %}"/>
+{% endblock css %}
+{% block conteudo %}
     <p class="chaves">
         Nesta página você tem a visualização das partidas do mata-mata, de acordo com a simulação, de forma mais ampla para que vejam as próximas partidas e os possíveis adversários em uma única tela.
     </p>
     <br />
-    <div id="tabs" class="rodadas">
+    <div id="tabs" class="row chaves-rodadas">
     	{% for rodada in rodadas %}
-            <div id="{{rodada.id}}" class="rodada">
-        	    <h2 class="nome-rodada">{{rodada.nome}}</h2>
-                <ul class="partidas">
+            <div id="{{rodada.id}}" class="chaves-rodada">
+        	    <h2 class="chaves-nome-rodada">{{rodada.nome}}</h2>
+                <ul class="chaves-partidas">
         	    {% for partida in rodada.partidas %}
-                    {% include "partida_tag.html" %}
+                    {% include "includes/partida.html" %}
                 {% empty %}
                     <li>Não há partidas no momento.</li>
         	    {% endfor %}
@@ -97,6 +56,4 @@
             <hr />
     	{% endfor %}
     </div>
-    {% include "rodape.html" %}
-</body>
-</html>
+{% endblock conteudo %}

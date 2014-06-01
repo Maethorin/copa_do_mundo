@@ -1,27 +1,80 @@
+{% load humanize %}
                     <div class="panel panel-default partida">
                         <div class="panel-heading">
-                            {% if mata_mata %}
                             <div class="panel-title">
+                            {% if mata_mata %}
                                 <h4 class="estadio">
                                     {{ partida.local.nome }}
                                 </h4>
                                 <div class="cidade">
                                     {{ partida.local.cidade_e_estado }}
                                 </div>
-                            </div>
                             {% else %}
-                            <div class="panel-title">{{ partida.data|date:"d M - H:i" }}</div>
+                            <h4>{{ partida.data|date:"d M - H:i" }}</h4>
                             {% endif %}
+                            {% if partida.realizada %}
+                                Realizada
+                            {% endif %}
+                            {% if partida.em_andamento %}
+                                Em andamento
+                            {% endif %}
+                            </div>
                         </div>
                         <div class="panel-body text-center">
+                            {% if partida.realizada or partida.em_andamento %}
+                            <h4 class="resultado-real">{% if partida.realizada %}Placar final{% else %}Placar atual{% endif %}</h4>
+                            <div class="campos-palpite">
+                                {{ partida.time_1.abreviatura|default:"NDF" }}
+                                <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
+                                <span class="gols">{{partida.gols_time_1|default:0}}</span>
+                                X
+                                <span class="gols">{{partida.gols_time_2|default:0}}</span>
+                                <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
+                                {{ partida.time_2.abreviatura|default:"NDF" }}
+                            </div>
+                            <div class="resultado-parcial{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">
+                                <h4 class="resultado-simulado">Placar simulado</h4>
+                                <h5 class="parcial"><span class="votos">Total de votos: {{partida.votos|intcomma}}</span></h5>
+                                {{ partida.time_1.abreviatura|default:"NDF" }}
+                                <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
+                                <span class="gols">{{partida.media_palpites_time_1}}</span>
+                                X
+                                <span class="gols">{{partida.media_palpites_time_2}}</span>
+                                <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
+                                {{ partida.time_2.abreviatura|default:"NDF" }}
+                                <div>
+                                {% if partida.palpite_certo %}
+                                    {% if partida.vitorioso_certo == 'CERTO' %}
+                                        <span class="label label-success">Vencedor</span>
+                                    {% elif partida.vitorioso_certo == 'EMPATE' %}
+                                        <span class="label label-warning">Vencedor</span>
+                                    {% else %}
+                                        <span class="label label-danger">Vencedor</span>
+                                    {% endif %}
+                                    <span class="label label-success">Placar</span>
+                                {% else %}
+                                    {% if partida.vitorioso_certo == 'CERTO' %}
+                                        <span class="label label-success">Vencedor</span>
+                                    {% elif partida.vitorioso_certo == 'EMPATE' %}
+                                        <span class="label label-warning">Vencedor</span>
+                                    {% else %}
+                                        <span class="label label-danger">Vencedor</span>
+                                    {% endif %}
+                                        <span class="label label-danger">Placar</span>
+                                {% endif %}
+                                </div>
+                            </div>
+                            {% else %}
                             <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal" role="form">
+                                {% csrf_token %}
+                                <input type="hidden" name="partida_id" value="{{partida.id}}" />
                                 <div class="campos-palpite">
                                     {{ partida.time_1.abreviatura|default:"NDF" }}
                                     <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
                                     <div class="palpite">
                                         <input class="form-control input-sm" placeholder="0" type="number" name="time_1" min="1" max="9" />
                                     </div>
-                                    x
+                                    X
                                     <div class="palpite">
                                         <input class="form-control input-sm" placeholder="0" type="number" name="time_2" min="1" max="9" />
                                     </div>
@@ -32,6 +85,7 @@
                                     <button type="submit" class="btn btn-primary btn-sm">enviar</button>
                                 </div>
                             </form>
+                            {% endif %}
                         </div>
                         <div class="panel-footer small">
                         {% if not mata_mata %}
