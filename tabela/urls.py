@@ -11,4 +11,5 @@ urlpatterns = patterns(
     url(r'^classificacao/(?P<atual>\w+)/?$', 'classificacao', name='classificacao'),
     url(r'^registra_palpite/?$', 'registra_palpite', name='registra_palpite'),
     url(r'^rodada/(?P<slug>\w+)/?$', 'mostra_rodada', name='rodada'),
+    url(r'^publica_no_facebook/?$', 'publica_no_facebook', name='publica_no_facebook'),
 )

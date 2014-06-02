@@ -2,10 +2,12 @@
 # encoding: utf-8
 import json
 from urlparse import unquote
+from django.conf import settings
 
 from django.core.context_processors import csrf
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
+from pip._vendor import requests
 
 from tabela.models import Grupo, Partida, Fase
 from tabela import simulador
@@ -97,3 +99,8 @@ def _obtem_palpites(request):
         palpite_time_2 = 0
 
     return palpite_time_1, palpite_time_2
+
+
+def publica_no_facebook(request):
+    resultado = requests.post("{}/{}/feed?access_token={}".format(settings.FACEBOOK_GRAPH_API, settings.FACEBOOK_PAGE_ID, settings.FACEBOOK_PAGE_ACCESS_TOKEN), data={"message": "This was post by my app! YUHUU!!!"})
+    return HttpResponse(resultado.text, mimetype="application/json")
