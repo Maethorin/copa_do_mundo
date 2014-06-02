@@ -70,13 +70,13 @@ def mostra_rodada(request, slug):
 
 def rodada(request, slug, template='partidas.html', inclui_partida_em_andamento=False, titulo_da_pagina="Inicial"):
     grupos = Grupo.objects.all()
-    partidas_em_andamento = simulador.obter_partidas_em_andamento()
+    # partidas_em_andamento = simulador.obter_partidas_em_andamento()
     # for partida in partidas_em_andamento:
     #     simulador.atualiza_informacoes_de_partida_em_andamento(partida)
     #     partida.save()
 
     partidas = Partida.objects.filter(fase__slug=slug)
-    # simulador.obter_times_de_partidas(partidas)
+    simulador.obter_times_de_partidas(partidas)
 
     titulos = {
         'oitavas': 'Oitavas'
@@ -85,29 +85,26 @@ def rodada(request, slug, template='partidas.html', inclui_partida_em_andamento=
     if slug in titulos:
         titulo_da_pagina = titulos[slug]
 
+    contexto = {
+        'partidas': partidas,
+        'grupos': grupos,
+        'titulo_da_pagina': titulo_da_pagina,
+        'css_fundo': slug,
+        'pagina_atual': slug
+    }
+    contexto.update(csrf(request))
     return render_to_response(
         template,
-        {
-            'partidas': partidas,
-            'grupos': grupos,
-            'titulo_da_pagina': titulo_da_pagina,
-            'css_fundo': slug,
-            'pagina_atual': slug
-        }
+        contexto
     )
 
 
 def registra_palpite(request):
-    json = request.POST.get('json', '') == 'json'
-    chaves = request.POST.get('chaves', '') == 'chaves'
-    partida_id = request.POST['partida_id']
-
+    partida_id = request.POST.get('partida_id')
     palpite_time_1, palpite_time_2 = _obtem_palpites(request)
-
     partida = Partida.objects.get(id=partida_id)
     if partida.em_andamento():
         return HttpResponseRedirect('/rodada/%s' % partida.fase.slug)
-
     if not partida.votos:
         partida.votos = 0
         partida.palpites_time_1 = 0
@@ -116,31 +113,27 @@ def registra_palpite(request):
     partida.palpites_time_1 += palpite_time_1
     partida.palpites_time_2 += palpite_time_2
     partida.save()
-    if json:
-        return HttpResponse('{"partida_id": "partida_%s", "gols_time_1": %s, "gols_time_2": %s, "votos": %s}' % (partida.id, partida.media_palpites_time_1(), partida.media_palpites_time_2(), partida.votos), mimetype="text/json")
-    
-    if chaves:
-        return HttpResponseRedirect('/chaves.html')
-
-    return HttpResponseRedirect('/rodada/%s' % partida.fase.slug)
+    return HttpResponse('{"partida_id": "partida_%s", "gols_time_1": %s, "gols_time_2": %s, "votos": %s}' % (partida.id, partida.media_palpites_time_1(), partida.media_palpites_time_2(), partida.votos), mimetype="text/json")
 
 
 def _obtem_palpites(request):
     try:
-        palpite_time_1 = int(request.POST['time_1'])
-        if palpite_time_1 < 0: palpite_time_1 = 0
+        palpite_time_1 = int(request.POST.get('time_1'))
+        if palpite_time_1 < 0:
+            palpite_time_1 = 0
     except ValueError:
         palpite_time_1 = 0
     try:
-        palpite_time_2 = int(request.POST['time_2'])
-        if palpite_time_2 < 0: palpite_time_2 = 0
+        palpite_time_2 = int(request.POST.get('time_2'))
+        if palpite_time_2 < 0:
+            palpite_time_2 = 0
     except ValueError:
         palpite_time_2 = 0
 
-    if palpite_time_1 > 7:
+    if palpite_time_1 > 9:
         palpite_time_1 = 0
 
-    if palpite_time_2 > 7:
+    if palpite_time_2 > 9:
         palpite_time_2 = 0
         
     return palpite_time_1, palpite_time_2

@@ -8121,8 +8121,12 @@ footer .logo {
   margin: 20px 10px;
   display: none;
 }
+/* line 6, ../../../sass/_partida.scss */
+.partida .panel-body {
+  padding-top: 0;
+}
 
-/* line 12, ../../../sass/_partida.scss */
+/* line 15, ../../../sass/_partida.scss */
 .oitavas,
 .quartas,
 .semifinais,
@@ -8130,7 +8134,7 @@ footer .logo {
 .final {
   overflow: hidden;
 }
-/* line 14, ../../../sass/_partida.scss */
+/* line 17, ../../../sass/_partida.scss */
 .oitavas .partida,
 .quartas .partida,
 .semifinais .partida,
@@ -8138,7 +8142,7 @@ footer .logo {
 .final .partida {
   display: none;
 }
-/* line 17, ../../../sass/_partida.scss */
+/* line 20, ../../../sass/_partida.scss */
 .oitavas .rodada,
 .quartas .rodada,
 .semifinais .rodada,
@@ -8147,16 +8151,16 @@ footer .logo {
   top: -165px;
 }
 
-/* line 23, ../../../sass/_partida.scss */
+/* line 26, ../../../sass/_partida.scss */
 .oitavas .barras {
   top: -190px;
 }
-/* line 26, ../../../sass/_partida.scss */
+/* line 29, ../../../sass/_partida.scss */
 .oitavas .baixo {
   top: -170px;
 }
 
-/* line 31, ../../../sass/_partida.scss */
+/* line 34, ../../../sass/_partida.scss */
 .rodada {
   text-align: center;
   overflow: hidden;
@@ -8165,23 +8169,23 @@ footer .logo {
   top: -70px;
 }
 
-/* line 39, ../../../sass/_partida.scss */
+/* line 42, ../../../sass/_partida.scss */
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* line 44, ../../../sass/_partida.scss */
+/* line 47, ../../../sass/_partida.scss */
 input[type=number] {
   -moz-appearance: textfield;
 }
 
-/* line 48, ../../../sass/_partida.scss */
+/* line 51, ../../../sass/_partida.scss */
 .palpite {
   width: 28px;
   display: inline-block;
 }
-/* line 51, ../../../sass/_partida.scss */
+/* line 54, ../../../sass/_partida.scss */
 .palpite input {
   padding: 5px 7px;
   font-family: 'Graduate', cursive;
@@ -8190,12 +8194,12 @@ input[type=number] {
   height: 37px;
 }
 
-/* line 60, ../../../sass/_partida.scss */
+/* line 63, ../../../sass/_partida.scss */
 .botao-palpite {
   margin-top: 10px;
 }
 
-/* line 64, ../../../sass/_partida.scss */
+/* line 67, ../../../sass/_partida.scss */
 .gols {
   padding: 2px 4px;
   border-radius: 3px;
@@ -8206,18 +8210,28 @@ input[type=number] {
   background-color: #ddffdd;
 }
 
-/* line 74, ../../../sass/_partida.scss */
+/* line 77, ../../../sass/_partida.scss */
 .resultado-simulado {
   background-color: #eeeeee;
-  margin: 20px -14px 0 -14px;
+  margin: 0 -14px 0 -14px;
   padding: 4px 0;
 }
 
-/* line 80, ../../../sass/_partida.scss */
+/* line 83, ../../../sass/_partida.scss */
 .resultado-real {
   background-color: #eeeeee;
   padding: 4px 0;
-  margin: -7px -14px 4px;
+  margin: 0 -14px 4px;
+}
+
+/* line 89, ../../../sass/_partida.scss */
+.placar-final, .placar-simulado, .placar-palpite {
+  margin-top: 15px;
+}
+
+/* line 93, ../../../sass/_partida.scss */
+.campos-palpite {
+  margin-top: 10px;
 }
 
 /* line 1, ../../../sass/_bandeiras.scss */

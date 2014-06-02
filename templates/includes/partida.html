@@ -1,5 +1,5 @@
 {% load humanize %}
-                    <div class="panel panel-default partida">
+                    <div class="panel panel-default partida" data-partida="{{ partida.id }}">
                         <div class="panel-heading">
                             <div class="panel-title">
                             {% if mata_mata %}
@@ -22,26 +22,22 @@
                         </div>
                         <div class="panel-body text-center">
                             {% if partida.realizada or partida.em_andamento %}
-                            <h4 class="resultado-real">{% if partida.realizada %}Placar final{% else %}Placar atual{% endif %}</h4>
-                            <div class="campos-palpite">
-                                {{ partida.time_1.abreviatura|default:"NDF" }}
-                                <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
-                                <span class="gols">{{partida.gols_time_1|default:0}}</span>
-                                X
-                                <span class="gols">{{partida.gols_time_2|default:0}}</span>
-                                <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
-                                {{ partida.time_2.abreviatura|default:"NDF" }}
+                            <div class="placar-final">
+                                <h4 class="resultado-real">{% if partida.realizada %}Placar final{% else %}Placar atual{% endif %}</h4>
+                                <div class="placar">
+                                    {% with final=True %}
+                                    {% include 'includes/placar.html' %}
+                                    {% endwith %}
+                                </div>
                             </div>
-                            <div class="resultado-parcial{% if partida.realizada %} realizada{% endif %}{% if partida.em_andamento %} andamento{% endif %}">
+                            {% endif %}
+                            <div class="placar-simulado" style="display: none;">
                                 <h4 class="resultado-simulado">Placar simulado</h4>
-                                <h5 class="parcial"><span class="votos">Total de votos: {{partida.votos|intcomma}}</span></h5>
-                                {{ partida.time_1.abreviatura|default:"NDF" }}
-                                <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
-                                <span class="gols">{{partida.media_palpites_time_1}}</span>
-                                X
-                                <span class="gols">{{partida.media_palpites_time_2}}</span>
-                                <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
-                                {{ partida.time_2.abreviatura|default:"NDF" }}
+                                <h5 class="parcial">Total de votos: <span class="votos">{{partida.votos|intcomma}}</span></h5>
+                                {% with simulado=True %}
+                                {% include 'includes/placar.html' %}
+                                {% endwith %}
+                                {% if partida.realizada %}
                                 <div>
                                 {% if partida.palpite_certo %}
                                     {% if partida.vitorioso_certo == 'CERTO' %}
@@ -63,28 +59,32 @@
                                         <span class="label label-danger">Placar</span>
                                 {% endif %}
                                 </div>
+                                {% endif %}
                             </div>
-                            {% else %}
-                            <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal" role="form">
-                                {% csrf_token %}
-                                <input type="hidden" name="partida_id" value="{{partida.id}}" />
-                                <div class="campos-palpite">
-                                    {{ partida.time_1.abreviatura|default:"NDF" }}
-                                    <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
-                                    <div class="palpite">
-                                        <input class="form-control input-sm" placeholder="0" type="number" name="time_1" min="1" max="9" />
+                            {% if not partida.realizada and not partida.em_andamento %}
+                            <div class="placar-palpite">
+                                {% if partida.time_1 and partida.time_2 %}
+                                <h4 class="resultado-simulado">Dar um palpite</h4>
+                                {% endif %}
+                                <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal" role="form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="partida_id" value="{{partida.id}}" />
+                                    <div class="campos-palpite">
+                                    {% if partida.time_1 and partida.time_2 %}
+                                    {% include 'includes/placar.html' %}
+                                    {% else %}
+                                    {% with final=True %}
+                                    {% include 'includes/placar.html' %}
+                                    {% endwith %}
+                                    {% endif %}
                                     </div>
-                                    X
-                                    <div class="palpite">
-                                        <input class="form-control input-sm" placeholder="0" type="number" name="time_2" min="1" max="9" />
+                                    {% if partida.time_1 and partida.time_2 %}
+                                    <div class="botao-palpite">
+                                        <button type="submit" class="btn btn-primary btn-sm">enviar</button>
                                     </div>
-                                    <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
-                                    {{ partida.time_2.abreviatura|default:"NDF" }}
-                                </div>
-                                <div class="botao-palpite">
-                                    <button type="submit" class="btn btn-primary btn-sm">enviar</button>
-                                </div>
+                                    {% endif %}
                             </form>
+                            </div>
                             {% endif %}
                         </div>
                         <div class="panel-footer small">

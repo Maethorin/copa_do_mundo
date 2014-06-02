@@ -3,6 +3,9 @@
   float: left;
   margin: 20px 10px;
   display: none;
+  .panel-body {
+    padding-top: 0;
+  }
 }
 
 .oitavas,
@@ -37,8 +40,8 @@
 }
 
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type=number] {
@@ -73,13 +76,20 @@ input[type=number] {
 
 .resultado-simulado {
   background-color: $gray-lighter;
-  margin: 20px -14px 0 -14px;
+  margin: 0 -14px 0 -14px;
   padding: 4px 0;
 }
 
 .resultado-real {
   background-color: $gray-lighter;
   padding: 4px 0;
-  margin: -7px -14px 4px;
+  margin: 0 -14px 4px;
 }
 
+.placar-final, .placar-simulado, .placar-palpite {
+  margin-top: 15px;
+}
+
+.campos-palpite {
+  margin-top: 10px;
+}

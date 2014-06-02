@@ -1,47 +1,37 @@
-$('li.partida form').each(function() {
-    $(this).append('<input type="hidden" name="json" value="json" />');
-    $(this).submit(function() {
-         $(this).ajaxSubmit({
-             dataType: 'json',
-             success: function(resultado) {
-                 atual = partida(resultado.partida_id);
-                 atual.$gols_time_1.html(resultado.gols_time_1);
-                 atual.$gols_time_2.html(resultado.gols_time_2);
-                 atual.$votos.html('Total: ' + resultado.votos);
-                 atual.$computado.show();
-                 atual.$parcial.show();
-                 atual.$enviar.hide();
-             }
-          });
-         return false
-     });
+$('.partida').on('submit', 'form', function(event) {
+    event.preventDefault();
+    var $this = $(this);
+    var $partida = $this.parents(".partida");
+    var data = $this.serializeArray();
+    $(data).each(function() {
+        if (this.name == "time_1" || this.name == "time_2") {
+            if (this.value == "") {
+                this.value = "0";
+            }
+        }
+    });
+    $.post($this[0].action, data)
+        .done(function(data) {
+            $partida.find(".placar-palpite").slideUp();
+            $partida.find(".placar-simulado").slideDown();
+            localStorage["partida-" + $partida.data("partida")] = 1;
+            $partida.find(".time_1").text(data['gols_time_1']);
+            $partida.find(".time_2").text(data['gols_time_2']);
+            $partida.find(".votos").text(data['votos']);
+        })
+        .fail(function() {
+            alert(0);
+        }
+    );
 });
-
-function partida(partida_id) { 
-    var $li = $('li#' + partida_id);
-    var gols_time_1 = null;
-    var gols_time_2 = null;
-    var computado = null;
-    var $parcial = $li.find('div.resultado-parcial');
-    if ($parcial && !$parcial.hasClass('realizada')) {
-        gols_time_1 = $parcial.find('span.gols')[0];
-        gols_time_2 = $parcial.find('span.gols')[1];
-        var $computado = $li.find('div.computado');
-        var $votos = $parcial.find('span.votos');
-        var $enviar = $li.find('form input.enviar');
-    }
-
-    return {
-        id: partida_id,
-        $gols_time_1: $(gols_time_1),
-        $gols_time_2: $(gols_time_2),
-        $computado: $computado,
-        $votos: $votos,
-        $enviar: $enviar,
-        $parcial: $parcial
-    };
-}
 
 $('.partidas-index').on('click', '.slide-up', function() {
     var $body = $(this).parent().find('.corpo-painel').slideToggle();
+});
+
+$('.partida').each(function() {
+    if (localStorage["partida-" + $(this).data("partida")]) {
+        $(this).find(".placar-palpite").css("display", "none");
+        $(this).find(".placar-simulado").css("display", "");
+    }
 });
