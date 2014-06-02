@@ -177,3 +177,13 @@ class Partida(models.Model):
         if not self.votos or self.votos < 0:
             return 0
         return self.palpites_time_2 / self.votos
+
+    def registra_palpite(self, palpite_time_1, palpite_time_2):
+        if not self.votos:
+            self.votos = 0
+            self.palpites_time_1 = 0
+            self.palpites_time_2 = 0
+        self.votos += 1
+        self.palpites_time_1 += palpite_time_1
+        self.palpites_time_2 += palpite_time_2
+        self.save()

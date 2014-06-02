@@ -1,3 +1,5 @@
+$.cookie.json = true;
+
 $('.partida').on('submit', 'form', function(event) {
     event.preventDefault();
     var $this = $(this);
@@ -14,7 +16,12 @@ $('.partida').on('submit', 'form', function(event) {
         .done(function(data) {
             $partida.find(".placar-palpite").slideUp();
             $partida.find(".placar-simulado").slideDown();
-            localStorage["partida-" + $partida.data("partida")] = 1;
+            var partidas = $.cookie('partidas');
+            if (!partidas) {
+                partidas = [];
+            }
+            partidas.push($partida.data("partida"));
+            $.cookie('partidas', partidas, { expires: 180 });
             $partida.find(".time_1").text(data['gols_time_1']);
             $partida.find(".time_2").text(data['gols_time_2']);
             $partida.find(".votos").text(data['votos']);
@@ -27,11 +34,4 @@ $('.partida').on('submit', 'form', function(event) {
 
 $('.partidas-index').on('click', '.slide-up', function() {
     var $body = $(this).parent().find('.corpo-painel').slideToggle();
-});
-
-$('.partida').each(function() {
-    if (localStorage["partida-" + $(this).data("partida")]) {
-        $(this).find(".placar-palpite").css("display", "none");
-        $(this).find(".placar-simulado").css("display", "");
-    }
 });

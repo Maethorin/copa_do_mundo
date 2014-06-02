@@ -1,102 +1,63 @@
 #!/usr/bin/env python
 # encoding: utf-8
-import re
-from django.core.context_processors import csrf
+import json
+from urlparse import unquote
 
-from django.shortcuts import *
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.core.context_processors import csrf
+from django.http import HttpResponse
+from django.shortcuts import render_to_response, redirect
 
 from tabela.models import Grupo, Partida, Fase
 from tabela import simulador
 
 
-def index(request):
-    return render_to_response(
-        'index.html',
-        {
-            'grupos': Grupo.objects.all(),
-            'titulo_da_pagina': 'Inicial',
-            'css_fundo': 'inicial'
-        }
-    )
-
-
-@csrf_protect
-def grupo(request, nome):
+def criar_contexto(request, titulo_da_pagina, pagina_atual, css_fundo, partidas=None, usa_csrf=False):
     grupos = Grupo.objects.all()
+    partidas_cookie = unquote(request.COOKIES.get("partidas", ""))
+    partidas_votadas = []
+    if partidas_cookie:
+        partidas_votadas = json.loads(partidas_cookie)
+    contexto = {
+        'grupos': grupos, 'pagina_atual': pagina_atual, 'partidas': partidas, 'css_fundo': css_fundo,
+        'titulo_da_pagina': titulo_da_pagina, 'partidas_votadas': partidas_votadas
+    }
+    if usa_csrf:
+        contexto.update(csrf(request))
+    return contexto
+
+
+def index(request):
+    return render_to_response('index.html', criar_contexto(request, "Inicial", "inicial", "inicial"))
+
+
+def partidas_de_grupo(request, nome):
     grupo = Grupo.objects.get(nome=nome)
     partidas_do_grupo = simulador.obtem_partidas_de_grupo(grupo)
-    contexto =         {
-            'grupos': grupos, 'grupo': grupo, 'pagina_atual': grupo.nome, 'em_grupos': True, 'ja_votou': True,
-            'partidas': partidas_do_grupo, 'css_fundo': 'grupos', 'titulo_da_pagina': "Grupo {}".format(grupo.nome)
-        }
-
-    contexto.update(csrf(request))
-    return render_to_response(
-        'grupo.html',
-        contexto
-    )
+    contexto = criar_contexto(request, "Grupo {}".format(grupo.nome), grupo.nome, 'grupos', partidas_do_grupo, usa_csrf=True)
+    contexto.update({'em_grupos': True})
+    return render_to_response('grupo.html', contexto)
 
 
 def classificacao(request, atual=None):
     atual = atual == 'atual'
-    grupos = Grupo.objects.all()
-    simulador.obter_dados_de_times(grupos, atual=atual)
-    return render_to_response('classificacao.html', {
-        'grupos': grupos, 'atual': atual, 'em_classificacao': True, 'titulo_da_pagina': "Classificação",
-        'css_fundo': 'classificacao', 'pagina_atual': 'classificacao_real' if atual else 'classificacao_simulada',
-    })
-
-
-def classificacao_atual(request):
-    grupos = Grupo.objects.all()
-    simulador.obter_dados_de_times(grupos, atual=True)
-    return render_to_response('classificacao.html', {'grupos': grupos, 'atual': True})
-
-
-def chaves(request):
-    fases = Fase.objects.all().exclude(slug='classificacao')
-    for fase in fases:
-        simulador.reordena_partidas_para_chave(fase)
-    return render_to_response("chaves.html", {
-        'rodadas': fases, 'index': index, 'chaves': True,
-        'css_fundo': 'chaves', 'pagina_atual': 'chaves', 'titulo_da_pagina': "Chaves"
-    })
+    contexto = criar_contexto(request, "Classificação", 'classificacao_real' if atual else 'classificacao_simulada', 'classificacao')
+    simulador.obter_dados_de_times(contexto['grupos'], atual=atual)
+    contexto.update({'em_classificacao': True, 'atual': atual})
+    return render_to_response('classificacao.html', contexto)
 
 
 def mostra_rodada(request, slug):
-    return rodada(request, slug)
-
-
-def rodada(request, slug, template='partidas.html', inclui_partida_em_andamento=False, titulo_da_pagina="Inicial"):
-    grupos = Grupo.objects.all()
     # partidas_em_andamento = simulador.obter_partidas_em_andamento()
     # for partida in partidas_em_andamento:
     #     simulador.atualiza_informacoes_de_partida_em_andamento(partida)
     #     partida.save()
 
-    partidas = Partida.objects.filter(fase__slug=slug)
+    fase = Fase.objects.get(slug=slug)
+    partidas = Partida.objects.filter(fase=fase)
     simulador.obter_times_de_partidas(partidas)
 
-    titulos = {
-        'oitavas': 'Oitavas'
-    }
-
-    if slug in titulos:
-        titulo_da_pagina = titulos[slug]
-
-    contexto = {
-        'partidas': partidas,
-        'grupos': grupos,
-        'titulo_da_pagina': titulo_da_pagina,
-        'css_fundo': slug,
-        'pagina_atual': slug
-    }
-    contexto.update(csrf(request))
-    return render_to_response(
-        template,
-        contexto
-    )
+    contexto = criar_contexto(request, fase.nome, slug, slug, partidas, usa_csrf=True)
+    return render_to_response('partidas.html', contexto)
 
 
 def registra_palpite(request):
@@ -104,16 +65,15 @@ def registra_palpite(request):
     palpite_time_1, palpite_time_2 = _obtem_palpites(request)
     partida = Partida.objects.get(id=partida_id)
     if partida.em_andamento():
-        return HttpResponseRedirect('/rodada/%s' % partida.fase.slug)
-    if not partida.votos:
-        partida.votos = 0
-        partida.palpites_time_1 = 0
-        partida.palpites_time_2 = 0
-    partida.votos += 1
-    partida.palpites_time_1 += palpite_time_1
-    partida.palpites_time_2 += palpite_time_2
-    partida.save()
-    return HttpResponse('{"partida_id": "partida_%s", "gols_time_1": %s, "gols_time_2": %s, "votos": %s}' % (partida.id, partida.media_palpites_time_1(), partida.media_palpites_time_2(), partida.votos), mimetype="text/json")
+        return redirect('rodada', partida.fase.slug)
+    partida.registra_palpite(palpite_time_1, palpite_time_2)
+    resultado = {
+        "partida_id": "partida_{}".format(partida.id),
+        "gols_time_1": partida.media_palpites_time_1(),
+        "gols_time_2": partida.media_palpites_time_2(),
+        "votos": partida.votos
+    }
+    return HttpResponse(json.dumps(resultado), mimetype="application/json")
 
 
 def _obtem_palpites(request):
@@ -135,36 +95,5 @@ def _obtem_palpites(request):
 
     if palpite_time_2 > 9:
         palpite_time_2 = 0
-        
+
     return palpite_time_1, palpite_time_2
-
-
-def _obter_rodadas(mata_mata=False):
-    rodadas = []
-    if not mata_mata:
-        rodadas.extend([
-            {'id': 'em_andamento', 'nome': 'Em Andamento', 'index': 0},
-            {'id': 'rodada_1', 'nome': '1ª Rodada', 'index': 1}, 
-            {'id': 'rodada_2', 'nome': '2ª Rodada', 'index': 2}, 
-            {'id': 'rodada_3', 'nome': '3ª Rodada', 'index': 3}
-        ])
-
-    rodadas.extend([
-        {'id': 'oitavas', 'nome': 'Oitavas', 'index': 4},
-        {'id': 'quartas', 'nome': 'Quartas', 'index': 5},
-        {'id': 'semifinais', 'nome': 'Semifinais', 'index': 6}
-        
-    ])
-    
-    if mata_mata:
-        rodadas.extend([
-            {'id': 'final', 'nome': 'Final', 'index': 8},
-            {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'index': 7}
-        ])
-    else:
-        rodadas.extend([
-            {'id': 'terceiro_lugar', 'nome': 'Terceiro Lugar', 'index': 7},
-            {'id': 'final', 'nome': 'Final', 'index': 8}
-        ])
-    
-    return rodadas
