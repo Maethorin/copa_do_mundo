@@ -4,3 +4,4 @@ Django
 South
 MySql-python
 lxml
+cssselect
