@@ -88,3 +88,17 @@ TEMPLATE_DIRS = (
 FACEBOOK_GRAPH_API = "https://graph.facebook.com/v2.0"
 FACEBOOK_PAGE_ID = os.environ.get('FACEBOOK_PAGE_ID', None)
 FACEBOOK_PAGE_ACCESS_TOKEN = os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN', None)
+
+URL_BASE_DE_RESULTADOS = "http://globoesporte.globo.com/servico/esportes_campeonato/widget-uuid/c36d99dd-918a-459f-bf0c-648dec5773af/fases"
+URL_RESULTADOS_DE_CLASSIFICACAO = "/fase-grupos-copa-do-mundo-2014/grupo/{}/rodada/{}/jogos.html"
+URL_RESULTADOS_DE_MATA_MATA = "/oitavas-copa-do-mundo-2014/classsificacao.html"
+URL_DE_GRUPOS = {
+    "A": "1069",
+    "B": "1070",
+    "C": "1071",
+    "D": "1072",
+    "E": "1073",
+    "F": "1074",
+    "G": "1075",
+    "H": "1166",
+}

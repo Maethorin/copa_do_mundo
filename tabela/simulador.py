@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
+from django.conf import settings
 
 import parser_regra
 
@@ -9,8 +10,7 @@ from tabela.models import Partida, Time, Fase
 
 
 class InformacoesDePartida():
-    def __init__(self, placar, status):
-        placar = placar.split('-')
+    def __init__(self, placar, status="Tá Indo"):
         self.gols_time_1 = 0
         self.gols_time_2 = 0
         if len(placar) == 2:
@@ -59,24 +59,40 @@ def atualiza_informacoes_de_partida_em_andamento(partida):
             partida.realizada = informacoes.realizada
 
 
+def obter_rodada(partida):
+    if 12 <= partida.data.day <= 16:
+        return "1"
+    elif partida.data.day == 17 and partida.time_1.grupo.nome == "H":
+        return "1"
+    elif partida.data.day == 17 and partida.time_1.grupo.nome == "A":
+        return "2"
+    elif 18 <= partida.data.day <= 22:
+            return "2"
+    return "3"
+
+
 def obter_informacoes_da_partida_em_jogo(partida):
     try:
-        pagina_resultado = lhtml.parse('http://br.oleole.com/resultados-futebol-ao-vivo/ls.asp').getroot()
+        url = settings.URL_BASE_DE_RESULTADOS
+        if partida.fase.slug == "classificacao":
+            url_grupo = settings.URL_RESULTADOS_DE_CLASSIFICACAO.format(settings.URL_DE_GRUPOS[partida.time_1.grupo.nome], obter_rodada(partida))
+            url = "{}{}".format(url, url_grupo)
+        pagina_resultado = lhtml.parse(url).getroot()
     except IOError:
         return None
     if pagina_resultado is None:
         return None
 
-    tabelas = pagina_resultado.cssselect('table')
-    linhas = tabelas[0].cssselect('tr.live_scores_row')
-    for linha in linhas:
-        nome_time1 = linha.cssselect('td.team1')[0].text_content()
-        nome_time2 = linha.cssselect('td.team2')[0].text_content()
-        if nome_time1 == partida.time_1.nome and nome_time2 == partida.time_2.nome:
-            placar = linha.cssselect('td.scores')[0].text_content()
-            status = linha.cssselect('td.status')[0].text_content()
-            informacoes = InformacoesDePartida(placar, status)
-            return informacoes
+    equipes = pagina_resultado.cssselect(".nome-equipe")
+    placar = []
+    for equipe in equipes:
+        if equipe.text == partida.time_1.abreviatura:
+            placar.append(equipe.getparent().getparent().cssselect(".placar-mandante").text)
+        elif equipe.text == partida.time_2.abreviatura:
+            placar.append(equipe.getparent().getparent().cssselect(".placar-visitante").text)
+
+    if placar:
+        return InformacoesDePartida(placar)
     return None
 
 

@@ -48,16 +48,20 @@ def classificacao(request, atual=None):
 
 
 def mostra_rodada(request, slug):
-    # partidas_em_andamento = simulador.obter_partidas_em_andamento()
-    # for partida in partidas_em_andamento:
-    #     simulador.atualiza_informacoes_de_partida_em_andamento(partida)
-    #     partida.save()
-
     fase = Fase.objects.get(slug=slug)
     partidas = Partida.objects.filter(fase=fase)
     simulador.obter_times_de_partidas(partidas)
 
     contexto = criar_contexto(request, fase.nome, slug, slug, partidas, usa_csrf=True)
+    return render_to_response('partidas.html', contexto)
+
+
+def partidas_em_andamento(request):
+    partidas = simulador.obter_partidas_em_andamento()
+    for partida in partidas:
+        simulador.atualiza_informacoes_de_partida_em_andamento(partida)
+        partida.save()
+    contexto = criar_contexto(request, "em andamento", "andamento", "andamentoi", partidas)
     return render_to_response('partidas.html', contexto)
 
 

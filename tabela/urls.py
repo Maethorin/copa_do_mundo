@@ -11,4 +11,5 @@ urlpatterns = patterns(
     url(r'^classificacao/(?P<atual>\w+)/?$', 'classificacao', name='classificacao'),
     url(r'^registra_palpite/?$', 'registra_palpite', name='registra_palpite'),
     url(r'^rodada/(?P<slug>\w+)/?$', 'mostra_rodada', name='rodada'),
+    url(r'^em_andamento/?$', 'partidas_em_andamento', name='em_andamento'),
 )
