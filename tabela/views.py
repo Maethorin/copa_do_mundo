@@ -7,7 +7,6 @@ from django.conf import settings
 from django.core.context_processors import csrf
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
-from pip._vendor import requests
 
 from tabela.models import Grupo, Partida, Fase
 from tabela import simulador
@@ -102,6 +101,7 @@ def _obtem_palpites(request):
 
 
 def publica_no_facebook(request):
+    from pip._vendor import requests
     message = request.GET.get("message", None)
     if not message:
         message = "Made by my Django App"
@@ -114,6 +114,7 @@ def publica_no_facebook(request):
 
 
 def obtem_access_token(request):
+    from pip._vendor import requests
     url = "{}/oauth/access_token?grant_type=fb_exchange_token&client_id={}&client_secret={}&fb_exchange_token={}"
     app_id = ""
     app_scret = ""
