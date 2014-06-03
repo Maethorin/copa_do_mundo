@@ -102,5 +102,21 @@ def _obtem_palpites(request):
 
 
 def publica_no_facebook(request):
-    resultado = requests.post("{}/{}/feed?access_token={}".format(settings.FACEBOOK_GRAPH_API, settings.FACEBOOK_PAGE_ID, settings.FACEBOOK_PAGE_ACCESS_TOKEN), data={"message": "This was post by my app! YUHUU!!!"})
+    message = request.GET.get("message", None)
+    if not message:
+        message = "Made by my Django App"
+    facebook_post = {
+        "message": message,
+        "link": "http://g1.globo.com/"
+    }
+    resultado = requests.post("{}/{}/feed?access_token={}".format(settings.FACEBOOK_GRAPH_API, settings.FACEBOOK_PAGE_ID, settings.FACEBOOK_PAGE_ACCESS_TOKEN), data=facebook_post)
+    return HttpResponse(resultado.text, mimetype="application/json")
+
+
+def obtem_access_token(request):
+    url = "{}/oauth/access_token?grant_type=fb_exchange_token&client_id={}&client_secret={}&fb_exchange_token={}"
+    app_id = ""
+    app_scret = ""
+    temporary_access_token = ""
+    resultado = requests.get(url.format(settings.FACEBOOK_GRAPH_API, app_id, app_scret, temporary_access_token))
     return HttpResponse(resultado.text, mimetype="application/json")
