@@ -511,17 +511,18 @@ class TestPegaPlacaDaGlobo(mox.MoxTestBase):
         c = Context({"partidas": partidas})
         return template.render(c)
 
+    def cria_time(self, partida, nome, abreviatura, gols, time_indice=1):
+        time = models.Time()
+        time.nome = nome
+        time.abreviatura = abreviatura
+        setattr(partida, "time_{}".format(time_indice), time)
+        if not gols is None:
+            setattr(partida, "gols_time_{}".format(time_indice), gols)
+
     def cria_partida(self, time_1_nome, time_1_abreviatura, time_1_gols, time_2_nome, time_2_abreviatura, time_2_gols):
         partida = models.Partida()
-        partida.time_1 = models.Time()
-        partida.time_1.nome = time_1_nome
-        partida.time_1.abreviatura = time_1_abreviatura
-        partida.gols_time_1 = time_1_gols
-
-        partida.time_2 = models.Time()
-        partida.time_2.nome = time_2_nome
-        partida.time_2.abreviatura = time_2_abreviatura
-        partida.gols_time_2 = time_2_gols
+        self.cria_time(partida, time_1_nome, time_1_abreviatura, time_1_gols, 1)
+        self.cria_time(partida, time_2_nome, time_2_abreviatura, time_2_gols, 2)
         return partida
 
     def test_le_corretamente_com_placar_primeira_partida(self):
@@ -540,4 +541,13 @@ class TestPegaPlacaDaGlobo(mox.MoxTestBase):
         pagina_resultado = lhtml.fragment_fromstring(html, create_parent=True)
         placar = simulador.obtem_placar_do_html(pagina_resultado, partida2)
         assert_equals(placar.gols_time_1, '3')
+        assert_equals(placar.gols_time_2, '0')
+
+    def test_deve_retornar_com_placar_0x0_se_nao_tiver_gols(self):
+        partida1 = self.cria_partida("P1 Blah1", "P1B1", None, "P1 Blah2", "P1B2", None)
+        partida2 = self.cria_partida("P2 Blah1", "P2B1", 3, "P2 Blah2", "P2B2", 0)
+        html = self.obter_html_de_placar([partida1, partida2])
+        pagina_resultado = lhtml.fragment_fromstring(html, create_parent=True)
+        placar = simulador.obtem_placar_do_html(pagina_resultado, partida1)
+        assert_equals(placar.gols_time_1, '0')
         assert_equals(placar.gols_time_2, '0')

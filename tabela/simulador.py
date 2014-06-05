@@ -11,8 +11,8 @@ from tabela.models import Partida, Time, Fase
 
 class InformacoesDePartida():
     def __init__(self, gols_time_1=0, gols_time_2=0, status="Tá Indo"):
-        self.gols_time_1 = gols_time_1
-        self.gols_time_2 = gols_time_2
+        self.gols_time_1 = gols_time_1 or '0'
+        self.gols_time_2 = gols_time_2 or '0'
         self.realizada = status == 'Finished'
 
 
@@ -70,16 +70,14 @@ def obter_rodada(partida):
 
 def obtem_placar_do_html(pagina_resultado, partida):
     equipes = pagina_resultado.cssselect(".nome-equipe")
-    gols_time_1 = None
-    gols_time_2 = None
+    gols_time_1 = 0
+    gols_time_2 = 0
     for equipe in equipes:
         if equipe.text == partida.time_1.abreviatura:
             gols_time_1 = equipe.getparent().getparent().cssselect(".placar-mandante")[0].text
         elif equipe.text == partida.time_2.abreviatura:
             gols_time_2 = equipe.getparent().getparent().cssselect(".placar-visitante")[0].text
-    if not gols_time_1 is None and not gols_time_2 is None:
-        return InformacoesDePartida(gols_time_1, gols_time_2)
-    return None
+    return InformacoesDePartida(gols_time_1, gols_time_2)
 
 
 def obter_informacoes_da_partida_em_jogo(partida):

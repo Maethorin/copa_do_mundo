@@ -10,9 +10,9 @@
 			</div>
 		</div>
 		<div class="placar">
-			<span class="placar-equipe placar-mandante">{{ partida.gols_time_1 }}</span>
+			<span class="placar-equipe placar-mandante">{{ partida.gols_time_1|default:"" }}</span>
 			<span class="sprite-sprite_08"></span>
-			<span class="placar-equipe placar-visitante">{{ partida.gols_time_2 }}</span>
+			<span class="placar-equipe placar-visitante">{{ partida.gols_time_2|default:"" }}</span>
 		</div>
 		<div class="equipe equipe-visitante" itemprop="performer" itemscope itemtype="http://schema.org/SportsTeam">
 			<div class="escudo-pequeno">
