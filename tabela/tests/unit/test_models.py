@@ -26,24 +26,26 @@ def test_valida_unicode_de_time():
 
 def test_valida_unicode_de_partida_com_times():
     partida = models.Partida()
-    partida.rodada = '1 Rodada'
+    partida.fase = models.Fase(nome="Oitavas")
+    partida.local = models.Estadio(nome="Estadio", cidade="Cidade", estado="RJ")
     partida.time_1 = models.Time()
     partida.time_1.nome = 'Time 1'
     partida.time_2 = models.Time()
     partida.time_2.nome = 'Time 2'
     partida.data = datetime(2014, 6, 12, 8, 30)
     partida_str = u'%s' % partida
-    assert_equals(partida_str, u'1 Rodada - Time 1 x Time 2 - Thu 12 June - 08:30 - Não realizada')
+    assert_equals(partida_str, u'Oitavas - Time 1 x Time 2 - Thu 12 June - 08:30 - Não realizada - Estadio (Cidade-RJ)')
 
 
 def test_valida_unicode_de_partida_com_regra():
     partida = models.Partida()
-    partida.rodada = '1 Rodada'
+    partida.fase = models.Fase(nome="Oitavas")
+    partida.local = models.Estadio(nome="Estadio", cidade="Cidade", estado="RJ")
     partida.regra_para_times = '1Ax2B'
     partida.data = datetime(2010, 6, 5, 8, 30)
     partida.realizada = True
     partida_str = '%s' % partida
-    assert_equals(partida_str, '1 Rodada - 1Ax2B - Sat 05 June - 08:30 - Realizada')
+    assert_equals(partida_str, 'Oitavas - 1Ax2B - Sat 05 June - 08:30 - Realizada - Estadio (Cidade-RJ)')
 
 
 def test_media_time_1_palpites_em_partida_retorna_zero_se_votos_eh_igual_a_zero():

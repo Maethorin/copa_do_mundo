@@ -2,8 +2,8 @@
 # encoding: utf-8
 
 from nose.tools import assert_equals
-from copa_do_mundo.tabela import simulador
-from copa_do_mundo.tabela.models import *
+from tabela import simulador
+from tabela.models import *
 
 class FakeModel():
 
@@ -70,8 +70,9 @@ def test_normalizar_lista_com_saldo_de_gols_recupera_saldo_quando_ha_empate():
 
     assert_equals(times, [time1, time2, time4, time3, time5, time6, time8, time9, time7])
 
+
 def test_obtem_times_de_partida_de_oitavas():
     time1, time2 = simulador.obtem_times_de_partida_de_oitavas('1Ax2B')
     
-    assert_equals(time1.nome, 'Uruguai')
-    assert_equals(time2.nome, 'Coréia do Sul')
+    assert_equals(time1.nome, 'Brasil')
+    assert_equals(time2.nome, u'Austrália')
