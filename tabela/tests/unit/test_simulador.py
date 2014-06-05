@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 # encoding: utf-8
+import os
 
-from mox import *
 import mox
 from nose.tools import assert_equals
+
+from lxml import html as lhtml
+
+from django.template import Context, Template
+
 from tabela import simulador, models
 
 
@@ -494,3 +499,45 @@ class TestSimulador(mox.MoxTestBase):
             self.mox.VerifyAll()
         finally:
             self.mox.UnsetStubs()
+
+
+class TestPegaPlacaDaGlobo(mox.MoxTestBase):
+
+    def obter_html_de_placar(self, partidas):
+        template_file = open(os.path.join(os.path.abspath("unit/placar-globo.html")), "r")
+        template_string = template_file.read()
+        template = Template(template_string)
+        template_file.close()
+        c = Context({"partidas": partidas})
+        return template.render(c)
+
+    def cria_partida(self, time_1_nome, time_1_abreviatura, time_1_gols, time_2_nome, time_2_abreviatura, time_2_gols):
+        partida = models.Partida()
+        partida.time_1 = models.Time()
+        partida.time_1.nome = time_1_nome
+        partida.time_1.abreviatura = time_1_abreviatura
+        partida.gols_time_1 = time_1_gols
+
+        partida.time_2 = models.Time()
+        partida.time_2.nome = time_2_nome
+        partida.time_2.abreviatura = time_2_abreviatura
+        partida.gols_time_2 = time_2_gols
+        return partida
+
+    def test_le_corretamente_com_placar_primeira_partida(self):
+        partida1 = self.cria_partida("P1 Blah1", "P1B1", 2, "P1 Blah2", "P1B2", 1)
+        partida2 = self.cria_partida("P2 Blah1", "P2B1", 3, "P2 Blah2", "P2B2", 0)
+        html = self.obter_html_de_placar([partida1, partida2])
+        pagina_resultado = lhtml.fragment_fromstring(html, create_parent=True)
+        placar = simulador.obtem_placar_do_html(pagina_resultado, partida1)
+        assert_equals(placar.gols_time_1, '2')
+        assert_equals(placar.gols_time_2, '1')
+
+    def test_le_corretamente_com_placar_segunda_partida(self):
+        partida1 = self.cria_partida("P1 Blah1", "P1B1", 2, "P1 Blah2", "P1B2", 1)
+        partida2 = self.cria_partida("P2 Blah1", "P2B1", 3, "P2 Blah2", "P2B2", 0)
+        html = self.obter_html_de_placar([partida1, partida2])
+        pagina_resultado = lhtml.fragment_fromstring(html, create_parent=True)
+        placar = simulador.obtem_placar_do_html(pagina_resultado, partida2)
+        assert_equals(placar.gols_time_1, '3')
+        assert_equals(placar.gols_time_2, '0')

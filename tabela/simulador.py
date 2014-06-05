@@ -10,12 +10,9 @@ from tabela.models import Partida, Time, Fase
 
 
 class InformacoesDePartida():
-    def __init__(self, placar, status="Tá Indo"):
-        self.gols_time_1 = 0
-        self.gols_time_2 = 0
-        if len(placar) == 2:
-            self.gols_time_1 = placar[0]
-            self.gols_time_2 = placar[1]
+    def __init__(self, gols_time_1=0, gols_time_2=0, status="Tá Indo"):
+        self.gols_time_1 = gols_time_1
+        self.gols_time_2 = gols_time_2
         self.realizada = status == 'Finished'
 
 
@@ -71,6 +68,20 @@ def obter_rodada(partida):
     return "3"
 
 
+def obtem_placar_do_html(pagina_resultado, partida):
+    equipes = pagina_resultado.cssselect(".nome-equipe")
+    gols_time_1 = None
+    gols_time_2 = None
+    for equipe in equipes:
+        if equipe.text == partida.time_1.abreviatura:
+            gols_time_1 = equipe.getparent().getparent().cssselect(".placar-mandante")[0].text
+        elif equipe.text == partida.time_2.abreviatura:
+            gols_time_2 = equipe.getparent().getparent().cssselect(".placar-visitante")[0].text
+    if not gols_time_1 is None and not gols_time_2 is None:
+        return InformacoesDePartida(gols_time_1, gols_time_2)
+    return None
+
+
 def obter_informacoes_da_partida_em_jogo(partida):
     try:
         url = settings.URL_BASE_DE_RESULTADOS
@@ -83,17 +94,7 @@ def obter_informacoes_da_partida_em_jogo(partida):
     if pagina_resultado is None:
         return None
 
-    equipes = pagina_resultado.cssselect(".nome-equipe")
-    placar = []
-    for equipe in equipes:
-        if equipe.text == partida.time_1.abreviatura:
-            placar.append(equipe.getparent().getparent().cssselect(".placar-mandante").text)
-        elif equipe.text == partida.time_2.abreviatura:
-            placar.append(equipe.getparent().getparent().cssselect(".placar-visitante").text)
-
-    if placar:
-        return InformacoesDePartida(placar)
-    return None
+    return obtem_placar_do_html(pagina_resultado, partida)
 
 
 def obtem_times_de_partida_de_outras_fases(regra):

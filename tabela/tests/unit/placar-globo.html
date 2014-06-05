@@ -1,0 +1,34 @@
+{% for partida in partidas %}
+<li itemscope itemtype="http://schema.org/SportsEvent" >
+	<meta itemprop="name" content="{{ partida.formatado_para_placar }}" />
+	<div class="infos-primarias sem-placar">
+		<div class="equipe equipe-mandante" itemprop="performer" itemscope itemtype="http://schema.org/SportsTeam">
+			<meta itemprop="name" content="Camarões" />
+			<span class="nome-equipe">{{ partida.time_1.abreviatura }}</span>
+			<div class="escudo-pequeno">
+				<img itemprop="image" src="http://s.glbimg.com/es/sde/f/organizacoes/2014/05/30/blah_30x30.png" width="30" height="30" alt="{{ partida.time_1.nome }}" title="{{ partida.time_1.nome }}" >
+			</div>
+		</div>
+		<div class="placar">
+			<span class="placar-equipe placar-mandante">{{ partida.gols_time_1 }}</span>
+			<span class="sprite-sprite_08"></span>
+			<span class="placar-equipe placar-visitante">{{ partida.gols_time_2 }}</span>
+		</div>
+		<div class="equipe equipe-visitante" itemprop="performer" itemscope itemtype="http://schema.org/SportsTeam">
+			<div class="escudo-pequeno">
+				<img itemprop="image" src="http://s.glbimg.com/es/sde/f/equipes/2014/06/04/blah_30x30_1.png" width="30" height="30" alt="{{ partida.time_2.nome }}" title="{{ partida.time_2.nome }}" >
+			</div>
+			<meta itemprop="name" content="Brasil" />
+			<span class="nome-equipe">{{ partida.time_2.abreviatura }}</span>
+		</div>
+	</div>
+	<div class="infos-extra">
+		<div class="data-local">
+			<span><meta itemprop="startDate" content="2014-06-23">Seg 23/06/2014 - 17:00</span>
+			<span>Mané Garrincha</span>
+		</div>
+		<span class="label label-confronto">veja como foi</span>
+		<span class="label label-tr">acompanhe em tempo real</span>
+	</div>
+</li>
+{% endfor %}

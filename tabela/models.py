@@ -102,6 +102,9 @@ class Partida(models.Model):
         verbose_name_plural = 'Partidas'
         db_table = 'partidas'
 
+    def formatado_para_placar(self):
+        return "{} x {}".format(self.time_1.nome, self.time_2.nome)
+
     def __unicode__(self):
         formato_data = '%a %d %B - %H:%M'
         situacao = "Realizada" if self.realizada else u"Não realizada"
