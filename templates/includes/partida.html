@@ -65,7 +65,7 @@
                                 {% if not partida.realizada and not partida.em_andamento %}
                             <div class="placar-palpite">
                                 {% if partida.time_1 and partida.time_2 %}
-                                <h4 class="resultado-simulado">Dar um palpite</h4>
+                                <h4 class="resultado-palpite">Dar um palpite</h4>
                                 {% endif %}
                                 <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal" role="form">
                                     {% csrf_token %}

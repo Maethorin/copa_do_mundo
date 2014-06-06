@@ -61,16 +61,6 @@
                 </a>
             </div>
             <div class="col-md-6 text-center">
-                <!-- Copa do Mundo Responsive -->
-{#                <ins class="adsbygoogle"#}
-{#                     style="display:block"#}
-{#                     data-ad-client="ca-pub-8167110538900295"#}
-{#                     data-ad-slot="4410258051"#}
-{#                     data-ad-format="auto"></ins>#}
-{#                <script>#}
-{#                    (adsbygoogle = window.adsbygoogle || []).push({});#}
-{#                </script>#}
-
             </div>
             <div class="col-md-3 pagina"><h1>{{ titulo_da_pagina }}</h1></div>
         </div>
@@ -99,25 +89,37 @@
     </div>
     <div class="container-fluid">
         <div class="row conteudo flex">
-            <div class="col-md-1 lateral esquerdo fundo-grama">
-                <div class="bola"></div>
+            <div class="col-md-2 lateral esquerdo fundo-grama">
+                <div class="andamento">
+                </div>
+                <div class="ad-sense fundo-grama">
+                    <ins class="adsbygoogle"
+                         style="display:block;"
+                         data-ad-client="ca-pub-8167110538900295"
+                         data-ad-slot="7420975388"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
-            <div class="col-md-9 central {{ css_fundo }}">
+            <div class="col-md-8 central {{ css_fundo }}">
                 {% block conteudo %}
                 {% endblock conteudo %}
             </div>
-            <div class="col-md-1 lateral direito fundo-grama">
-                <div class="bola"></div>
-            </div>
-            <div class="col-md-1 ad-sense fundo-grama">
-{#                <ins class="adsbygoogle"#}
-{#                     style="display:block;"#}
-{#                     data-ad-client="ca-pub-8167110538900295"#}
-{#                     data-ad-slot="7420975388"#}
-{#                     data-ad-format="auto"></ins>#}
-{#                <script>#}
-{#                    (adsbygoogle = window.adsbygoogle || []).push({});#}
-{#                </script>#}
+            <div class="col-md-2 lateral direito fundo-grama">
+                <div class="proximas">
+                </div>
+                <div class="ad-sense fundo-grama">
+                    <ins class="adsbygoogle"
+                         style="display:block;"
+                         data-ad-client="ca-pub-8167110538900295"
+                         data-ad-slot="7420975388"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
         </div>
         <div class="row social fundo-grama">
@@ -162,11 +164,11 @@
     <script type="text/javascript" src="{% static 'js/jquery-ui-1.10.4.custom.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
-{#    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
 
     <script type="text/javascript" src="{% static 'js/geral.js' %}"></script>
     {% block js %}
     {% endblock js %}
 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </body>
 </html>

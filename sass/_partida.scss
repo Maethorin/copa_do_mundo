@@ -1,7 +1,7 @@
 .partida {
-  width: 95%;
+  width: 100%;
   float: left;
-  margin: 20px 10px;
+  margin-top: 20px;
   display: none;
   .panel-body {
     padding-top: 0;
@@ -74,22 +74,33 @@ input[type=number] {
   background-color: $verde-claro;
 }
 
+.resultado-palpite {
+  background-color: $gray-lighter;
+  margin: 0 -13px 0;
+  padding: 4px 0;
+}
+
 .resultado-simulado {
   background-color: $gray-lighter;
-  margin: 0 -14px 0 -14px;
+  margin: 0 -6px 0;
   padding: 4px 0;
 }
 
 .resultado-real {
   background-color: $gray-lighter;
   padding: 4px 0;
-  margin: 0 -14px 4px;
+  margin: 0 -3px 4px;
 }
 
-.placar-final, .placar-simulado, .placar-palpite {
+.campos-palpite, .placar-final, .placar-simulado, .placar-palpite {
   margin-top: 15px;
 }
 
-.campos-palpite {
-  margin-top: 10px;
+.campos-palpite, .placar-final, .placar-simulado {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.abreviatura {
+  font-size: 12px;
 }

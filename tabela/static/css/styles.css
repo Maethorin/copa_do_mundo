@@ -7965,27 +7965,19 @@ footer .logo {
 }
 
 /* line 63, ../../../sass/_base.scss */
-.grupos {
-  background-image: url(../img/fundo-grupos.jpg), linear-gradient(#ddffdd, #559955, #559955, #559955, #559955, #c0efc0);
-  background-repeat: no-repeat;
-  background-position: center center;
-  overflow: hidden;
-}
-
-/* line 70, ../../../sass/_base.scss */
 .oitavas, .quartas, .semifinais, .terceiro_lugar, .final {
   background-image: url(../img/fundo-fases.jpg), linear-gradient(#ddffdd, #559955, #559955, #559955, #559955, #c0efc0);
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-/* line 76, ../../../sass/_base.scss */
+/* line 69, ../../../sass/_base.scss */
 .central {
   padding: 20px 20px 0 20px;
   min-height: 670px;
 }
 
-/* line 81, ../../../sass/_base.scss */
+/* line 74, ../../../sass/_base.scss */
 .bola {
   cursor: pointer;
   background-image: url("../img/bola.png");
@@ -7996,12 +7988,12 @@ footer .logo {
   margin-right: auto;
 }
 
-/* line 91, ../../../sass/_base.scss */
+/* line 84, ../../../sass/_base.scss */
 .ad-sense {
-  padding: 10px 5px;
+  padding: 10px 0;
 }
 
-/* line 95, ../../../sass/_base.scss */
+/* line 88, ../../../sass/_base.scss */
 .introducao {
   margin-bottom: 20px;
   background-color: rgba(0, 0, 0, 0.4);
@@ -8009,18 +8001,18 @@ footer .logo {
   position: relative;
   top: -75px;
 }
-/* line 101, ../../../sass/_base.scss */
+/* line 94, ../../../sass/_base.scss */
 .introducao .texto {
   display: none;
 }
-/* line 104, ../../../sass/_base.scss */
+/* line 97, ../../../sass/_base.scss */
 .introducao p {
   margin: 16px 0;
   color: #EFEFEF;
   font-size: 14px;
 }
 
-/* line 111, ../../../sass/_base.scss */
+/* line 104, ../../../sass/_base.scss */
 .flex {
   display: -webkit-box;
   display: -moz-box;
@@ -8030,12 +8022,12 @@ footer .logo {
   flex: 1 0 auto;
 }
 
-/* line 120, ../../../sass/_base.scss */
+/* line 113, ../../../sass/_base.scss */
 .social {
   border-top: 1px solid #265926;
 }
 
-/* line 124, ../../../sass/_base.scss */
+/* line 117, ../../../sass/_base.scss */
 .branco {
   background-color: rgba(255, 255, 255, 0.6);
   padding: 5px 0;
@@ -8043,21 +8035,21 @@ footer .logo {
   min-height: 43px;
 }
 
-/* line 131, ../../../sass/_base.scss */
+/* line 124, ../../../sass/_base.scss */
 .slide-up {
   cursor: pointer;
 }
-/* line 133, ../../../sass/_base.scss */
+/* line 126, ../../../sass/_base.scss */
 .slide-up:hover {
   background-color: #006700;
 }
 
-/* line 140, ../../../sass/_base.scss */
+/* line 133, ../../../sass/_base.scss */
 .partidas-index .col-md-6 {
   position: relative;
   height: 60px;
 }
-/* line 144, ../../../sass/_base.scss */
+/* line 137, ../../../sass/_base.scss */
 .partidas-index .painel {
   position: absolute;
   left: 5.2%;
@@ -8065,46 +8057,46 @@ footer .logo {
   bottom: -52px;
   display: none;
 }
-/* line 150, ../../../sass/_base.scss */
+/* line 143, ../../../sass/_base.scss */
 .partidas-index .painel .corpo-painel {
   display: none;
   color: #EFEFEF;
   height: 300px;
 }
 
-/* line 158, ../../../sass/_base.scss */
+/* line 151, ../../../sass/_base.scss */
 .aberto {
   height: 400px;
 }
 
-/* line 162, ../../../sass/_base.scss */
+/* line 155, ../../../sass/_base.scss */
 .barras, .barras-baixo {
-  width: 50%;
+  width: 55%;
   margin-bottom: -30px;
   height: 45px;
   position: relative;
   top: -105px;
-  left: 25%;
+  left: 22.5%;
   border-width: 0 15px;
   border-style: solid;
   border-image: linear-gradient(to left, #000000, #aaaaaa) 1 100%;
 }
 
-/* line 174, ../../../sass/_base.scss */
+/* line 167, ../../../sass/_base.scss */
 .barras-baixo {
   top: 66px;
   height: 60px;
   display: none;
 }
 
-/* line 180, ../../../sass/_base.scss */
+/* line 173, ../../../sass/_base.scss */
 .painel {
   background-color: rgba(0, 0, 0, 0.4);
   border-width: 4px;
   border-style: solid;
   border-color: #9A9A9A;
 }
-/* line 185, ../../../sass/_base.scss */
+/* line 178, ../../../sass/_base.scss */
 .painel h3 {
   background-color: green;
   margin: -9px;
@@ -8116,9 +8108,9 @@ footer .logo {
 
 /* line 1, ../../../sass/_partida.scss */
 .partida {
-  width: 95%;
+  width: 100%;
   float: left;
-  margin: 20px 10px;
+  margin-top: 20px;
   display: none;
 }
 /* line 6, ../../../sass/_partida.scss */
@@ -8211,27 +8203,40 @@ input[type=number] {
 }
 
 /* line 77, ../../../sass/_partida.scss */
-.resultado-simulado {
+.resultado-palpite {
   background-color: #eeeeee;
-  margin: 0 -14px 0 -14px;
+  margin: 0 -13px 0;
   padding: 4px 0;
 }
 
 /* line 83, ../../../sass/_partida.scss */
-.resultado-real {
+.resultado-simulado {
   background-color: #eeeeee;
+  margin: 0 -6px 0;
   padding: 4px 0;
-  margin: 0 -14px 4px;
 }
 
 /* line 89, ../../../sass/_partida.scss */
-.placar-final, .placar-simulado, .placar-palpite {
+.resultado-real {
+  background-color: #eeeeee;
+  padding: 4px 0;
+  margin: 0 -3px 4px;
+}
+
+/* line 95, ../../../sass/_partida.scss */
+.campos-palpite, .placar-final, .placar-simulado, .placar-palpite {
   margin-top: 15px;
 }
 
-/* line 93, ../../../sass/_partida.scss */
-.campos-palpite {
-  margin-top: 10px;
+/* line 99, ../../../sass/_partida.scss */
+.campos-palpite, .placar-final, .placar-simulado {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+/* line 104, ../../../sass/_partida.scss */
+.abreviatura {
+  font-size: 12px;
 }
 
 /* line 1, ../../../sass/_bandeiras.scss */
@@ -8409,61 +8414,73 @@ input[type=number] {
 }
 
 /* line 1, ../../../sass/_classificacao.scss */
+.grupos {
+  background-image: url(../img/fundo-grupos.jpg), linear-gradient(#ddffdd, #559955, #559955, #559955, #559955, #c0efc0);
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+}
+/* line 6, ../../../sass/_classificacao.scss */
+.grupos .col-md-4 {
+  padding: 0 8px;
+}
+
+/* line 11, ../../../sass/_classificacao.scss */
 .classificacao {
   overflow: hidden;
 }
 
-/* line 5, ../../../sass/_classificacao.scss */
+/* line 15, ../../../sass/_classificacao.scss */
 .classificacoes {
   background-color: #eeeeee;
 }
-/* line 7, ../../../sass/_classificacao.scss */
+/* line 17, ../../../sass/_classificacao.scss */
 .classificacoes .desclassificado {
   background-color: #e58886;
 }
-/* line 10, ../../../sass/_classificacao.scss */
+/* line 20, ../../../sass/_classificacao.scss */
 .classificacoes .primeiro {
   background-color: #8acc8a;
 }
-/* line 13, ../../../sass/_classificacao.scss */
+/* line 23, ../../../sass/_classificacao.scss */
 .classificacoes .segundo {
   background-color: #92d5e9;
 }
-/* line 16, ../../../sass/_classificacao.scss */
+/* line 26, ../../../sass/_classificacao.scss */
 .classificacoes .posicao {
   width: 1%;
 }
-/* line 19, ../../../sass/_classificacao.scss */
+/* line 29, ../../../sass/_classificacao.scss */
 .classificacoes .pontos, .classificacoes .jogos, .classificacoes .vitorias, .classificacoes .empates, .classificacoes .derrotas, .classificacoes .gols-feitos, .classificacoes .gols-tomados, .classificacoes .saldo-de-gols, .classificacoes .aproveitamento {
   width: 8%;
 }
-/* line 22, ../../../sass/_classificacao.scss */
+/* line 32, ../../../sass/_classificacao.scss */
 .classificacoes .label {
   padding: 1px 8%;
 }
 
-/* line 27, ../../../sass/_classificacao.scss */
+/* line 37, ../../../sass/_classificacao.scss */
 .label-gols-pro {
   background-color: #449d44;
 }
 
-/* line 30, ../../../sass/_classificacao.scss */
+/* line 40, ../../../sass/_classificacao.scss */
 .label-gols-contra {
   background-color: #c9302c;
 }
 
-/* line 34, ../../../sass/_classificacao.scss */
+/* line 44, ../../../sass/_classificacao.scss */
 .tabela-classificacao {
   position: relative;
   top: -85px;
 }
-/* line 37, ../../../sass/_classificacao.scss */
+/* line 47, ../../../sass/_classificacao.scss */
 .tabela-classificacao .corpo {
   display: none;
   margin-top: 25px;
 }
 
-/* line 43, ../../../sass/_classificacao.scss */
+/* line 53, ../../../sass/_classificacao.scss */
 .legenda {
   margin-top: 5px;
   background-color: #eeeeee;

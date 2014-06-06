@@ -1,23 +1,23 @@
     {% if final %}
-                                {{ partida.time_1.abreviatura|default:"NDF" }}
+                                <span class="abreviatura">{{ partida.time_1.abreviatura|default:"NDF" }}</span>
                                 <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
                                 <span class="gols">{{partida.gols_time_1|default:0}}</span>
                                 X
                                 <span class="gols">{{partida.gols_time_2|default:0}}</span>
                                 <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
-                                {{ partida.time_2.abreviatura|default:"NDF" }}
+                                <span class="abreviatura">{{ partida.time_2.abreviatura|default:"NDF" }}</span>
 
     {% elif simulado %}
 
-                                {{ partida.time_1.abreviatura|default:"NDF" }}
+                                <span class="abreviatura">{{ partida.time_1.abreviatura|default:"NDF" }}</span>
                                 <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
                                 <span class="gols time_1">{{partida.media_palpites_time_1}}</span>
                                 X
                                 <span class="gols time_2">{{partida.media_palpites_time_2}}</span>
                                 <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
-                                {{ partida.time_2.abreviatura|default:"NDF" }}
+                                <span class="abreviatura">{{ partida.time_2.abreviatura|default:"NDF" }}</span>
     {% else %}
-                                    {{ partida.time_1.abreviatura|default:"NDF" }}
+                                    <span class="abreviatura">{{ partida.time_1.abreviatura|default:"NDF" }}</span>
                                     <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
                                     <div class="palpite">
                                         <input class="form-control input-sm" placeholder="0" type="number" name="time_1" min="0" max="9" />
@@ -27,5 +27,5 @@
                                         <input class="form-control input-sm" placeholder="0" type="number" name="time_2" min="0" max="9" />
                                     </div>
                                     <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
-                                    {{ partida.time_2.abreviatura|default:"NDF" }}
+                                    <span class="abreviatura">{{ partida.time_2.abreviatura|default:"NDF" }}</span>
     {% endif %}
