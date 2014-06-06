@@ -7893,91 +7893,88 @@ button.close {
     display: none !important;
   }
 }
-/* line 1, ../../../sass/_base.scss */
+/* line 1, ../sass/_base.scss */
 body {
   padding: 0 0 50px 0;
   font-family: 'Arvo', serif;
 }
 
-/* line 6, ../../../sass/_base.scss */
+/* line 6, ../sass/_base.scss */
 .titulo {
   background: url("../img/logo-simulacopa.png") no-repeat;
   width: 260px;
   height: 95px;
 }
 
-/* line 12, ../../../sass/_base.scss */
+/* line 12, ../sass/_base.scss */
 .pagina {
   color: #EFEFEF;
   font-weight: bold;
 }
-/* line 15, ../../../sass/_base.scss */
+/* line 15, ../sass/_base.scss */
 .pagina h1 {
   font-size: 43px;
 }
 
-/* line 20, ../../../sass/_base.scss */
+/* line 20, ../sass/_base.scss */
 footer {
   font-size: 10px;
 }
-/* line 22, ../../../sass/_base.scss */
+/* line 22, ../sass/_base.scss */
 footer .logo {
   padding: 8px;
 }
 
 @media (max-width: 768px) {
-  /* line 29, ../../../sass/_base.scss */
+  /* line 29, ../sass/_base.scss */
   .conteudo .esquerdo, .conteudo .direito {
     display: none;
   }
 }
-/* line 35, ../../../sass/_base.scss */
+/* line 35, ../sass/_base.scss */
 .fundo-grama {
-  background-image: url(../img/grama.jpg);
+  background-image: url(../img/grama2.jpg);
 }
 
-/* line 39, ../../../sass/_base.scss */
+/* line 39, ../sass/_base.scss */
+.fundo-grama3 {
+  background-image: url(../img/grama3.jpg);
+}
+
+/* line 43, ../sass/_base.scss */
 .cabecalho {
   background-color: #90f490;
   padding: 10px 0;
   border-bottom: 1px solid #265926;
 }
-/* line 43, ../../../sass/_base.scss */
+/* line 47, ../sass/_base.scss */
 .cabecalho div[class] {
   background-color: rgba(0, 128, 0, 0.5);
   padding: 5px 10px;
 }
 
-/* line 49, ../../../sass/_base.scss */
+/* line 53, ../sass/_base.scss */
 .inicial, .classificacao {
-  background-image: url(../img/fundo-inicial.jpg), linear-gradient(#ddffdd, #559955, #559955, #559955, #559955, #c0efc0);
+  background-image: url(../img/fundo-classificacao.jpg), linear-gradient(#6ba025, #558812, #558812, #558812, #558812, #6ba025);
   background-repeat: no-repeat;
   background-position: center center;
-  overflow: hidden;
+  overflow: auto;
 }
 
-/* line 56, ../../../sass/_base.scss */
-.classificacao {
-  background-image: url(../img/fundo-classificacao.jpg), linear-gradient(#ddffdd, #559955, #559955, #559955, #559955, #c0efc0);
-  background-repeat: no-repeat;
-  background-position: center center;
-  overflow: hidden;
-}
-
-/* line 63, ../../../sass/_base.scss */
+/* line 60, ../sass/_base.scss */
 .oitavas, .quartas, .semifinais, .terceiro_lugar, .final {
-  background-image: url(../img/fundo-fases.jpg), linear-gradient(#ddffdd, #559955, #559955, #559955, #559955, #c0efc0);
+  background-image: url(../img/fundo-central.jpg), linear-gradient(#6ba025, #558812, #558812, #558812, #558812, #6ba025);
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: 30;
 }
 
-/* line 69, ../../../sass/_base.scss */
+/* line 66, ../sass/_base.scss */
 .central {
   padding: 20px 20px 0 20px;
-  min-height: 670px;
+  height: 650px;
 }
 
-/* line 74, ../../../sass/_base.scss */
+/* line 71, ../sass/_base.scss */
 .bola {
   cursor: pointer;
   background-image: url("../img/bola.png");
@@ -7988,31 +7985,31 @@ footer .logo {
   margin-right: auto;
 }
 
-/* line 84, ../../../sass/_base.scss */
+/* line 81, ../sass/_base.scss */
 .ad-sense {
   padding: 10px 0;
 }
 
-/* line 88, ../../../sass/_base.scss */
+/* line 85, ../sass/_base.scss */
 .introducao {
   margin-bottom: 20px;
   background-color: rgba(0, 0, 0, 0.4);
   overflow: hidden;
   position: relative;
-  top: -75px;
+  top: -85px;
 }
-/* line 94, ../../../sass/_base.scss */
+/* line 91, ../sass/_base.scss */
 .introducao .texto {
   display: none;
 }
-/* line 97, ../../../sass/_base.scss */
+/* line 94, ../sass/_base.scss */
 .introducao p {
   margin: 16px 0;
   color: #EFEFEF;
   font-size: 14px;
 }
 
-/* line 104, ../../../sass/_base.scss */
+/* line 101, ../sass/_base.scss */
 .flex {
   display: -webkit-box;
   display: -moz-box;
@@ -8022,12 +8019,12 @@ footer .logo {
   flex: 1 0 auto;
 }
 
-/* line 113, ../../../sass/_base.scss */
+/* line 110, ../sass/_base.scss */
 .social {
   border-top: 1px solid #265926;
 }
 
-/* line 117, ../../../sass/_base.scss */
+/* line 114, ../sass/_base.scss */
 .branco {
   background-color: rgba(255, 255, 255, 0.6);
   padding: 5px 0;
@@ -8035,21 +8032,21 @@ footer .logo {
   min-height: 43px;
 }
 
-/* line 124, ../../../sass/_base.scss */
+/* line 121, ../sass/_base.scss */
 .slide-up {
   cursor: pointer;
 }
-/* line 126, ../../../sass/_base.scss */
+/* line 123, ../sass/_base.scss */
 .slide-up:hover {
   background-color: #006700;
 }
 
-/* line 133, ../../../sass/_base.scss */
+/* line 130, ../sass/_base.scss */
 .partidas-index .col-md-6 {
   position: relative;
   height: 60px;
 }
-/* line 137, ../../../sass/_base.scss */
+/* line 134, ../sass/_base.scss */
 .partidas-index .painel {
   position: absolute;
   left: 5.2%;
@@ -8057,19 +8054,19 @@ footer .logo {
   bottom: -52px;
   display: none;
 }
-/* line 143, ../../../sass/_base.scss */
+/* line 140, ../sass/_base.scss */
 .partidas-index .painel .corpo-painel {
   display: none;
   color: #EFEFEF;
   height: 300px;
 }
 
-/* line 151, ../../../sass/_base.scss */
+/* line 148, ../sass/_base.scss */
 .aberto {
   height: 400px;
 }
 
-/* line 155, ../../../sass/_base.scss */
+/* line 152, ../sass/_base.scss */
 .barras, .barras-baixo {
   width: 55%;
   margin-bottom: -30px;
@@ -8082,21 +8079,21 @@ footer .logo {
   border-image: linear-gradient(to left, #000000, #aaaaaa) 1 100%;
 }
 
-/* line 167, ../../../sass/_base.scss */
+/* line 164, ../sass/_base.scss */
 .barras-baixo {
   top: 66px;
   height: 60px;
   display: none;
 }
 
-/* line 173, ../../../sass/_base.scss */
+/* line 170, ../sass/_base.scss */
 .painel {
   background-color: rgba(0, 0, 0, 0.4);
   border-width: 4px;
   border-style: solid;
   border-color: #9A9A9A;
 }
-/* line 178, ../../../sass/_base.scss */
+/* line 175, ../sass/_base.scss */
 .painel h3 {
   background-color: green;
   margin: -9px;
@@ -8106,27 +8103,27 @@ footer .logo {
   top: 0;
 }
 
-/* line 1, ../../../sass/_partida.scss */
+/* line 1, ../sass/_partida.scss */
 .partida {
   width: 100%;
   float: left;
   margin-top: 20px;
   display: none;
 }
-/* line 6, ../../../sass/_partida.scss */
+/* line 6, ../sass/_partida.scss */
 .partida .panel-body {
   padding-top: 0;
 }
 
-/* line 15, ../../../sass/_partida.scss */
+/* line 15, ../sass/_partida.scss */
 .oitavas,
 .quartas,
 .semifinais,
 .terceiro_lugar,
 .final {
-  overflow: hidden;
+  overflow: auto;
 }
-/* line 17, ../../../sass/_partida.scss */
+/* line 17, ../sass/_partida.scss */
 .oitavas .partida,
 .quartas .partida,
 .semifinais .partida,
@@ -8134,7 +8131,7 @@ footer .logo {
 .final .partida {
   display: none;
 }
-/* line 20, ../../../sass/_partida.scss */
+/* line 20, ../sass/_partida.scss */
 .oitavas .rodada,
 .quartas .rodada,
 .semifinais .rodada,
@@ -8143,16 +8140,16 @@ footer .logo {
   top: -165px;
 }
 
-/* line 26, ../../../sass/_partida.scss */
+/* line 26, ../sass/_partida.scss */
 .oitavas .barras {
   top: -190px;
 }
-/* line 29, ../../../sass/_partida.scss */
+/* line 29, ../sass/_partida.scss */
 .oitavas .baixo {
   top: -170px;
 }
 
-/* line 34, ../../../sass/_partida.scss */
+/* line 34, ../sass/_partida.scss */
 .rodada {
   text-align: center;
   overflow: hidden;
@@ -8161,23 +8158,23 @@ footer .logo {
   top: -70px;
 }
 
-/* line 42, ../../../sass/_partida.scss */
+/* line 42, ../sass/_partida.scss */
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* line 47, ../../../sass/_partida.scss */
+/* line 47, ../sass/_partida.scss */
 input[type=number] {
   -moz-appearance: textfield;
 }
 
-/* line 51, ../../../sass/_partida.scss */
+/* line 51, ../sass/_partida.scss */
 .palpite {
   width: 28px;
   display: inline-block;
 }
-/* line 54, ../../../sass/_partida.scss */
+/* line 54, ../sass/_partida.scss */
 .palpite input {
   padding: 5px 7px;
   font-family: 'Graduate', cursive;
@@ -8186,12 +8183,12 @@ input[type=number] {
   height: 37px;
 }
 
-/* line 63, ../../../sass/_partida.scss */
+/* line 63, ../sass/_partida.scss */
 .botao-palpite {
   margin-top: 10px;
 }
 
-/* line 67, ../../../sass/_partida.scss */
+/* line 67, ../sass/_partida.scss */
 .gols {
   padding: 2px 4px;
   border-radius: 3px;
@@ -8202,44 +8199,44 @@ input[type=number] {
   background-color: #ddffdd;
 }
 
-/* line 77, ../../../sass/_partida.scss */
+/* line 77, ../sass/_partida.scss */
 .resultado-palpite {
   background-color: #eeeeee;
   margin: 0 -13px 0;
   padding: 4px 0;
 }
 
-/* line 83, ../../../sass/_partida.scss */
+/* line 83, ../sass/_partida.scss */
 .resultado-simulado {
   background-color: #eeeeee;
   margin: 0 -6px 0;
   padding: 4px 0;
 }
 
-/* line 89, ../../../sass/_partida.scss */
+/* line 89, ../sass/_partida.scss */
 .resultado-real {
   background-color: #eeeeee;
   padding: 4px 0;
   margin: 0 -3px 4px;
 }
 
-/* line 95, ../../../sass/_partida.scss */
+/* line 95, ../sass/_partida.scss */
 .campos-palpite, .placar-final, .placar-simulado, .placar-palpite {
   margin-top: 15px;
 }
 
-/* line 99, ../../../sass/_partida.scss */
+/* line 99, ../sass/_partida.scss */
 .campos-palpite, .placar-final, .placar-simulado {
   margin-left: -10px;
   margin-right: -10px;
 }
 
-/* line 104, ../../../sass/_partida.scss */
+/* line 104, ../sass/_partida.scss */
 .abreviatura {
   font-size: 12px;
 }
 
-/* line 1, ../../../sass/_bandeiras.scss */
+/* line 1, ../sass/_bandeiras.scss */
 .bandeira {
   background-image: url("../img/sprite_bandeiras25_copa.png");
   width: 25px;
@@ -8248,239 +8245,239 @@ input[type=number] {
   vertical-align: middle;
 }
 
-/* line 9, ../../../sass/_bandeiras.scss */
+/* line 9, ../sass/_bandeiras.scss */
 .br {
   background-position: -35px -210px;
 }
 
-/* line 13, ../../../sass/_bandeiras.scss */
+/* line 13, ../sass/_bandeiras.scss */
 .cr {
   background-position: -70px -35px;
 }
 
-/* line 17, ../../../sass/_bandeiras.scss */
+/* line 17, ../sass/_bandeiras.scss */
 .me {
   background-position: -140px -245px;
 }
 
-/* line 21, ../../../sass/_bandeiras.scss */
+/* line 21, ../sass/_bandeiras.scss */
 .ca {
   background-position: -245px -280px;
 }
 
-/* line 25, ../../../sass/_bandeiras.scss */
+/* line 25, ../sass/_bandeiras.scss */
 .es {
   background-position: -245px -35px;
 }
 
-/* line 29, ../../../sass/_bandeiras.scss */
+/* line 29, ../sass/_bandeiras.scss */
 .ho {
   background-position: -105px -70px;
 }
 
-/* line 33, ../../../sass/_bandeiras.scss */
+/* line 33, ../sass/_bandeiras.scss */
 .ch {
   background-position: -105px -210px;
 }
 
-/* line 37, ../../../sass/_bandeiras.scss */
+/* line 37, ../sass/_bandeiras.scss */
 .au {
   background-position: 0px -420px;
 }
 
-/* line 41, ../../../sass/_bandeiras.scss */
+/* line 41, ../sass/_bandeiras.scss */
 .co {
   background-position: -140px -210px;
 }
 
-/* line 45, ../../../sass/_bandeiras.scss */
+/* line 45, ../sass/_bandeiras.scss */
 .gr {
   background-position: -70px -70px;
 }
 
-/* line 49, ../../../sass/_bandeiras.scss */
+/* line 49, ../sass/_bandeiras.scss */
 .cm {
   background-position: 0px -315px;
 }
 
-/* line 53, ../../../sass/_bandeiras.scss */
+/* line 53, ../sass/_bandeiras.scss */
 .ja {
   background-position: -140px -420px;
 }
 
-/* line 57, ../../../sass/_bandeiras.scss */
+/* line 57, ../sass/_bandeiras.scss */
 .ur {
   background-position: -280px -210px;
 }
 
-/* line 61, ../../../sass/_bandeiras.scss */
+/* line 61, ../sass/_bandeiras.scss */
 .cs {
   background-position: -35px -245px;
 }
 
-/* line 65, ../../../sass/_bandeiras.scss */
+/* line 65, ../sass/_bandeiras.scss */
 .in {
   background-position: -175px -70px;
 }
 
-/* line 69, ../../../sass/_bandeiras.scss */
+/* line 69, ../sass/_bandeiras.scss */
 .it {
   background-position: 0px -105px;
 }
 
-/* line 73, ../../../sass/_bandeiras.scss */
+/* line 73, ../sass/_bandeiras.scss */
 .su {
   background-position: -280px -140px;
 }
 
-/* line 77, ../../../sass/_bandeiras.scss */
+/* line 77, ../sass/_bandeiras.scss */
 .eq {
   background-position: -175px -210px;
 }
 
-/* line 81, ../../../sass/_bandeiras.scss */
+/* line 81, ../sass/_bandeiras.scss */
 .fr {
   background-position: 0px -70px;
 }
 
-/* line 85, ../../../sass/_bandeiras.scss */
+/* line 85, ../sass/_bandeiras.scss */
 .hn {
   background-position: -70px -245px;
 }
 
-/* line 89, ../../../sass/_bandeiras.scss */
+/* line 89, ../sass/_bandeiras.scss */
 .ar {
   background-position: 0px -210px;
 }
 
-/* line 93, ../../../sass/_bandeiras.scss */
+/* line 93, ../sass/_bandeiras.scss */
 .bo {
   background-position: -280px 0px;
 }
 
-/* line 97, ../../../sass/_bandeiras.scss */
+/* line 97, ../sass/_bandeiras.scss */
 .ir {
   background-position: -70px -420px;
 }
 
-/* line 101, ../../../sass/_bandeiras.scss */
+/* line 101, ../sass/_bandeiras.scss */
 .ng {
   background-position: -245px -350px;
 }
 
-/* line 105, ../../../sass/_bandeiras.scss */
+/* line 105, ../sass/_bandeiras.scss */
 .al {
   background-position: -35px 0px;
 }
 
-/* line 109, ../../../sass/_bandeiras.scss */
+/* line 109, ../sass/_bandeiras.scss */
 .po {
   background-position: -70px -140px;
 }
 
-/* line 113, ../../../sass/_bandeiras.scss */
+/* line 113, ../sass/_bandeiras.scss */
 .ga {
   background-position: -175px -315px;
 }
 
-/* line 117, ../../../sass/_bandeiras.scss */
+/* line 117, ../sass/_bandeiras.scss */
 .eu {
   background-position: 0px -245px;
 }
 
-/* line 121, ../../../sass/_bandeiras.scss */
+/* line 121, ../sass/_bandeiras.scss */
 .be {
   background-position: -245px 0px;
 }
 
-/* line 125, ../../../sass/_bandeiras.scss */
+/* line 125, ../sass/_bandeiras.scss */
 .ag {
   background-position: -70px -280px;
 }
 
-/* line 129, ../../../sass/_bandeiras.scss */
+/* line 129, ../sass/_bandeiras.scss */
 .ru {
   background-position: -175px -140px;
 }
 
-/* line 133, ../../../sass/_bandeiras.scss */
+/* line 133, ../sass/_bandeiras.scss */
 .cd {
   background-position: -35px -420px;
 }
 
-/* line 137, ../../../sass/_bandeiras.scss */
+/* line 137, ../sass/_bandeiras.scss */
 .ndf {
   background-position: -35px -455px;
 }
 
-/* line 1, ../../../sass/_classificacao.scss */
+/* line 1, ../sass/_classificacao.scss */
 .grupos {
-  background-image: url(../img/fundo-grupos.jpg), linear-gradient(#ddffdd, #559955, #559955, #559955, #559955, #c0efc0);
+  background-image: url(../img/fundo-central.jpg), linear-gradient(#6ba025, #558812, #558812, #558812, #558812, #6ba025);
   background-repeat: no-repeat;
   background-position: center center;
   overflow: hidden;
 }
-/* line 6, ../../../sass/_classificacao.scss */
+/* line 6, ../sass/_classificacao.scss */
 .grupos .col-md-4 {
   padding: 0 8px;
 }
 
-/* line 11, ../../../sass/_classificacao.scss */
+/* line 11, ../sass/_classificacao.scss */
 .classificacao {
   overflow: hidden;
 }
 
-/* line 15, ../../../sass/_classificacao.scss */
+/* line 15, ../sass/_classificacao.scss */
 .classificacoes {
   background-color: #eeeeee;
 }
-/* line 17, ../../../sass/_classificacao.scss */
+/* line 17, ../sass/_classificacao.scss */
 .classificacoes .desclassificado {
   background-color: #e58886;
 }
-/* line 20, ../../../sass/_classificacao.scss */
+/* line 20, ../sass/_classificacao.scss */
 .classificacoes .primeiro {
   background-color: #8acc8a;
 }
-/* line 23, ../../../sass/_classificacao.scss */
+/* line 23, ../sass/_classificacao.scss */
 .classificacoes .segundo {
   background-color: #92d5e9;
 }
-/* line 26, ../../../sass/_classificacao.scss */
+/* line 26, ../sass/_classificacao.scss */
 .classificacoes .posicao {
   width: 1%;
 }
-/* line 29, ../../../sass/_classificacao.scss */
+/* line 29, ../sass/_classificacao.scss */
 .classificacoes .pontos, .classificacoes .jogos, .classificacoes .vitorias, .classificacoes .empates, .classificacoes .derrotas, .classificacoes .gols-feitos, .classificacoes .gols-tomados, .classificacoes .saldo-de-gols, .classificacoes .aproveitamento {
   width: 8%;
 }
-/* line 32, ../../../sass/_classificacao.scss */
+/* line 32, ../sass/_classificacao.scss */
 .classificacoes .label {
   padding: 1px 8%;
 }
 
-/* line 37, ../../../sass/_classificacao.scss */
+/* line 37, ../sass/_classificacao.scss */
 .label-gols-pro {
   background-color: #449d44;
 }
 
-/* line 40, ../../../sass/_classificacao.scss */
+/* line 40, ../sass/_classificacao.scss */
 .label-gols-contra {
   background-color: #c9302c;
 }
 
-/* line 44, ../../../sass/_classificacao.scss */
+/* line 44, ../sass/_classificacao.scss */
 .tabela-classificacao {
   position: relative;
   top: -85px;
 }
-/* line 47, ../../../sass/_classificacao.scss */
+/* line 47, ../sass/_classificacao.scss */
 .tabela-classificacao .corpo {
   display: none;
   margin-top: 25px;
 }
 
-/* line 53, ../../../sass/_classificacao.scss */
+/* line 53, ../sass/_classificacao.scss */
 .legenda {
   margin-top: 5px;
   background-color: #eeeeee;

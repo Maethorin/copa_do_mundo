@@ -4,7 +4,7 @@ require 'bootstrap-sass'
 # Set this to the root of your project when deployed:
 http_path = "/"
 css_dir = "tabela/static/css"
-sass_dir = "sass"
+sass_dir = "tabela/static/sass"
 images_dir = "tabela/static/img"
 javascripts_dir = "tabela/static/js"
 

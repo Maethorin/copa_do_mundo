@@ -31,8 +31,10 @@ $verde-campo: #90F490;
 $fundo-cabecalho: rgba(green, .5);
 $painel-header-bg: rgb(0, 128, 0);
 $verde-claro: #DFD;
+$verde-campo-claro: #6ba025;
+$verde-campo-escuro: #558812;
 
-$fundo-gradient: linear_gradient($verde-claro, $brand-primary, $brand-primary, $brand-primary, $brand-primary, #C0EFC0);
+$fundo-gradient: linear_gradient($verde-campo-claro, $verde-campo-escuro, $verde-campo-escuro, $verde-campo-escuro, $verde-campo-escuro, $verde-campo-claro);
 
 //== Scaffolding
 //

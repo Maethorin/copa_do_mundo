@@ -33,7 +33,11 @@ footer {
 }
 
 .fundo-grama {
-  background-image: url(../img/grama.jpg);
+  background-image: url(../img/grama2.jpg);
+}
+
+.fundo-grama3 {
+  background-image: url(../img/grama3.jpg);
 }
 
 .cabecalho {
@@ -47,28 +51,21 @@ footer {
 }
 
 .inicial, .classificacao {
-  background-image: url(../img/fundo-inicial.jpg), $fundo-gradient;
-  background-repeat: no-repeat;
-  background-position: center center;
-  overflow: hidden;
-}
-
-.classificacao {
   background-image: url(../img/fundo-classificacao.jpg), $fundo-gradient;
   background-repeat: no-repeat;
   background-position: center center;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .oitavas, .quartas, .semifinais, .terceiro_lugar, .final  {
-  background-image: url(../img/fundo-fases.jpg), $fundo-gradient;
+  background-image: url(../img/fundo-central.jpg), $fundo-gradient;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: floor(30);
 }
 
 .central {
   padding: 20px 20px 0 20px;
-  min-height: 670px;
+  height: 650px;
 }
 
 .bola {
@@ -90,7 +87,7 @@ footer {
   background-color: rgba(black, 0.4);
   overflow: hidden;
   position: relative;
-  top: -75px;
+  top: -85px;
   .texto {
     display: none;
   }
