@@ -98,7 +98,7 @@ footer {
 }
 
 .cabecalho {
-  div[class] {
+  .titulo, .titulo-da-pagina {
     padding: 2px 10px;
   }
 }
@@ -226,5 +226,37 @@ footer {
     color: #ffff00;
     position: relative;
     top: 0;
+  }
+}
+
+.grupos-classificando {
+  overflow: auto;
+  max-height: 98px;
+  .times {
+    overflow: hidden;
+    margin-top: 6px;
+  }
+  .grupo, .time {
+    float: left;
+  }
+  .time {
+    font-size: 8px;
+    padding: 0 13px;
+  }
+  .grupo {
+    border: 1px solid #333;
+    padding: 0;
+    margin: 4px 4%;
+    overflow: hidden;
+    .nome {
+      a {
+        color: #ffff00;
+      }
+      margin: -6px;
+      padding: 4px 0 2px;
+      position: relative;
+      font-size: 10px;
+      top: 0;
+    }
   }
 }

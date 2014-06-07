@@ -7906,113 +7906,139 @@ button.close {
 }
 
 /* line 11, ../sass/_fundos.scss */
+.bw {
+  background-image: url("../img/sprite_bandeiras25_copa_bw.png");
+}
+
+/* line 15, ../sass/_fundos.scss */
 .titulo {
   background: url("../img/logo-simulacopa.png") no-repeat;
 }
 
-/* line 15, ../sass/_fundos.scss */
+/* line 19, ../sass/_fundos.scss */
 .fundo-grama {
   background-image: url(../img/grama/grama.jpg);
 }
 
-/* line 19, ../sass/_fundos.scss */
+/* line 23, ../sass/_fundos.scss */
 .inicial, .classificacao {
   background-image: url(../img/fundo-classificacao.jpg), linear-gradient(#6ba025, #558812, #558812, #558812, #558812, #6ba025);
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-/* line 25, ../sass/_fundos.scss */
+/* line 29, ../sass/_fundos.scss */
 .oitavas, .quartas, .semifinais, .terceiro_lugar, .final {
   background-image: url(../img/fundo-central.jpg), linear-gradient(#6ba025, #558812, #558812, #558812, #558812, #6ba025);
   background-repeat: no-repeat;
   background-position: 30;
 }
 
-/* line 32, ../sass/_fundos.scss */
+/* line 36, ../sass/_fundos.scss */
 .cabecalho, .branco {
   background-color: rgba(0, 128, 0, 0.5);
 }
 
-/* line 36, ../sass/_fundos.scss */
+/* line 40, ../sass/_fundos.scss */
 .bola {
   background-image: url("../img/bola.png");
 }
 
-/* line 40, ../sass/_fundos.scss */
+/* line 44, ../sass/_fundos.scss */
 .introducao {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* line 45, ../sass/_fundos.scss */
+/* line 49, ../sass/_fundos.scss */
 .slide-up:hover {
   background-color: #006700;
 }
 
-/* line 50, ../sass/_fundos.scss */
+/* line 54, ../sass/_fundos.scss */
 footer {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-/* line 54, ../sass/_fundos.scss */
+/* line 58, ../sass/_fundos.scss */
 .painel {
   background-color: rgba(0, 0, 0, 0.4);
 }
-/* line 56, ../sass/_fundos.scss */
+/* line 60, ../sass/_fundos.scss */
 .painel h3 {
   background-color: green;
 }
 
-/* line 61, ../sass/_fundos.scss */
+/* line 65, ../sass/_fundos.scss */
+.grupo {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+/* line 67, ../sass/_fundos.scss */
+.grupo .times {
+  background-color: #FAFAFA;
+}
+/* line 70, ../sass/_fundos.scss */
+.grupo .nome {
+  background-color: green;
+}
+/* line 73, ../sass/_fundos.scss */
+.grupo .time {
+  background-color: #ffef99;
+}
+/* line 75, ../sass/_fundos.scss */
+.grupo .time.bw {
+  background-color: #AAA;
+}
+
+/* line 81, ../sass/_fundos.scss */
 .grupos {
   background-image: url(../img/fundo-central.jpg), linear-gradient(#6ba025, #558812, #558812, #558812, #558812, #6ba025);
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-/* line 67, ../sass/_fundos.scss */
+/* line 87, ../sass/_fundos.scss */
 .classificacoes {
   background-color: #eeeeee;
 }
-/* line 69, ../sass/_fundos.scss */
+/* line 89, ../sass/_fundos.scss */
 .classificacoes .desclassificado {
   background-color: #e58886;
 }
-/* line 72, ../sass/_fundos.scss */
+/* line 92, ../sass/_fundos.scss */
 .classificacoes .primeiro {
   background-color: #8acc8a;
 }
-/* line 75, ../sass/_fundos.scss */
+/* line 95, ../sass/_fundos.scss */
 .classificacoes .segundo {
   background-color: #92d5e9;
 }
 
-/* line 80, ../sass/_fundos.scss */
+/* line 100, ../sass/_fundos.scss */
 .label-gols-pro {
   background-color: #449d44;
 }
 
-/* line 83, ../sass/_fundos.scss */
+/* line 103, ../sass/_fundos.scss */
 .label-gols-contra {
   background-color: #c9302c;
 }
 
-/* line 87, ../sass/_fundos.scss */
+/* line 107, ../sass/_fundos.scss */
 .gols {
   background-color: #ddffdd;
 }
 
-/* line 91, ../sass/_fundos.scss */
+/* line 111, ../sass/_fundos.scss */
 .resultado-palpite {
   background-color: #eeeeee;
 }
 
-/* line 95, ../sass/_fundos.scss */
+/* line 115, ../sass/_fundos.scss */
 .resultado-simulado {
   background-color: #eeeeee;
 }
 
-/* line 99, ../sass/_fundos.scss */
+/* line 119, ../sass/_fundos.scss */
 .resultado-real {
   background-color: #eeeeee;
 }
@@ -8121,7 +8147,7 @@ footer .logo {
   }
 }
 /* line 101, ../sass/_base.scss */
-.cabecalho div[class] {
+.cabecalho .titulo, .cabecalho .titulo-da-pagina {
   padding: 2px 10px;
 }
 
@@ -8268,6 +8294,45 @@ footer .logo {
   color: #ffff00;
   position: relative;
   top: 0;
+}
+
+/* line 232, ../sass/_base.scss */
+.grupos-classificando {
+  overflow: auto;
+  max-height: 98px;
+}
+/* line 235, ../sass/_base.scss */
+.grupos-classificando .times {
+  overflow: hidden;
+  margin-top: 6px;
+}
+/* line 239, ../sass/_base.scss */
+.grupos-classificando .grupo, .grupos-classificando .time {
+  float: left;
+}
+/* line 242, ../sass/_base.scss */
+.grupos-classificando .time {
+  font-size: 8px;
+  padding: 0 13px;
+}
+/* line 246, ../sass/_base.scss */
+.grupos-classificando .grupo {
+  border: 1px solid #333;
+  padding: 0;
+  margin: 4px 4%;
+  overflow: hidden;
+}
+/* line 251, ../sass/_base.scss */
+.grupos-classificando .grupo .nome {
+  margin: -6px;
+  padding: 4px 0 2px;
+  position: relative;
+  font-size: 10px;
+  top: 0;
+}
+/* line 252, ../sass/_base.scss */
+.grupos-classificando .grupo .nome a {
+  color: #ffff00;
 }
 
 /* line 1, ../sass/_partida.scss */

@@ -55,11 +55,15 @@
     <div class="container-fluid cabecalho-container">
         <div class="row topo"></div>
         <div class="row fundo-grama-faixa-acima flex cabecalho">
-            <div class="col-md-1"></div>
-            <div class="col-md-2 text-right">
+            <div class="col-md-3">
                 <a class="titulo" href="{% url 'index' %}"></a>
             </div>
             <div class="col-md-6 text-center">
+                <div class="grupos-classificando">
+                {% for grupo in grupos_classificando %}
+                    {% include 'includes/grupo_classificando.html' %}
+                {% endfor %}
+                </div>
             </div>
             <div class="col-md-3 titulo-da-pagina"><h1>{{ titulo_da_pagina }}</h1></div>
         </div>
@@ -149,6 +153,6 @@
     {% block js %}
     {% endblock js %}
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+{#    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
 </body>
 </html>

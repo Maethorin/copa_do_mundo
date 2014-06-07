@@ -19,7 +19,7 @@ def criar_contexto(request, titulo_da_pagina, pagina_atual, css_fundo, partidas=
     if partidas_cookie:
         partidas_votadas = json.loads(partidas_cookie)
     contexto = {
-        'grupos': grupos, 'pagina_atual': pagina_atual, 'partidas': partidas, 'css_fundo': css_fundo,
+        'grupos': grupos, 'grupos_classificando': grupos, 'pagina_atual': pagina_atual, 'partidas': partidas, 'css_fundo': css_fundo,
         'titulo_da_pagina': titulo_da_pagina, 'partidas_votadas': partidas_votadas
     }
     if usa_csrf:

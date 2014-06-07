@@ -8,6 +8,10 @@
   background-image: url('../img/sprite_bandeiras25_copa.png');
 }
 
+.bw {
+  background-image: url('../img/sprite_bandeiras25_copa_bw.png');
+}
+
 .titulo {
   background: url('../img/logo-simulacopa.png') no-repeat;
 }
@@ -55,6 +59,22 @@ footer {
   background-color: rgba(black, 0.4);
   h3 {
     background-color: $painel-header-bg;
+  }
+}
+
+.grupo {
+  background-color: rgba(black, 0.4);
+  .times {
+    background-color: #FAFAFA;
+  }
+  .nome {
+    background-color: $painel-header-bg;
+  }
+  .time {
+    background-color: lighten($amarelo-ouro, 30%);
+    &.bw {
+      background-color: #AAA;
+    }
   }
 }
 

@@ -42,7 +42,7 @@ function redimencionaCentral() {
     var $central = $(".central");
     var diferenca = 0;
     if (viewportWidth <= 768) {
-        diferenca = 150;
+        diferenca = 166;
         $(".navbar").addClass('navbar-fixed-top');
         $(".conteudo").removeClass("flex");
         $("body").css("padding-top", "45px");

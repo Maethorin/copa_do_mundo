@@ -42,6 +42,10 @@ class Time(models.Model):
             return 0
         return round(float(self.vitorias) / float(self.jogos) * 100, 1)
 
+    @property
+    def desclassificado(self):
+        return False
+
     class Meta:
         ordering = ['grupo', '-pontos', 'nome']
         verbose_name_plural = 'Times'
