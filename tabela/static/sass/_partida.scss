@@ -71,23 +71,19 @@ input[type=number] {
   font-family: 'Graduate', cursive;
   font-size: 18px;
   font-weight: bold;
-  background-color: $verde-claro;
 }
 
 .resultado-palpite {
-  background-color: $gray-lighter;
   margin: 0 -13px 0;
   padding: 4px 0;
 }
 
 .resultado-simulado {
-  background-color: $gray-lighter;
   margin: 0 -6px 0;
   padding: 4px 0;
 }
 
 .resultado-real {
-  background-color: $gray-lighter;
   padding: 4px 0;
   margin: 0 -3px 4px;
 }
@@ -103,4 +99,10 @@ input[type=number] {
 
 .abreviatura {
   font-size: 12px;
+}
+
+.partida {
+  h4 {
+    margin: 0;
+  }
 }

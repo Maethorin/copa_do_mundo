@@ -35,3 +35,31 @@ $('.partida').on('submit', 'form', function(event) {
 $('.partidas-index').on('click', '.slide-up', function() {
     var $body = $(this).parent().find('.corpo-painel').slideToggle();
 });
+
+function redimencionaCentral() {
+    var viewportWidth = $(window).width();
+    var viewportHeight = $(window).height();
+    var $central = $(".central");
+    var diferenca = 0;
+    if (viewportWidth <= 768) {
+        diferenca = 150;
+        $(".navbar").addClass('navbar-fixed-top');
+        $(".conteudo").removeClass("flex");
+        $("body").css("padding-top", "45px");
+    }
+    else {
+        diferenca = 276;
+        $(".navbar").removeClass('navbar-fixed-top');
+        $(".conteudo").addClass("flex");
+        $("body").css("padding-top", "");
+    }
+    $central.css("height", (viewportHeight - diferenca) + "px");
+}
+
+$(window).load(function() {
+    redimencionaCentral();
+});
+
+$(window).resize(function() {
+    redimencionaCentral();
+});

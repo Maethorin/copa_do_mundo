@@ -1,0 +1,102 @@
+.logo-menor {
+  background-image: url('../img/logo-simulacopa-menor.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.bandeira {
+  background-image: url('../img/sprite_bandeiras25_copa.png');
+}
+
+.titulo {
+  background: url('../img/logo-simulacopa.png') no-repeat;
+}
+
+.fundo-grama {
+  background-image: url(../img/grama/grama.jpg);
+}
+
+.inicial, .classificacao {
+  background-image: url(../img/fundo-classificacao.jpg), $fundo-gradient;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.oitavas, .quartas, .semifinais, .terceiro_lugar, .final  {
+  background-image: url(../img/fundo-central.jpg), $fundo-gradient;
+  background-repeat: no-repeat;
+  background-position: floor(30);
+}
+
+
+.cabecalho, .branco {
+    background-color: $fundo-cabecalho;
+}
+
+.bola {
+  background-image: url('../img/bola.png');
+}
+
+.introducao {
+  background-color: rgba(black, 0.4);
+}
+
+.slide-up {
+  &:hover {
+    background-color: darken($painel-header-bg, 5%);
+  }
+}
+
+footer {
+  background-color: rgba(white, .6);
+}
+
+.painel {
+  background-color: rgba(black, 0.4);
+  h3 {
+    background-color: $painel-header-bg;
+  }
+}
+
+.grupos {
+  background-image: url(../img/fundo-central.jpg), $fundo-gradient;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.classificacoes {
+  background-color: $gray-lighter;
+  .desclassificado {
+    background-color: lighten($table-tr-danger-bg, 13%);
+  }
+  .primeiro {
+    background-color: lighten($brand-success, 13%);
+  }
+  .segundo {
+    background-color: lighten($brand-info, 13%);
+  }
+}
+
+.label-gols-pro {
+  background-color: darken($brand-success, 10%);
+}
+.label-gols-contra {
+  background-color: darken($brand-danger, 10%);
+}
+
+.gols {
+  background-color: $verde-claro;
+}
+
+.resultado-palpite {
+  background-color: $gray-lighter;
+}
+
+.resultado-simulado {
+  background-color: $gray-lighter;
+}
+
+.resultado-real {
+  background-color: $gray-lighter;
+}
+

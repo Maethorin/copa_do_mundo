@@ -3,9 +3,9 @@
 {% block conteudo %}
     {% if partidas|length == 2 %}
     <div class="row">
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
         {% for partida in partidas %}
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="barras acima"></div>
                 <div class="painel rodada well-sm">
                     <h3>{{ partida.data|date:"d M - H:i" }}</h3>
@@ -15,16 +15,16 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
     </div>
     {% else %}
     <div class="row">
         {% if partidas|length > 4 %}
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
         {% elif partidas|length > 2 %}
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
         {% else %}
-            <div class="col-md-4"></div>
+            <div class="col-md-3"></div>
         {% endif %}
         {% for partida in partidas %}
             {% if forloop.counter0|divisibleby:2 %}
@@ -33,12 +33,12 @@
             </div>
             {% endif %}
             {% if forloop.counter0 == 4 %}
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
     </div>
     <div class="row">
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
             {% endif %}
-            <div class="col-md-{% if partidas|length > 4 %}4{% elif partidas|length > 2 %}4{% else %}4{% endif %}">
+            <div class="col-md-{% if partidas|length > 4 %}5{% elif partidas|length > 2 %}5{% else %}6{% endif %}">
                 <div class="barras{% if forloop.counter > 4 %} baixo{% else %} acima{% endif %}"></div>
                 <div class="painel rodada well-sm">
                     <h3>{{ partida.data|date:"d M - H:i" }}</h3>
@@ -52,9 +52,9 @@
             {% endif %}
         {% endfor %}
         {% if partidas|length > 4 %}
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
         {% elif partidas|length > 2 %}
-            <div class="col-md-2"></div>
+            <div class="col-md-1"></div>
         {% else %}
             <div class="col-md-3"></div>
         {% endif %}

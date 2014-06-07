@@ -4,19 +4,27 @@
                             <div class="panel-title">
                             {% if mata_mata %}
                                 <h4 class="estadio">
+                                {% if partida.realizada %}
+                                    <span class="label label-success">R</span> -
+                                {% endif %}
+                                {% if partida.em_andamento %}
+                                    <span class="label label-warning">A</span> -
+                                {% endif %}
                                     {{ partida.local.nome }}
                                 </h4>
                                 <div class="cidade">
                                     {{ partida.local.cidade_e_estado }}
                                 </div>
                             {% else %}
-                            <h4>{{ partida.data|date:"d M - H:i" }}</h4>
-                            {% endif %}
-                            {% if partida.realizada %}
-                                Realizada
-                            {% endif %}
-                            {% if partida.em_andamento %}
-                                Em andamento
+                            <h4>
+                                {% if partida.realizada %}
+                                    <span class="label label-success">R</span> -
+                                {% endif %}
+                                {% if partida.em_andamento %}
+                                    <span class="label label-warning">A</span> -
+                                {% endif %}
+                                {{ partida.data|date:"d M - H:i" }}
+                            </h4>
                             {% endif %}
                             </div>
                         </div>
