@@ -8,3 +8,5 @@ $(window).load(function() {
         primeira = true;
     });
 });
+
+$(".linha-titulo span").tooltip();

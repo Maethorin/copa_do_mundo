@@ -8300,29 +8300,30 @@ footer .logo {
 .grupos-classificando {
   overflow: auto;
   max-height: 98px;
+  padding-left: 10.5%;
 }
-/* line 235, ../sass/_base.scss */
+/* line 236, ../sass/_base.scss */
 .grupos-classificando .times {
   overflow: hidden;
   margin-top: 6px;
 }
-/* line 239, ../sass/_base.scss */
+/* line 240, ../sass/_base.scss */
 .grupos-classificando .grupo, .grupos-classificando .time {
   float: left;
 }
-/* line 242, ../sass/_base.scss */
+/* line 243, ../sass/_base.scss */
 .grupos-classificando .time {
   font-size: 8px;
   padding: 0 13px;
 }
-/* line 246, ../sass/_base.scss */
+/* line 247, ../sass/_base.scss */
 .grupos-classificando .grupo {
   border: 1px solid #333;
   padding: 0;
   margin: 4px 4%;
   overflow: hidden;
 }
-/* line 251, ../sass/_base.scss */
+/* line 252, ../sass/_base.scss */
 .grupos-classificando .grupo .nome {
   margin: -6px;
   padding: 4px 0 2px;
@@ -8330,7 +8331,7 @@ footer .logo {
   font-size: 10px;
   top: 0;
 }
-/* line 252, ../sass/_base.scss */
+/* line 253, ../sass/_base.scss */
 .grupos-classificando .grupo .nome a {
   color: #ffff00;
 }
@@ -8661,7 +8662,7 @@ input[type=number] {
   width: 1%;
 }
 /* line 16, ../sass/_classificacao.scss */
-.classificacoes .pontos, .classificacoes .jogos, .classificacoes .vitorias, .classificacoes .empates, .classificacoes .derrotas, .classificacoes .gols-feitos, .classificacoes .gols-tomados, .classificacoes .saldo-de-gols, .classificacoes .aproveitamento {
+.classificacoes .linha-titulo {
   width: 8%;
 }
 /* line 19, ../sass/_classificacao.scss */

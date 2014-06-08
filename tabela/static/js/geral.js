@@ -63,3 +63,5 @@ $(window).load(function() {
 $(window).resize(function() {
     redimencionaCentral();
 });
+
+$(".time").tooltip();
