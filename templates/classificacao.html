@@ -31,7 +31,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {% for time in grupo.times %}
+                                {% for time in grupo.time_set.all %}
                                     <tr class="{% if forloop.counter == 1 %}primeiro{% elif forloop.counter == 2 %}segundo{% else %}desclassificado{% endif %}">
                                         <td class="posicao">
                                             {{forloop.counter}}º

@@ -25,7 +25,9 @@ def obtem_partidas_de_grupo(grupo):
 
 def obter_dados_de_times(grupos, atual=False):
     for grupo in grupos:
-        grupo.times = obtem_times_do_grupo_ordenados_por_classificacao(grupo.nome, atual)
+        for time in obtem_times_do_grupo_ordenados_por_classificacao(grupo.nome, atual):
+            time.save()
+
 
 
 def obter_times_de_partidas(partidas):
@@ -128,6 +130,8 @@ def obtem_time_do_grupo_na_classificacao(nome_do_grupo, classificacao):
 
 def obtem_times_do_grupo_ordenados_por_classificacao(nome_do_grupo, atual=False):
     times = Time.objects.filter(grupo__nome__exact=nome_do_grupo)
+    for time in times:
+        time.pontos = 0
     times_lista = []
     for time in times:
         fase = Fase.objects.get(slug='classificacao')

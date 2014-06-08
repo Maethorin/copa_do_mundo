@@ -1,5 +1,8 @@
 mox
+mock
 nose
+sure
+six
 Django
 South
 MySql-python

@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 from datetime import datetime
+import mox
 
 from nose.tools import assert_equals
 from tabela import models
@@ -84,3 +85,183 @@ def test_media_time_2_palpites_em_partida_retorna_correto():
     media = partida.media_palpites_time_2()
 
     assert_equals(media, 2)
+
+
+class TesteFaseClassificacao(mox.MoxTestBase):
+    def setUp(self):
+        super(TesteFaseClassificacao, self).setUp()
+        self.mox.StubOutWithMock(models, "datetime")
+        self.fase = models.Fase(
+            data_inicio=datetime.strptime("2014-06-12 00:00:00", "%Y-%m-%d %H:%M:%S"),
+            data_fim=datetime.strptime("2014-06-26 23:59:59", "%Y-%m-%d %H:%M:%S")
+        )
+
+    def test_deve_retornar_true_no_primeiro_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-06-12 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_true_no_ultimo_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-06-26 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_false_antes(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-06-11 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+    def test_deve_retornar_false_depois(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-06-27 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+
+class TesteFaseOitavas(mox.MoxTestBase):
+    def setUp(self):
+        super(TesteFaseOitavas, self).setUp()
+        self.mox.StubOutWithMock(models, "datetime")
+        self.fase = models.Fase(
+            data_inicio=datetime.strptime("2014-06-28 00:00:00", "%Y-%m-%d %H:%M:%S"),
+            data_fim=datetime.strptime("2014-07-01 23:59:59", "%Y-%m-%d %H:%M:%S")
+        )
+
+    def test_deve_retornar_true_no_primeiro_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-06-28 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_true_no_ultimo_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-01 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_false_para_antes(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-06-27 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+    def test_deve_retornar_false_para_depois(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-02 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+
+class TesteFaseQuartas(mox.MoxTestBase):
+    def setUp(self):
+        super(TesteFaseQuartas, self).setUp()
+        self.mox.StubOutWithMock(models, "datetime")
+        self.fase = models.Fase(
+            data_inicio=datetime.strptime("2014-07-04 00:00:00", "%Y-%m-%d %H:%M:%S"),
+            data_fim=datetime.strptime("2014-07-05 23:59:59", "%Y-%m-%d %H:%M:%S")
+        )
+
+    def test_deve_retornar_true_no_primeiro_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-04 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_true_no_ultimo_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-05 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_false_para_antes(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-03 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+    def test_deve_retornar_false_para_depois(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-06 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+
+class TesteFaseSemifinais(mox.MoxTestBase):
+    def setUp(self):
+        super(TesteFaseSemifinais, self).setUp()
+        self.mox.StubOutWithMock(models, "datetime")
+        self.fase = models.Fase(
+            data_inicio=datetime.strptime("2014-07-08 00:00:00", "%Y-%m-%d %H:%M:%S"),
+            data_fim=datetime.strptime("2014-07-09 23:59:59", "%Y-%m-%d %H:%M:%S")
+        )
+
+    def test_deve_retornar_true_no_primeiro_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-08 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_true_no_ultimo_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-09 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_false_para_antes(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-07 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+    def test_deve_retornar_false_para_depois(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-10 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+
+class TesteFaseTerceiro(mox.MoxTestBase):
+    def setUp(self):
+        super(TesteFaseTerceiro, self).setUp()
+        self.mox.StubOutWithMock(models, "datetime")
+        self.fase = models.Fase(
+            data_inicio=datetime.strptime("2014-07-12 00:00:00", "%Y-%m-%d %H:%M:%S"),
+            data_fim=datetime.strptime("2014-07-12 23:59:59", "%Y-%m-%d %H:%M:%S")
+        )
+
+    def test_deve_retornar_true_no_primeiro_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-12 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_true_no_ultimo_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-12 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_false_para_antes(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-11 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+    def test_deve_retornar_false_para_depois(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-13 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+
+class TesteFaseFinal(mox.MoxTestBase):
+    def setUp(self):
+        super(TesteFaseFinal, self).setUp()
+        self.mox.StubOutWithMock(models, "datetime")
+        self.fase = models.Fase(
+            data_inicio=datetime.strptime("2014-07-13 00:00:00", "%Y-%m-%d %H:%M:%S"),
+            data_fim=datetime.strptime("2014-07-13 23:59:59", "%Y-%m-%d %H:%M:%S")
+        )
+
+    def test_deve_retornar_true_no_primeiro_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-13 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_true_no_ultimo_dia(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-13 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.true
+
+    def test_deve_retornar_false_para_antes(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-12 23:59:59", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false
+
+    def test_deve_retornar_false_para_depois(self):
+        models.datetime.now().AndReturn(datetime.strptime("2014-07-14 00:00:00", "%Y-%m-%d %H:%M:%S"))
+        self.mox.ReplayAll()
+        self.fase.eh_atual.should.be.false

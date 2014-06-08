@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import datetime
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.db import models
 
@@ -23,6 +23,7 @@ class Time(models.Model):
     id = models.AutoField(primary_key=True, db_column='time_id')
     nome = models.CharField(max_length=200, unique=True)
     pontos = models.IntegerField(blank=True, default=0)
+    posicao = models.IntegerField(blank=True, default=0)
     grupo = models.ForeignKey(Grupo)
     abreviatura = models.CharField(max_length=15, unique=True, blank=True, null=True)
     sigla = models.CharField(max_length=3, unique=True, blank=True, null=True)
@@ -42,8 +43,16 @@ class Time(models.Model):
             return 0
         return round(float(self.vitorias) / float(self.jogos) * 100, 1)
 
-    @property
-    def desclassificado(self):
+    def classificado(self):
+        fase = Fase.fase_atual()
+        if not fase:
+            return True
+        if fase.slug == 'classificacao' and fase.finalizada:
+            return self.posicao <= 2
+        if fase.slug != 'classificacao':
+            for partida in fase.partida_set.all():
+                if self == partida.time_1 or self == partida.time_2:
+                    return True
         return False
 
     class Meta:
@@ -63,6 +72,25 @@ class Fase(models.Model):
     id = models.AutoField(primary_key=True, db_column='fase_id')
     nome = models.CharField(max_length=20)
     slug = models.SlugField(null=True)
+    data_inicio = models.DateTimeField(null=True)
+    data_fim = models.DateTimeField(null=True)
+
+    @property
+    def eh_atual(self):
+        hoje = datetime.now()
+        return self.data_inicio <= hoje <= self.data_fim
+
+    @property
+    def finalizada(self):
+        hoje = datetime.now()
+        return hoje > self.data_fim
+
+    @classmethod
+    def fase_atual(cls):
+        for fase in cls.objects.all():
+            if fase.eh_atual:
+                return fase
+        return None
 
     def __unicode__(self):
         return u"%s" % self.nome
@@ -157,9 +185,9 @@ class Partida(models.Model):
         return self.media_palpites_time_1() == int(self.gols_time_1 or 0) and self.media_palpites_time_2() == int(self.gols_time_2)
 
     def em_andamento(self):
-        data_atual = datetime.datetime.today()
-        data_atual = data_atual + datetime.timedelta(hours=settings.SERVER_TIME_DIFF)
-        data_limite = self.data + datetime.timedelta(minutes=-3)
+        data_atual = datetime.today()
+        data_atual = data_atual + timedelta(hours=settings.SERVER_TIME_DIFF)
+        data_limite = self.data + timedelta(minutes=-3)
         if data_limite <= data_atual and not self.realizada:
             return True
         return False

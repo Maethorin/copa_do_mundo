@@ -2,7 +2,7 @@
     <div class="nome"><a href="{% url 'grupo' grupo.nome %}">Grupo {{ grupo.nome }}</a></div>
     <div class="times">
         {% for time in grupo.time_set.all %}
-            <span class="time bandeira {% if forloop.counter0|divisibleby:2 %}bw{% endif %} {{ time.sigla }}" title="{{ time.abreviatura }}"></span>
+            <span class="time bandeira {% if not time.classificado %}bw{% endif %} {{ time.sigla }}" title="{{ time.abreviatura }}"></span>
         {% endfor %}
     </div>
 </div>
