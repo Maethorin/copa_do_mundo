@@ -20,6 +20,7 @@ SERVER_TIME_DIFF = 0
 
 ALLOWED_HOSTS = []
 
+CSRF_COOKIE_SECURE = False
 
 # Application definition
 

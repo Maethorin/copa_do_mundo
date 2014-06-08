@@ -9,3 +9,5 @@ $(window).load(function() {
         primeira = true;
     });
 });
+
+$('.partida').css("display", "none");

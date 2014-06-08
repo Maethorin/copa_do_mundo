@@ -104,7 +104,8 @@ footer {
 }
 
 .inicial, .classificacao {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .central {
@@ -260,4 +261,42 @@ footer {
       top: 0;
     }
   }
+}
+
+.proximas, .andamento {
+  overflow: hidden;
+  cursor: pointer;
+  h3 {
+    font-size: 15px;
+    padding: 13px;
+  }
+}
+
+.andamento {
+  margin: 21px 0 0 10px;
+}
+
+.proximas {
+  margin: 21px 10px 0 0;
+}
+
+.partidas-proximas, .partidas-andamento {
+  position: absolute;
+  z-index: 10;
+  width: 35%;
+  .corpo-painel {
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}
+
+.partidas-andamento {
+  left: -545px;
+  float: left;
+}
+
+.partidas-proximas {
+  right: -545px;
+  float: right;
 }

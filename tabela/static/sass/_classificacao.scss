@@ -1,12 +1,14 @@
 .grupos {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   .col-md-4 {
     padding: 0 8px;
   }
 }
 
 .classificacao {
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .classificacoes {

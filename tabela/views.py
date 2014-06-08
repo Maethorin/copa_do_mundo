@@ -12,18 +12,18 @@ from tabela.models import Grupo, Partida, Fase
 from tabela import simulador
 
 
-def criar_contexto(request, titulo_da_pagina, pagina_atual, css_fundo, partidas=None, usa_csrf=False):
+def criar_contexto(request, titulo_da_pagina, pagina_atual, css_fundo, partidas=None):
     grupos = Grupo.objects.all()
     partidas_cookie = unquote(request.COOKIES.get("partidas", ""))
     partidas_votadas = []
     if partidas_cookie:
         partidas_votadas = json.loads(partidas_cookie)
     contexto = {
-        'grupos': grupos, 'grupos_classificando': grupos, 'pagina_atual': pagina_atual, 'partidas': partidas, 'css_fundo': css_fundo,
-        'titulo_da_pagina': titulo_da_pagina, 'partidas_votadas': partidas_votadas
+        'grupos': grupos, 'grupos_classificando': grupos, 'pagina_atual': pagina_atual, 'partidas': partidas,
+        'css_fundo': css_fundo, 'titulo_da_pagina': titulo_da_pagina, 'partidas_votadas': partidas_votadas,
+        'partidas_atuais': [], 'proximas_partidas': Partida.objects.filter(realizada=False).order_by('data')[:4]
     }
-    if usa_csrf:
-        contexto.update(csrf(request))
+    contexto.update(csrf(request))
     return contexto
 
 
@@ -34,7 +34,7 @@ def index(request):
 def partidas_de_grupo(request, nome):
     grupo = Grupo.objects.get(nome=nome)
     partidas_do_grupo = simulador.obtem_partidas_de_grupo(grupo)
-    contexto = criar_contexto(request, "Grupo {}".format(grupo.nome), grupo.nome, 'grupos', partidas_do_grupo, usa_csrf=True)
+    contexto = criar_contexto(request, "Grupo {}".format(grupo.nome), grupo.nome, 'grupos', partidas_do_grupo)
     contexto.update({'em_grupos': True})
     return render_to_response('grupo.html', contexto)
 
@@ -52,7 +52,7 @@ def mostra_rodada(request, slug):
     partidas = Partida.objects.filter(fase=fase)
     simulador.obter_times_de_partidas(partidas)
 
-    contexto = criar_contexto(request, fase.nome, slug, slug, partidas, usa_csrf=True)
+    contexto = criar_contexto(request, fase.nome, slug, slug, partidas)
     return render_to_response('partidas.html', contexto)
 
 

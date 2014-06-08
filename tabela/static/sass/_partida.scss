@@ -2,9 +2,11 @@
   width: 100%;
   float: left;
   margin-top: 20px;
-  display: none;
   .panel-body {
     padding-top: 0;
+  }
+  h4 {
+    margin: 0;
   }
 }
 
@@ -13,10 +15,8 @@
 .semifinais,
 .terceiro_lugar,
 .final {
-  overflow: auto;
-  .partida {
-    display: none;
-  }
+  overflow-y: auto;
+  overflow-x: hidden;
   .rodada {
     top: -165px;
   }
@@ -99,10 +99,4 @@ input[type=number] {
 
 .abreviatura {
   font-size: 12px;
-}
-
-.partida {
-  h4 {
-    margin: 0;
-  }
 }

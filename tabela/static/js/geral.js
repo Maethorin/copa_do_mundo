@@ -21,7 +21,7 @@ $('.partida').on('submit', 'form', function(event) {
                 partidas = [];
             }
             partidas.push($partida.data("partida"));
-            $.cookie('partidas', partidas, { expires: 180 });
+            $.cookie('partidas', partidas, { expires: 180, path:'/' });
             $partida.find(".time_1").text(data['gols_time_1']);
             $partida.find(".time_2").text(data['gols_time_2']);
             $partida.find(".votos").text(data['votos']);
@@ -32,9 +32,32 @@ $('.partida').on('submit', 'form', function(event) {
     );
 });
 
-$('.partidas-index').on('click', '.slide-up', function() {
-    var $body = $(this).parent().find('.corpo-painel').slideToggle();
+$('.conteudo').on('click', '.andamento', function() {
+    animaPartidas($('.partidas-andamento'), 'left');
 });
+
+$('.conteudo').on('click', '.proximas', function() {
+    animaPartidas($('.partidas-proximas'), 'right');
+});
+
+function animaPartidas($partidas, direcao) {
+    var aminacao = {};
+    if ($partidas.data("posicao") == 'aberto') {
+        $partidas.find('.corpo-painel').slideToggle(function() {
+            aminacao = (direcao == 'left' ? {left: -545} : {right: -545});
+            $partidas.animate(aminacao);
+            $partidas.data("posicao", ($partidas.data("posicao") == 'fechado' ? 'aberto' : 'fechado'))
+        });
+    }
+    else {
+        aminacao = (direcao == 'left' ? {left: 15} : {right: 15});
+        $partidas.animate(aminacao, function() {
+            $partidas.find('.corpo-painel').slideToggle();
+            $partidas.data("posicao", ($partidas.data("posicao") == 'fechado' ? 'aberto' : 'fechado'))
+        });
+    }
+}
+
 
 function redimencionaCentral() {
     var viewportWidth = $(window).width();

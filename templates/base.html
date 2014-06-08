@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="pt-BR" ng-app>
+<html lang="pt-BR">
 <head>
 	<meta name="google-site-verification" content="ufF_BgXpalYSqe6Ligt2uELxA22cyIj_5tFIuGNk158" />
     <meta charset="utf-8">
@@ -28,7 +28,6 @@
       })();
 
     </script>
-    <script type="application/javascript" src="{% static 'js/angular.min.js' %}"></script>
 </head>
 <body class="fundo-grama">
     <div id="fb-root"></div>
@@ -94,7 +93,8 @@
     <div class="container-fluid">
         <div class="row conteudo flex">
             <div class="col-md-2 lateral esquerdo fundo-grama-faixa-esquerda">
-                <div class="andamento">
+                <div class="andamento painel text-right">
+                    <h3>Partidas em andamento <span class="fa fa-angle-double-right"></span></h3>
                 </div>
                 <div class="ad-sense">
                     <ins class="adsbygoogle"
@@ -108,11 +108,42 @@
                 </div>
             </div>
             <div class="col-md-8 central {{ css_fundo }}">
+                <div class="painel partidas-andamento well-sm" data-posicao="fechado">
+                    <h3>Partidas em andamento</h3>
+                    <div class="corpo-painel">
+                        {% if not partidas_atuais %}
+                            <div class="panel panel-default partida">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <h4>Sem Jogo</h4>
+                                    </div>
+                                </div>
+                                <div class="panel-body text-center">
+                                    Não há partidas no momento
+                                </div>
+                                <div class="panel-footer small">
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% for partida in partidas_atuais %}
+                            {% include 'includes/partida.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="painel partidas-proximas well-sm" data-posicao="fechado">
+                    <h3>Próximas</h3>
+                    <div class="corpo-painel">
+                        {% for partida in proximas_partidas %}
+                            {% include 'includes/partida.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
                 {% block conteudo %}
                 {% endblock conteudo %}
             </div>
             <div class="col-md-2 lateral direito fundo-grama-faixa-direita">
-                <div class="proximas">
+                <div class="proximas painel">
+                    <h3><span class="fa fa-angle-double-left"></span> Próximas partidas</h3>
                 </div>
                 <div class="ad-sense">
                     <ins class="adsbygoogle"
