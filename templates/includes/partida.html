@@ -1,6 +1,6 @@
 {% load humanize %}
                     <div class="panel panel-default partida" data-partida="{{ partida.id }}">
-                        <div class="panel-heading">
+                        <div class="panel-heading text-center">
                             <div class="panel-title">
                             {% if mata_mata %}
                                 <h4 class="estadio">
@@ -97,7 +97,7 @@
                                 {% endif %}
                             {% endif %}
                         </div>
-                        <div class="panel-footer small">
+                        <div class="panel-footer small text-center">
                         {% if not mata_mata %}
                             <h4 class="estadio">
                                 {{ partida.local.nome }}

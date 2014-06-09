@@ -18,10 +18,15 @@ def criar_contexto(request, titulo_da_pagina, pagina_atual, css_fundo, partidas=
     partidas_votadas = []
     if partidas_cookie:
         partidas_votadas = json.loads(partidas_cookie)
+
+    proximas_partidas = [
+        partida for partida in
+        Partida.objects.filter(realizada=False).order_by('data')[:6] if not partida.em_andamento()
+    ]
     contexto = {
         'grupos': grupos, 'grupos_classificando': grupos, 'pagina_atual': pagina_atual, 'partidas': partidas,
         'css_fundo': css_fundo, 'titulo_da_pagina': titulo_da_pagina, 'partidas_votadas': partidas_votadas,
-        'partidas_atuais': [], 'proximas_partidas': Partida.objects.filter(realizada=False).order_by('data')[:4]
+        'partidas_atuais': [], 'proximas_partidas': proximas_partidas[:4]
     }
     contexto.update(csrf(request))
     return contexto
