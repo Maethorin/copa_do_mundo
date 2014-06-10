@@ -50,7 +50,6 @@ def partidas_de_grupo(request, nome):
 def classificacao(request, atual=None):
     atual = atual == 'atual'
     contexto = criar_contexto(request, "Classificação", 'classificacao_real' if atual else 'classificacao_simulada', 'classificacao')
-    # simulador.obter_dados_de_times(contexto['grupos'], atual=atual)
     contexto.update({'em_classificacao': True, 'atual': atual})
     return render_to_response('classificacao.html', contexto)
 

@@ -19,6 +19,9 @@ class Grupo(models.Model):
     def __unicode__(self):
         return "Grupo {}".format(self.nome)
 
+    def times_por_classificacao_simulada(self):
+        return self.time_set.all().order_by('classificacao_simulada__posicao')
+
     def partidas_do_grupo_na_fase(self, fase_slug):
         fase = Fase.objects.get(slug=fase_slug)
         times_query = Q(fase=fase, time_1__in=self.time_set.all()) | Q(fase=fase, time_2__in=self.time_set.all())
@@ -26,21 +29,76 @@ class Grupo(models.Model):
         return partidas
 
 
+class Classificacao(models.Model):
+    TIPO_CLASSIFICACAO = (("S", "Simulada"), ("R", "Real"))
+    tipo = models.CharField(max_length=1, choices=TIPO_CLASSIFICACAO, default="S")
+    jogos = models.IntegerField(blank=True, default=0)
+    vitorias = models.IntegerField(blank=True, default=0)
+    empates = models.IntegerField(blank=True, default=0)
+    gols_feitos = models.IntegerField(blank=True, default=0)
+    gols_tomados = models.IntegerField(blank=True, default=0)
+    saldo_de_gols = models.IntegerField(blank=True, default=0)
+    pontos = models.IntegerField(blank=True, default=0)
+    posicao = models.IntegerField(blank=True, default=0)
+
+    def aproveitamento(self):
+        if self.jogos == 0:
+            return 0
+        return round(float(self.vitorias) / float(self.jogos) * 100, 1)
+
+    def derrotas(self):
+        return self.jogos - (self.vitorias + self.empates)
+
+    def zera_valores(self):
+        self.jogos = 0
+        self.vitorias = 0
+        self.empates = 0
+        self.gols_feitos = 0
+        self.gols_tomados = 0
+        self.pontos = 0
+
+    class Meta:
+        verbose_name = u'Classificação'
+        verbose_name_plural = u'Classificações'
+        db_table = 'classificacao'
+
+
 class Time(models.Model):
     id = models.AutoField(primary_key=True, db_column='time_id')
     nome = models.CharField(max_length=200, unique=True)
-    pontos = models.IntegerField(blank=True, default=0)
-    posicao = models.IntegerField(blank=True, default=0)
     grupo = models.ForeignKey(Grupo)
     abreviatura = models.CharField(max_length=15, unique=True, blank=True, null=True)
     sigla = models.CharField(max_length=3, unique=True, blank=True, null=True)
+    classificacao_simulada = models.OneToOneField(Classificacao, null=True, related_name="time_na_simulacao")
+    classificacao_real = models.OneToOneField(Classificacao, null=True, related_name="time_real")
 
-    jogos = 0
-    vitorias = 0
-    empates = 0
-    gols_feitos = 0
-    gols_tomados = 0
-    saldo_de_gols = 0
+    def classificacao(self, tipo):
+        if tipo == "S":
+            return self.classificacao_simulada
+        elif tipo == "R":
+            return self.classificacao_real
+
+    def zera_valores(self, tipo):
+        if tipo == "S":
+            if self.classificacao_simulada:
+                try:
+                    self.classificacao_simulada.zera_valores()
+                except Classificacao.DoesNotExist:
+                    self.classificacao_simulada = Classificacao.objects.create(tipo="S")
+                    self.save()
+            else:
+                self.classificacao_simulada = Classificacao.objects.create(tipo="S")
+                self.save()
+        elif tipo == "R":
+            if self.classificacao_real:
+                try:
+                    self.classificacao_real.zera_valores()
+                except Classificacao.DoesNotExist:
+                    self.classificacao_real = Classificacao.objects.create(tipo="R")
+                    self.save()
+            else:
+                self.classificacao_real = Classificacao.objects.create(tipo="R")
+                self.save()
 
     def derrotas(self):
         return self.jogos - (self.vitorias + self.empates)
@@ -63,12 +121,12 @@ class Time(models.Model):
         return False
 
     class Meta:
-        ordering = ['grupo', '-pontos', 'nome']
+        ordering = ['grupo', 'nome']
         verbose_name_plural = 'Times'
         db_table = 'times'
 
     def __unicode__(self):
-        return '%s - Grupo %s. Pontos %d' % (self.nome, self.grupo.nome, self.pontos)
+        return '%s - Grupo %s.' % (self.nome, self.grupo.nome)
 
 
 class Fase(models.Model):
