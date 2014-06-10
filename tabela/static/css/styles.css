@@ -11019,6 +11019,11 @@ input[type=number] {
   font-size: 12px;
 }
 
+/* line 105, ../sass/_partida.scss */
+.rodada .partida {
+  display: none;
+}
+
 /* line 1, ../sass/_bandeiras.scss */
 .bandeira {
   width: 25px;

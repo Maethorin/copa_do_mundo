@@ -9,7 +9,6 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 
 from tabela.models import Grupo, Partida, Fase
-from tabela import simulador
 
 
 def criar_contexto(request, titulo_da_pagina, pagina_atual, css_fundo, partidas=None):
@@ -23,10 +22,14 @@ def criar_contexto(request, titulo_da_pagina, pagina_atual, css_fundo, partidas=
         partida for partida in
         Partida.objects.filter(realizada=False).order_by('data')[:6] if not partida.em_andamento()
     ]
+    partidas_em_andamento = [
+        partida for partida in
+        Partida.objects.filter(realizada=False).order_by('data')[:6] if partida.em_andamento()
+    ]
     contexto = {
         'grupos': grupos, 'grupos_classificando': grupos, 'pagina_atual': pagina_atual, 'partidas': partidas,
         'css_fundo': css_fundo, 'titulo_da_pagina': titulo_da_pagina, 'partidas_votadas': partidas_votadas,
-        'partidas_atuais': [], 'proximas_partidas': proximas_partidas[:4]
+        'partidas_atuais': partidas_em_andamento, 'proximas_partidas': proximas_partidas[:4]
     }
     contexto.update(csrf(request))
     return contexto
@@ -38,7 +41,7 @@ def index(request):
 
 def partidas_de_grupo(request, nome):
     grupo = Grupo.objects.get(nome=nome)
-    partidas_do_grupo = simulador.obtem_partidas_de_grupo(grupo)
+    partidas_do_grupo = grupo.partidas_do_grupo_na_fase('classificacao')
     contexto = criar_contexto(request, "Grupo {}".format(grupo.nome), grupo.nome, 'grupos', partidas_do_grupo)
     contexto.update({'em_grupos': True})
     return render_to_response('grupo.html', contexto)
@@ -47,7 +50,7 @@ def partidas_de_grupo(request, nome):
 def classificacao(request, atual=None):
     atual = atual == 'atual'
     contexto = criar_contexto(request, "Classificação", 'classificacao_real' if atual else 'classificacao_simulada', 'classificacao')
-    simulador.obter_dados_de_times(contexto['grupos'], atual=atual)
+    # simulador.obter_dados_de_times(contexto['grupos'], atual=atual)
     contexto.update({'em_classificacao': True, 'atual': atual})
     return render_to_response('classificacao.html', contexto)
 
@@ -55,18 +58,7 @@ def classificacao(request, atual=None):
 def mostra_rodada(request, slug):
     fase = Fase.objects.get(slug=slug)
     partidas = Partida.objects.filter(fase=fase)
-    simulador.obter_times_de_partidas(partidas)
-
     contexto = criar_contexto(request, fase.nome, slug, slug, partidas)
-    return render_to_response('partidas.html', contexto)
-
-
-def partidas_em_andamento(request):
-    partidas = simulador.obter_partidas_em_andamento()
-    for partida in partidas:
-        simulador.atualiza_informacoes_de_partida_em_andamento(partida)
-        partida.save()
-    contexto = criar_contexto(request, "em andamento", "andamento", "andamentoi", partidas)
     return render_to_response('partidas.html', contexto)
 
 

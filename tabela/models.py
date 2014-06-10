@@ -4,6 +4,7 @@
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.db import models
+from django.db.models import Q
 
 
 class Grupo(models.Model):
@@ -17,6 +18,12 @@ class Grupo(models.Model):
 
     def __unicode__(self):
         return "Grupo {}".format(self.nome)
+
+    def partidas_do_grupo_na_fase(self, fase_slug):
+        fase = Fase.objects.get(slug=fase_slug)
+        times_query = Q(fase=fase, time_1__in=self.time_set.all()) | Q(fase=fase, time_2__in=self.time_set.all())
+        partidas = Partida.objects.filter(times_query)
+        return partidas
 
 
 class Time(models.Model):
