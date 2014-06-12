@@ -13,9 +13,6 @@ APP_PATH = os.path.join(BASE_DIR)
 SECRET_KEY = '%zwkr9gs@t2hs)!ce4_j!^&uj!dtsei(5eo75e0k0(*i2@c_9v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-LOCAL_DEVELOPMENT = True
-TEMPLATE_DEBUG = True
 SERVER_TIME_DIFF = 0
 
 ALLOWED_HOSTS = []
@@ -89,3 +86,10 @@ TEMPLATE_DIRS = (
 FACEBOOK_GRAPH_API = "https://graph.facebook.com/v2.0"
 FACEBOOK_PAGE_ID = os.environ.get('FACEBOOK_PAGE_ID', None)
 FACEBOOK_PAGE_ACCESS_TOKEN = os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN', None)
+
+
+#produção
+DEBUG = False
+LOCAL_DEVELOPMENT = False
+TEMPLATE_DEBUG = False
+STATIC_ROOT = '/webapps/copa_do_mundo/app/tabela/static/'
