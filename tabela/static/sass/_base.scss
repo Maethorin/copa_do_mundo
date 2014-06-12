@@ -42,12 +42,6 @@ $faixa-tamanho-n: -18px;
 
 .social {
   @include box-shadow(
-    rgba(white, 0.5) 0 $faixa-tamanho 5px -1px inset
-  );
-}
-
-.menu {
-  @include box-shadow(
     rgba(white, 0.5) 0 $faixa-tamanho-n 5px -1px inset
   );
 }
@@ -158,18 +152,6 @@ footer {
     display: -webkit-flex;
     display: flex;
     flex:1 0 auto;
-}
-
-.social {
-  border-bottom: 3px solid $amarelo-ouro;
-  min-height: 55px;
-}
-
-.branco {
-  margin: 17px 0 0;
-  padding-top: 8px;
-  overflow: hidden;
-  min-height: 36px;
 }
 
 .slide-up {
@@ -299,4 +281,19 @@ footer {
 .partidas-proximas {
   right: -545px;
   float: right;
+}
+
+.navbar {
+  margin: -5px 0;
+}
+
+.social {
+  padding: 10px 0 25px;
+  border-top: 3px solid $amarelo-ouro;
+}
+
+.branco {
+  margin: -10px 0 -6px;
+  min-height: 31px;
+  padding: 5px 0 0;
 }

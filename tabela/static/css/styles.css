@@ -10598,87 +10598,81 @@ body {
 
 /* line 43, ../sass/_base.scss */
 .social {
-  -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 18px 5px -1px inset;
-  box-shadow: rgba(255, 255, 255, 0.5) 0 18px 5px -1px inset;
-}
-
-/* line 49, ../sass/_base.scss */
-.menu {
   -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 -18px 5px -1px inset;
   box-shadow: rgba(255, 255, 255, 0.5) 0 -18px 5px -1px inset;
 }
 
-/* line 55, ../sass/_base.scss */
+/* line 49, ../sass/_base.scss */
 .cabecalho-container {
   -webkit-box-shadow: rgba(255, 255, 255, 0.5) 0 18px 5px -1px inset;
   box-shadow: rgba(255, 255, 255, 0.5) 0 18px 5px -1px inset;
 }
 
-/* line 61, ../sass/_base.scss */
+/* line 55, ../sass/_base.scss */
 .logo-menor {
   width: 125px;
 }
 
-/* line 65, ../sass/_base.scss */
+/* line 59, ../sass/_base.scss */
 footer {
   font-size: 10px;
   min-height: 20px;
 }
-/* line 68, ../sass/_base.scss */
+/* line 62, ../sass/_base.scss */
 footer .logo {
   padding: 8px;
 }
 
 @media (max-width: 768px) {
-  /* line 74, ../sass/_base.scss */
+  /* line 68, ../sass/_base.scss */
   .navbar-absolute {
     position: absolute;
     margin: 0;
   }
 
-  /* line 79, ../sass/_base.scss */
+  /* line 73, ../sass/_base.scss */
   .conteudo .esquerdo, .conteudo .direito {
     display: none;
   }
 
-  /* line 83, ../sass/_base.scss */
+  /* line 77, ../sass/_base.scss */
   .cabecalho {
     display: none;
   }
-  /* line 85, ../sass/_base.scss */
+  /* line 79, ../sass/_base.scss */
   .cabecalho.flex {
     display: none;
   }
 
-  /* line 91, ../sass/_base.scss */
+  /* line 85, ../sass/_base.scss */
   .menu .titulo-da-pagina h1 {
     font-size: 13px;
     width: 95px;
     margin-top: 19px;
   }
 }
-/* line 101, ../sass/_base.scss */
+/* line 95, ../sass/_base.scss */
 .cabecalho .titulo, .cabecalho .titulo-da-pagina {
   padding: 2px 10px;
 }
 
-/* line 106, ../sass/_base.scss */
+/* line 100, ../sass/_base.scss */
 .inicial, .classificacao {
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-/* line 111, ../sass/_base.scss */
+/* line 105, ../sass/_base.scss */
 .central {
   padding: 20px 20px 0 20px;
 }
 
-/* line 115, ../sass/_base.scss */
+/* line 109, ../sass/_base.scss */
 .topo {
   min-height: 17px;
 }
 
-/* line 119, ../sass/_base.scss */
+/* line 113, ../sass/_base.scss */
 .titulo {
   margin: -2px 0 -4px;
   width: 260px;
@@ -10686,7 +10680,7 @@ footer .logo {
   display: inline-block;
 }
 
-/* line 126, ../sass/_base.scss */
+/* line 120, ../sass/_base.scss */
 .bola {
   cursor: pointer;
   width: 70px;
@@ -10696,30 +10690,30 @@ footer .logo {
   margin-right: auto;
 }
 
-/* line 135, ../sass/_base.scss */
+/* line 129, ../sass/_base.scss */
 .ad-sense {
   padding: 10px 25px;
 }
 
-/* line 139, ../sass/_base.scss */
+/* line 133, ../sass/_base.scss */
 .introducao {
   margin-bottom: 20px;
   overflow: hidden;
   position: relative;
   top: -85px;
 }
-/* line 144, ../sass/_base.scss */
+/* line 138, ../sass/_base.scss */
 .introducao .texto {
   display: none;
 }
-/* line 147, ../sass/_base.scss */
+/* line 141, ../sass/_base.scss */
 .introducao p {
   margin: 16px 0;
   color: #EFEFEF;
   font-size: 14px;
 }
 
-/* line 154, ../sass/_base.scss */
+/* line 148, ../sass/_base.scss */
 .flex {
   display: -webkit-box;
   display: -moz-box;
@@ -10729,31 +10723,17 @@ footer .logo {
   flex: 1 0 auto;
 }
 
-/* line 163, ../sass/_base.scss */
-.social {
-  border-bottom: 3px solid gold;
-  min-height: 55px;
-}
-
-/* line 168, ../sass/_base.scss */
-.branco {
-  margin: 17px 0 0;
-  padding-top: 8px;
-  overflow: hidden;
-  min-height: 36px;
-}
-
-/* line 175, ../sass/_base.scss */
+/* line 157, ../sass/_base.scss */
 .slide-up {
   cursor: pointer;
 }
 
-/* line 180, ../sass/_base.scss */
+/* line 162, ../sass/_base.scss */
 .partidas-index .col-md-6 {
   position: relative;
   height: 60px;
 }
-/* line 184, ../sass/_base.scss */
+/* line 166, ../sass/_base.scss */
 .partidas-index .painel {
   position: absolute;
   left: 5.2%;
@@ -10761,19 +10741,19 @@ footer .logo {
   bottom: -52px;
   display: none;
 }
-/* line 190, ../sass/_base.scss */
+/* line 172, ../sass/_base.scss */
 .partidas-index .painel .corpo-painel {
   display: none;
   color: #EFEFEF;
   height: 300px;
 }
 
-/* line 198, ../sass/_base.scss */
+/* line 180, ../sass/_base.scss */
 .aberto {
   height: 400px;
 }
 
-/* line 202, ../sass/_base.scss */
+/* line 184, ../sass/_base.scss */
 .barras, .barras-baixo {
   width: 55%;
   margin-bottom: -30px;
@@ -10786,20 +10766,20 @@ footer .logo {
   border-image: linear-gradient(to left, #000000, #aaaaaa) 1 100%;
 }
 
-/* line 214, ../sass/_base.scss */
+/* line 196, ../sass/_base.scss */
 .barras-baixo {
   top: 66px;
   height: 60px;
   display: none;
 }
 
-/* line 220, ../sass/_base.scss */
+/* line 202, ../sass/_base.scss */
 .painel {
   border-width: 4px;
   border-style: solid;
   border-color: #9A9A9A;
 }
-/* line 224, ../sass/_base.scss */
+/* line 206, ../sass/_base.scss */
 .painel h3 {
   margin: -9px;
   padding: 7px;
@@ -10808,34 +10788,34 @@ footer .logo {
   top: 0;
 }
 
-/* line 233, ../sass/_base.scss */
+/* line 215, ../sass/_base.scss */
 .grupos-classificando {
   overflow: auto;
   max-height: 98px;
   padding-left: 10.5%;
 }
-/* line 237, ../sass/_base.scss */
+/* line 219, ../sass/_base.scss */
 .grupos-classificando .times {
   overflow: hidden;
   margin-top: 6px;
 }
-/* line 241, ../sass/_base.scss */
+/* line 223, ../sass/_base.scss */
 .grupos-classificando .grupo, .grupos-classificando .time {
   float: left;
 }
-/* line 244, ../sass/_base.scss */
+/* line 226, ../sass/_base.scss */
 .grupos-classificando .time {
   font-size: 8px;
   padding: 0 13px;
 }
-/* line 248, ../sass/_base.scss */
+/* line 230, ../sass/_base.scss */
 .grupos-classificando .grupo {
   border: 1px solid #333;
   padding: 0;
   margin: 4px 4%;
   overflow: hidden;
 }
-/* line 253, ../sass/_base.scss */
+/* line 235, ../sass/_base.scss */
 .grupos-classificando .grupo .nome {
   margin: -6px;
   padding: 4px 0 2px;
@@ -10843,55 +10823,73 @@ footer .logo {
   font-size: 10px;
   top: 0;
 }
-/* line 254, ../sass/_base.scss */
+/* line 236, ../sass/_base.scss */
 .grupos-classificando .grupo .nome a {
   color: #ffff00;
 }
 
-/* line 266, ../sass/_base.scss */
+/* line 248, ../sass/_base.scss */
 .proximas, .andamento {
   overflow: hidden;
   cursor: pointer;
 }
-/* line 269, ../sass/_base.scss */
+/* line 251, ../sass/_base.scss */
 .proximas h3, .andamento h3 {
   font-size: 13px;
   padding: 13px;
 }
 
-/* line 275, ../sass/_base.scss */
+/* line 257, ../sass/_base.scss */
 .andamento {
   margin: 21px 0 0 10px;
 }
 
-/* line 279, ../sass/_base.scss */
+/* line 261, ../sass/_base.scss */
 .proximas {
   margin: 21px 10px 0 0;
 }
 
-/* line 283, ../sass/_base.scss */
+/* line 265, ../sass/_base.scss */
 .partidas-proximas, .partidas-andamento {
   position: absolute;
   z-index: 10;
   width: 35%;
 }
-/* line 287, ../sass/_base.scss */
+/* line 269, ../sass/_base.scss */
 .partidas-proximas .corpo-painel, .partidas-andamento .corpo-painel {
   display: none;
   max-height: 400px;
   overflow-y: auto;
 }
 
-/* line 294, ../sass/_base.scss */
+/* line 276, ../sass/_base.scss */
 .partidas-andamento {
   left: -545px;
   float: left;
 }
 
-/* line 299, ../sass/_base.scss */
+/* line 281, ../sass/_base.scss */
 .partidas-proximas {
   right: -545px;
   float: right;
+}
+
+/* line 286, ../sass/_base.scss */
+.navbar {
+  margin: -5px 0;
+}
+
+/* line 290, ../sass/_base.scss */
+.social {
+  padding: 10px 0 25px;
+  border-top: 3px solid gold;
+}
+
+/* line 295, ../sass/_base.scss */
+.branco {
+  margin: -10px 0 -6px;
+  min-height: 31px;
+  padding: 5px 0 0;
 }
 
 /* line 1, ../sass/_partida.scss */
