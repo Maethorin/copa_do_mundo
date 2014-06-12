@@ -4,3 +4,4 @@ python-dev
 libxml2-dev
 libxslt1-dev
 nginx
+supervisor

@@ -12,8 +12,7 @@ echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
 cd $DJANGODIR
-source /usr/local/bin/virtualenvwrapper_lazy.sh
-workon copa
+source /webapps/copa_do_mundo/.virtualenvs/bin/activate
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
