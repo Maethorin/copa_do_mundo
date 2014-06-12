@@ -113,7 +113,9 @@ class Time(models.Model):
         if not fase:
             return True
         if fase.slug == 'classificacao' and fase.finalizada:
-            return self.posicao <= 2
+            return self.classificacao_real.posicao <= 2
+        if fase.slug == 'classificacao' and not fase.finalizada:
+            return True
         if fase.slug != 'classificacao':
             for partida in fase.partida_set.all():
                 if self == partida.time_1 or self == partida.time_2:
