@@ -1,0 +1,1 @@
+web: gunicorn copa_do_mundo.wsgi

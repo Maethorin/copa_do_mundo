@@ -1,8 +1,4 @@
-mox
-mock
-nose
-sure
-six
+Gunicorn
 Django
 South
 MySql-python
