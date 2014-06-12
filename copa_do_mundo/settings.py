@@ -23,6 +23,7 @@ CSRF_COOKIE_SECURE = False
 
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'django.contrib.sitemaps',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -89,7 +90,7 @@ FACEBOOK_PAGE_ACCESS_TOKEN = os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN', None)
 
 
 #produção
-DEBUG = False
-LOCAL_DEVELOPMENT = False
-TEMPLATE_DEBUG = False
-STATIC_ROOT = '/webapps/copa_do_mundo/app/tabela/static/'
+DEBUG = True
+LOCAL_DEVELOPMENT = True
+TEMPLATE_DEBUG = True
+# STATIC_ROOT = '/webapps/copa_do_mundo/app/tabela/static/'
