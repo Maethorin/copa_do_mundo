@@ -1,8 +1,8 @@
 #!/bin/bash
 
 NAME="copa_do_mundo"                                  # Name of the application
-DJANGODIR=/webapps/copa_do_mundo/copa/copa_do_mundo             # Django project directory
-SOCKFILE=/webapps/copa_do_mundo/copa/run/gunicorn.sock  # we will communicte using this unix socket
+DJANGODIR=/webapps/copa_do_mundo/app/copa_do_mundo             # Django project directory
+SOCKFILE=/webapps/copa_do_mundo/app/run/gunicorn.sock  # we will communicte using this unix socket
 USER=copa                                        # the user to run as
 GROUP=webapps                                     # the group to run as
 NUM_WORKERS=3                                     # how many worker processes should Gunicorn spawn
