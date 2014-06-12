@@ -1,31 +1,42 @@
     {% if final %}
-                                <span class="abreviatura">{{ partida.time_1.abreviatura|default:"NDF" }}</span>
-                                <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
-                                <span class="gols">{{partida.gols_time_1|default:0}}</span>
+                                <div class="time-container" title="{{ partida.time_1.nome|default:'Não definido' }}">
+                                    <span class="abreviatura">{{ partida.time_1.abreviatura|default:"NDF" }}</span>
+                                    <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
+                                    <span class="gols">{{partida.gols_time_1|default:0}}</span>
+                                </div>
                                 X
-                                <span class="gols">{{partida.gols_time_2|default:0}}</span>
-                                <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
-                                <span class="abreviatura">{{ partida.time_2.abreviatura|default:"NDF" }}</span>
+                                <div class="time-container" title="{{ partida.time_2.nome|default:'Não definido' }}">
+                                    <span class="gols">{{partida.gols_time_2|default:0}}</span>
+                                    <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
+                                    <span class="abreviatura">{{ partida.time_2.abreviatura|default:"NDF" }}</span>
+                                </div>
 
     {% elif simulado %}
-
-                                <span class="abreviatura">{{ partida.time_1.abreviatura|default:"NDF" }}</span>
-                                <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
-                                <span class="gols time_1">{{partida.media_palpites_time_1}}</span>
+                                <div class="time-container" title="{{ partida.time_1.nome|default:'Não definido' }}">
+                                    <span class="abreviatura">{{ partida.time_1.abreviatura|default:"NDF" }}</span>
+                                    <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
+                                    <span class="gols time_1">{{partida.media_palpites_time_1}}</span>
+                                </div>
                                 X
-                                <span class="gols time_2">{{partida.media_palpites_time_2}}</span>
-                                <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
-                                <span class="abreviatura">{{ partida.time_2.abreviatura|default:"NDF" }}</span>
+                                <div class="time-container" title="{{ partida.time_2.nome|default:'Não definido' }}">
+                                    <span class="gols time_2">{{partida.media_palpites_time_2}}</span>
+                                    <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
+                                    <span class="abreviatura">{{ partida.time_2.abreviatura|default:"NDF" }}</span>
+                                </div>
     {% else %}
+                                <div class="time-container" title="{{ partida.time_1.nome|default:'Não definido' }}">
                                     <span class="abreviatura">{{ partida.time_1.abreviatura|default:"NDF" }}</span>
                                     <icon class="bandeira {{ partida.time_1.sigla|default:"ndf" }}"></icon>
                                     <div class="palpite">
                                         <input class="form-control input-sm" placeholder="0" type="number" name="time_1" min="0" max="9" />
                                     </div>
+                                </div>
                                     X
+                                <div class="time-container" title="{{ partida.time_2.nome|default:'Não definido' }}">
                                     <div class="palpite">
                                         <input class="form-control input-sm" placeholder="0" type="number" name="time_2" min="0" max="9" />
                                     </div>
                                     <icon class="bandeira {{ partida.time_2.sigla|default:"ndf" }}"></icon>
                                     <span class="abreviatura">{{ partida.time_2.abreviatura|default:"NDF" }}</span>
+                                </div>
     {% endif %}

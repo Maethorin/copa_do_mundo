@@ -83,8 +83,10 @@ $(window).load(function() {
     redimencionaCentral();
 });
 
+
 $(window).resize(function() {
     redimencionaCentral();
 });
 
 $(".time").tooltip();
+$(".time-container").tooltip();
