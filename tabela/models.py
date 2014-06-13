@@ -20,7 +20,7 @@ class Grupo(models.Model):
         return "Grupo {}".format(self.nome)
 
     def times_por_classificacao_simulada(self):
-        return self.time_set.all().order_by('classificacao_simulada__posicao')
+        return self.time_set.all().order_by('-classificacao_simulada__pontos', '-classificacao_simulada__saldo_de_gols', '-classificacao_simulada__gols_feitos')
 
     def partidas_do_grupo_na_fase(self, fase_slug):
         fase = Fase.objects.get(slug=fase_slug)

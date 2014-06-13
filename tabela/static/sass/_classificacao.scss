@@ -35,4 +35,8 @@
 .legenda {
   margin-top: 5px;
   background-color: $gray-lighter;
+  .label-container {
+    display: inline-block;
+    width: 19%;
+  }
 }
