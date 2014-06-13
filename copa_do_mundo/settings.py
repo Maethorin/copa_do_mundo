@@ -15,7 +15,7 @@ SECRET_KEY = '%zwkr9gs@t2hs)!ce4_j!^&uj!dtsei(5eo75e0k0(*i2@c_9v'
 # SECURITY WARNING: don't run with debug turned on in production!
 SERVER_TIME_DIFF = 0
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["www.simuladorcopadomundo.com.br", "simuladorcopadomundo.com.br"]
 
 CSRF_COOKIE_SECURE = False
 
