@@ -83,11 +83,6 @@ TEMPLATE_DIRS = (
     os.path.join(APP_PATH, 'templates'),
 )
 
-FACEBOOK_GRAPH_API = "https://graph.facebook.com/v2.0"
-FACEBOOK_PAGE_ID = os.environ.get('FACEBOOK_PAGE_ID', None)
-FACEBOOK_PAGE_ACCESS_TOKEN = os.environ.get('FACEBOOK_PAGE_ACCESS_TOKEN', None)
-
-
 #produção
 DEBUG = False
 LOCAL_DEVELOPMENT = False
