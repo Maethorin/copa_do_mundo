@@ -22,6 +22,9 @@ class Grupo(models.Model):
     def times_por_classificacao_simulada(self):
         return self.time_set.all().order_by('-classificacao_simulada__pontos', '-classificacao_simulada__saldo_de_gols', '-classificacao_simulada__gols_feitos')
 
+    def times_por_classificacao_real(self):
+        return self.time_set.all().order_by('-classificacao_real__pontos', '-classificacao_real__saldo_de_gols', '-classificacao_real__gols_feitos')
+
     def partidas_do_grupo_na_fase(self, fase_slug):
         fase = Fase.objects.get(slug=fase_slug)
         times_query = Q(fase=fase, time_1__in=self.time_set.all()) | Q(fase=fase, time_2__in=self.time_set.all())
