@@ -100,24 +100,11 @@ def _obtem_palpites(request):
     return palpite_time_1, palpite_time_2
 
 
-def publica_no_facebook(request):
-    from pip._vendor import requests
-    message = request.GET.get("message", None)
-    if not message:
-        message = "Made by my Django App"
-    facebook_post = {
-        "message": message,
-        "link": "http://g1.globo.com/"
-    }
-    resultado = requests.post("{}/{}/feed?access_token={}".format(settings.FACEBOOK_GRAPH_API, settings.FACEBOOK_PAGE_ID, settings.FACEBOOK_PAGE_ACCESS_TOKEN), data=facebook_post)
-    return HttpResponse(resultado.text, mimetype="application/json")
-
-
-def obtem_access_token(request):
-    from pip._vendor import requests
-    url = "{}/oauth/access_token?grant_type=fb_exchange_token&client_id={}&client_secret={}&fb_exchange_token={}"
-    app_id = ""
-    app_scret = ""
-    temporary_access_token = ""
-    resultado = requests.get(url.format(settings.FACEBOOK_GRAPH_API, app_id, app_scret, temporary_access_token))
-    return HttpResponse(resultado.text, mimetype="application/json")
+# def obtem_access_token(request):
+#     from pip._vendor import requests
+#     url = "{}/oauth/access_token?grant_type=fb_exchange_token&client_id={}&client_secret={}&fb_exchange_token={}"
+#     app_id = ""
+#     app_scret = ""
+#     temporary_access_token = ""
+#     resultado = requests.get(url.format(settings.FACEBOOK_GRAPH_API, app_id, app_scret, temporary_access_token))
+#     return HttpResponse(resultado.text, mimetype="application/json")
