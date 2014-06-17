@@ -21,7 +21,7 @@ body {
   }
   .titulo-da-pagina {
     h1 {
-      font-size: 17px;
+      font-size: 16px;
       width: 125px;
       text-align: right;
       margin-top: 16px;
@@ -130,20 +130,28 @@ footer {
   padding: 10px 25px;
 }
 
-.introducao {
-  margin-bottom: 20px;
-  overflow: hidden;
-  position: relative;
-  top: -85px;
-  .texto {
-    display: none;
-  }
-  p {
-    margin: 16px 0;
-    color: #EFEFEF;
-    font-size: 14px;
-  }
+.agenda {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+
+//.introducao {
+//  margin-bottom: 20px;
+//  overflow: hidden;
+//  position: relative;
+//  top: -85px;
+  .texto {
+    padding: 5px;
+    border-radius: 3px;
+    margin-top: 10px;
+//    display: none;
+    p {
+      margin: 16px 0;
+      color: #EFEFEF;
+      font-size: 14px;
+    }
+  }
+//}
 
 .flex {
     display: -webkit-box;
@@ -168,9 +176,9 @@ footer {
     left: 5.2%;
     width: 90%;
     bottom: -52px;
-    display: none;
+//    display: none;
     .corpo-painel {
-      display: none;
+//      display: none;
       color: #EFEFEF;
       height: 300px;
     }
@@ -204,11 +212,33 @@ footer {
   border-style: solid;
   border-color: #9A9A9A;
   h3 {
-    margin: -9px;
-    padding: 7px;
+    margin: -9px -9px 10px -9px;
+    padding: 5px 10px;
     color: #ffff00;
-    position: relative;
-    top: 0;
+    font-size: 20px;
+    a {
+      color: #ffff00;
+    }
+  }
+}
+
+.panel-group {
+  h3 {
+    margin: -9px;
+    cursor: pointer;
+    .fa {
+      float: right;
+      font-size: 14px;
+    }
+  }
+}
+
+#accordion {
+  .panel-body {
+    padding: 5px;
+    max-height: 440px;
+    overflow: auto;
+    margin: 15px 0 5px;
   }
 }
 
@@ -245,44 +275,6 @@ footer {
   }
 }
 
-.proximas, .andamento {
-  overflow: hidden;
-  cursor: pointer;
-  h3 {
-    font-size: 13px;
-    padding: 13px;
-  }
-}
-
-.andamento {
-  margin: 21px 0 0 10px;
-}
-
-.proximas {
-  margin: 21px 10px 0 0;
-}
-
-.partidas-proximas, .partidas-andamento {
-  position: absolute;
-  z-index: 10;
-  width: 35%;
-  .corpo-painel {
-    display: none;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-}
-
-.partidas-andamento {
-  left: -545px;
-  float: left;
-}
-
-.partidas-proximas {
-  right: -545px;
-  float: right;
-}
-
 .navbar {
   margin: -5px 0;
 }
@@ -296,4 +288,11 @@ footer {
   margin: -10px 0 -6px;
   min-height: 31px;
   padding: 5px 0 0;
+}
+
+
+.agenda {
+  .painel {
+    margin-bottom: 10px;
+  }
 }

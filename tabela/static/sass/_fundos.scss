@@ -32,7 +32,6 @@
   background-position: floor(30);
 }
 
-
 .cabecalho, .branco {
     background-color: $fundo-cabecalho;
 }
@@ -42,7 +41,6 @@
 }
 
 .introducao {
-  background-color: rgba(black, 0.4);
 }
 
 .proximas, .andamento {
@@ -53,6 +51,10 @@
   }
 }
 
+.texto {
+  background-color: rgba(black, 0.4);
+}
+
 footer {
   background-color: rgba(white, .6);
 }
@@ -61,6 +63,14 @@ footer {
   background-color: rgba(black, 0.4);
   h3 {
     background-color: $painel-header-bg;
+  }
+}
+
+.panel-group {
+  h3 {
+   &:hover {
+      background-color: darken($painel-header-bg, 10%);
+    }
   }
 }
 
@@ -122,3 +132,10 @@ footer {
   background-color: $gray-lighter;
 }
 
+.dados-partida {
+  background-color: #DDD;
+}
+
+.rodada-header {
+  background-color: lighten($painel-header-bg, 5%);
+}

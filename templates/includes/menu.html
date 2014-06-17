@@ -18,4 +18,4 @@
             <li{% if pagina_atual == 'classificacao_real' %} class="active"{% endif %}><a href="{% url 'classificacao' 'atual' %}" title="Classificação real"><div>Real</div></a></li>
         </ul>
     </li>
-{#    <li><a href="{% url 'chaves' %}" title="Rodadas do mata-mata em chaves"><div>Mata-mata</div></a></li>#}
+    <li{% if pagina_atual == 'agenda' %} class="active"{% endif %}><a href="{% url 'agenda' %}" title="Partida em andamento e próximas partidas"><div>Agenda</div></a></li>

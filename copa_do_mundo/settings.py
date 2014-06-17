@@ -17,6 +17,8 @@ SERVER_TIME_DIFF = 0
 
 ALLOWED_HOSTS = ["www.simuladorcopadomundo.com.br", "simuladorcopadomundo.com.br"]
 
+BASE_URL = "http://{}".format(ALLOWED_HOSTS[0])
+
 CSRF_COOKIE_SECURE = False
 
 # Application definition
@@ -82,6 +84,8 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     os.path.join(APP_PATH, 'templates'),
 )
+
+FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID', '880437195316693')
 
 #produção
 DEBUG = False

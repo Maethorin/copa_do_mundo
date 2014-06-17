@@ -28,8 +28,9 @@ class Grupo(models.Model):
     def partidas_do_grupo_na_fase(self, fase_slug):
         fase = Fase.objects.get(slug=fase_slug)
         times_query = Q(fase=fase, time_1__in=self.time_set.all()) | Q(fase=fase, time_2__in=self.time_set.all())
-        partidas = Partida.objects.filter(times_query)
-        return partidas
+        if fase.tem_rodadas:
+            return Partida.objects.filter(times_query).order_by('rodada__id')
+        return Partida.objects.filter(times_query)
 
 
 class Classificacao(models.Model):
@@ -134,6 +135,19 @@ class Time(models.Model):
         return '%s - Grupo %s.' % (self.nome, self.grupo.nome)
 
 
+class Rodada(models.Model):
+    id = models.AutoField(primary_key=True, db_column='rodada_id')
+    nome = models.CharField(max_length=20)
+    slug = models.SlugField(null=True)
+
+    class Meta:
+        verbose_name_plural = 'Rodadas'
+        db_table = 'rodadas'
+
+    def __unicode__(self):
+        return u"{}".format(self.nome)
+
+
 class Fase(models.Model):
     class Meta:
         verbose_name_plural = 'Fases'
@@ -144,6 +158,7 @@ class Fase(models.Model):
     slug = models.SlugField(null=True)
     data_inicio = models.DateTimeField(null=True)
     data_fim = models.DateTimeField(null=True)
+    tem_rodadas = models.BooleanField(default=False)
 
     @property
     def eh_atual(self):
@@ -191,6 +206,7 @@ class Partida(models.Model):
     data = models.DateTimeField()
     local = models.ForeignKey(Estadio, null=True)
     fase = models.ForeignKey(Fase, null=True)
+    rodada = models.ForeignKey(Rodada, null=True)
     regra_para_times = models.CharField(max_length=20, null=True, blank=True)
     gols_time_1 = models.IntegerField(null=True, blank=True)
     gols_time_2 = models.IntegerField(null=True, blank=True)
@@ -205,7 +221,13 @@ class Partida(models.Model):
         db_table = 'partidas'
 
     def formatado_para_placar(self):
-        return "{} x {}".format(self.time_1.nome, self.time_2.nome)
+        time_1 = u"Não definido"
+        time_2 = u"Não definido"
+        if self.time_1:
+            time_1 = self.time_1.nome
+        if self.time_2:
+            time_2 = self.time_2.nome
+        return u"{} x {}".format(time_1, time_2)
 
     def __unicode__(self):
         formato_data = '%a %d %B - %H:%M'

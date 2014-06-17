@@ -1,0 +1,73 @@
+{% load humanize %}
+            <li class="list-group-item partida" data-partida="{{ partida.id }}">
+                <div class="dados-partida">
+                    <span class="nomes-times">{{ partida.formatado_para_placar }}</span>
+                    <span class="fa fa-circle"></span>
+                    {{ partida.data|date:"d M - H:i" }}
+                    <span class="fa fa-circle"></span>
+                    {{ partida.local.nome }}
+                    <span class="fa fa-circle"></span>
+                    {{ partida.local.cidade_e_estado }}
+                </div>
+                <ul class="list-group placar-partida">
+                    {% if partida.realizada or partida.em_andamento %}
+                    <li class="list-group-item realizada text-center">
+                        {% if partida.realizada %}
+                            <span class="label label-success" title="Placar final">F</span>
+                        {% else %}
+                            <span class="label label-warning" title="Placar Atual">A</span>
+                        {% endif %}
+                        {% with final=True %}
+                        {% include 'includes/placar.html' %}
+                        {% endwith %}
+                    </li>
+                    {% endif %}
+                    <li class="list-group-item simulada text-center"{% if not partida.realizada and not partida.id in partidas_votadas %} style="display: none;"{% endif %}>
+                        <span class="label label-primary" title="Placar simulado - {{ partida.votos|intcomma }} votos">S</span>
+                        {% with simulado=True %}
+                        {% include 'includes/placar.html' %}
+                        {% endwith %}
+                        {% if partida.realizada %}
+                        {% if partida.palpite_certo %}
+                            {% if partida.vitorioso_certo == 'CERTO' %}
+                                <span class="label label-success" title="Acertou vencedor">V</span>
+                            {% elif partida.vitorioso_certo == 'EMPATE' %}
+                                <span class="label label-sucess" title="Acertou empate">E</span>
+                            {% else %}
+                                <span class="label label-danger" title="Errou vencedor">V</span>
+                            {% endif %}
+                            <span class="label label-success" title="Acertou placar">P</span>
+                        {% else %}
+                            {% if partida.vitorioso_certo == 'CERTO' %}
+                                <span class="label label-success" title="Acertou vencedor">V</span>
+                            {% elif partida.vitorioso_certo == 'EMPATE' %}
+                                <span class="label label-success" title="Acertou empate">E</span>
+                            {% else %}
+                                <span class="label label-danger" title="Errou vencedor">V</span>
+                            {% endif %}
+                                <span class="label label-danger" title="Errou placar">P</span>
+                        {% endif %}
+                        {% endif %}
+                    </li>
+                    {% if not partida.id in partidas_votadas %}
+                        {% if not partida.realizada and not partida.em_andamento %}
+                    <li class="list-group-item votar text-center">
+                        <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal form-palpite" role="form">
+                            {% csrf_token %}
+                            <input type="hidden" name="partida_id" value="{{partida.id}}" />
+                            {% if partida.time_1 and partida.time_2 %}
+                            {% include 'includes/placar.html' %}
+                            {% else %}
+                            {% with final=True %}
+                            {% include 'includes/placar.html' %}
+                            {% endwith %}
+                            {% endif %}
+                            {% if partida.time_1 and partida.time_2 %}
+                             <button type="submit" class="btn btn-primary btn-sm"><span class="fa fa-share"></span></button>
+                            {% endif %}
+                        </form>
+                    </li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </li>

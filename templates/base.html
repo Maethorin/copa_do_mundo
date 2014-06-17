@@ -10,6 +10,14 @@
     <meta name="description" content="Simulador do resultado das partidas da Copa do Mundo baseado nos palpites dos visitantes. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na patida." />
     <meta name="keywords" content="simulador,futebol,copa,copa do mundo,fifa 2014,Brasil 2014,jogos,resultados,tabela da copa,partidas,grupos,placar,times da copa" />
 
+    <meta property="fb:app_id" content="{{ og.app_id }}" />
+    <meta property="og:title" content="{{ og.title }}" />
+    <meta property="og:site_name" content="{{ og.site_name }}"/>
+    <meta property="og:url" content="{{ og.url }}" />
+    <meta property="og:description" content="{{ og.description }}" />
+    <meta property="og:type" content="{{ og.type }}" />
+    <meta property="og:image" content="{{ og.image }}" />
+
 	<title>Simulador da Copa do Mundo</title>
     <link rel="shortcut icon" href="{% static 'img/favicon/favicon.ico' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
@@ -92,7 +100,7 @@
             <div class="branco">
                 <div class="col-md-7"></div>
                 <div class="col-md-2">
-                    <div class="fb-like" data-href="https://www.facebook.com/simuladorcopadomundo" data-share="true" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+                    <div class="fb-like" data-href="https://www.facebook.com/simuladorcopadomundo" data-share="true" data-layout="button_count" data-action="like" data-show-faces="false"></div>
                 </div>
                 <div class="col-md-1">
 
@@ -102,9 +110,6 @@
         </div>
         <div class="row conteudo flex">
             <div class="col-md-2 lateral esquerdo fundo-grama-faixa-esquerda">
-                <div class="andamento painel text-right">
-                    <h3>Partidas em andamento <span class="fa fa-angle-double-right"></span></h3>
-                </div>
                 <div class="ad-sense">
                     <ins class="adsbygoogle"
                          style="display:block;"
@@ -117,43 +122,10 @@
                 </div>
             </div>
             <div class="col-md-8 central {{ css_fundo }}">
-                <div class="painel partidas-andamento well-sm" data-posicao="fechado">
-                    <h3>Partidas em andamento</h3>
-                    <div class="corpo-painel">
-                        {% if not partidas_atuais %}
-                            <div class="panel panel-default partida">
-                                <div class="panel-heading">
-                                    <div class="panel-title text-center">
-                                        <h4>Sem Jogo</h4>
-                                    </div>
-                                </div>
-                                <div class="panel-body text-center">
-                                    Não há partidas no momento
-                                </div>
-                                <div class="panel-footer small">
-                                </div>
-                            </div>
-                        {% endif %}
-                        {% for partida in partidas_atuais %}
-                            {% include 'includes/partida.html' %}
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="painel partidas-proximas well-sm" data-posicao="fechado">
-                    <h3>Próximas</h3>
-                    <div class="corpo-painel">
-                        {% for partida in proximas_partidas %}
-                            {% include 'includes/partida.html' %}
-                        {% endfor %}
-                    </div>
-                </div>
                 {% block conteudo %}
                 {% endblock conteudo %}
             </div>
             <div class="col-md-2 lateral direito fundo-grama-faixa-direita">
-                <div class="proximas painel">
-                    <h3><span class="fa fa-angle-double-left"></span> Próximas partidas</h3>
-                </div>
                 <div class="ad-sense">
                     <ins class="adsbygoogle"
                          style="display:block;"

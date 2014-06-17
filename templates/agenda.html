@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block conteudo %}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="painel well-sm">
+                <h3>Partidas em andamento</h3>
+                {% if not partidas_atuais %}
+                <div class="panel panel-default partida">
+                    <div class="panel-heading">
+                        <div class="panel-title text-center">
+                            <h4>Sem Jogo</h4>
+                        </div>
+                    </div>
+                    <div class="panel-body text-center">
+                        Não há partidas no momento
+                    </div>
+                    <div class="panel-footer small">
+                    </div>
+                </div>
+                {% else %}
+                <ul class="list-group">
+                {% for partida in partidas_atuais %}
+                    {% include 'includes/partida_curta.html' %}
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="painel well-sm" data-posicao="fechado">
+                <h3>Próximas</h3>
+                <ul class="list-group">
+                    {% for partida in proximas_partidas %}
+                        {% include 'includes/partida_curta.html' %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+{% endblock conteudo %}
+
+{% block js %}
+{#    <script type="application/javascript" src="{% static 'js/em_andamento.js' %}"></script>#}
+{% endblock js %}

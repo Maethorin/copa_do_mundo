@@ -1,20 +1,13 @@
-$(window).load(function() {
-    $('.barras').animate({top: -20}, 600);
-    $('.introducao').animate({top: 0}, 600, function() {
-        $('.introducao .texto').slideToggle(600, function() {
-            $('.partidas-index .painel').show().animate({bottom: -6});
-            $('.barras-baixo').show().animate({bottom: 0});
-        });
-    });
+$("#accordion").on("click", "h3", function() {
+    var $collapse = $(this).parent().find(".panel-collapse");
+    $("#accordion").find(".in").collapse('toggle');
+    $collapse.collapse('toggle');
 });
 
-$(window).unload(function() {
-    $('.barras-baixo').show().animate({top: 66});
-    $('.partidas-index .painel').show().animate({bottom: -52}, function() {
-        $('.introducao .texto').slideToggle(600, function() {
-            $('.barras').animate({top: 105}, 600);
-            $('.introducao').animate({top: -75}, 600);
-        });
-    });
+$("#accordion").on("show.bs.collapse", function(event) {
+    $(event.target).parent().find("h3 .fa").toggleClass("fa-chevron-up fa-chevron-down");
 });
 
+$("#accordion").on("hide.bs.collapse", function(event) {
+    $(event.target).parent().find("h3 .fa").toggleClass("fa-chevron-up fa-chevron-down");
+});

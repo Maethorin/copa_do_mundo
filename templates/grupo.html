@@ -2,23 +2,21 @@
 {% load staticfiles %}
 {% block conteudo %}
     <div class="row">
-        {% for partida in partidas %}
-            {% if forloop.counter0|divisibleby:2 %}
-            {% if forloop.counter0 > 0 %}
-                </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="painel well-sm">
+                <h3>Partidas do grupo {{ pagina_atual }}</h3>
+                <ul class="list-group">
+                {% for partida in partidas %}
+                    {% ifchanged partida.rodada %}
+                    <li class="list-group-item rodada-header">{{ partida.rodada }} Rodada</li>
+                    {% endifchanged %}
+                    {% include 'includes/partida_curta.html' %}
+                {% endfor %}
+                </ul>
             </div>
-            {% endif %}
-            <div class="col-md-4">
-                <div class="barras"></div>
-                <div class="painel rodada well-sm">
-                    <h3>{% if forloop.counter == 1 %}1{% elif forloop.counter == 3 %}2{% else %}3{% endif %}&#170; Rodada</h3>
-            {% endif %}
-            {% include 'includes/partida.html' %}
-            {% if forloop.last %}
-                </div>
-            </div>
-            {% endif %}
-        {% endfor %}
+        </div>
+        <div class="col-md-1"></div>
     </div>
 {% endblock conteudo %}
 

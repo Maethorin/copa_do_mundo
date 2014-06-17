@@ -2,24 +2,54 @@
 {% load staticfiles %}
 {% block conteudo %}
     <div class="row">
-        <div class="col-md-12">
-            <div class="barras"></div>
-            <div class="painel introducao well-sm">
-                <h3>Como funciona</h3>
-                <div class="texto">
-                    <p>O SimulaCopa funciona com a média de gols nas votações. A idéia é ter a maior precisão de resultados com uma quantidade de variáveis maior.</p>
-                    <p>Num simples caso de escolher entre 3 opções (Time A, Time B ou Empate) e decidir pelo número de vitórias de cada time, o fator de quantidade de gols fica desconsiderada.</p>
-                    <p>Mas se você considerar que o palpite na quantidade de gols que cada time poderá fazer naquela partida for mais importante do que simplesmente dizer se ele irá ganhar, perder ou empatar, então o resultado dessa partida seria decidido pela média dos palpites dos gols</p>
-                    <p>Pelo ao menos essa é a teoria :D</p>
-                    <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na partida.</p>
-                    <p>Caso você queira que seu resultado seja guardado, faça login pelo Facebook.</p>
-                    <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha x Suiça, Alemanha x Sérvia :D...</p>
-                    <p>A tabela com as partidas e seus resultados poderão ser acessadas no menu acima. Apenas as partidas não realizadas poderão receber os palpites.</p>
-                    <p>A medida que as partidas forem acontecendo, os palpites serão fechados e o resultado real passa a contar na computação para as próximas fases. Nesses casos, o resultado e os palpites serão exibidos.</p>
-                    <p>Acompanhe também, nessa página, o placar das partidas em andamento.</p>
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div id="accordion" class="panel-group">
+                <div class="panel painel well-sm">
+                    <h3><a data-toggle="collapse" data-parent="#accordion" href="#comoFunciona">Como funciona</a> <span class="fa fa-chevron-up"></span></h3>
+                    <div class="texto panel-collapse collapse in" id="comoFunciona">
+                        <div class="panel-body">
+                            <p>O SimulaCopa funciona com a média de gols nas votações. A idéia é ter a maior precisão de resultados com uma quantidade de variáveis maior.</p>
+                            <p>Num simples caso de escolher entre 3 opções (Time A, Time B ou Empate) e decidir pelo número de vitórias de cada time, o fator de quantidade de gols fica desconsiderada.</p>
+                            <p>Mas se você considerar que o palpite na quantidade de gols que cada time poderá fazer naquela partida for mais importante do que simplesmente dizer se ele irá ganhar, perder ou empatar, então o resultado dessa partida seria decidido pela média dos palpites dos gols</p>
+                            <p>Pelo ao menos essa é a teoria :D</p>
+                            <p>Diferente dos simuladores disponíveis, o seu palpite é acumulado com todos os palpites realizados até o momento. O resultado de cada partida é uma média simples: soma de todos os palpites de gols do time dividido pela quantidade de votos na partida.</p>
+                            <p>Caso você queira que seu resultado seja guardado, faça login pelo Facebook.</p>
+                            <p>A idéia é que, quanto mais pessoas participarem, mais chances desses resultados estarem certos. A não ser que aconteça alguma zebra como Espanha x Suiça, Alemanha x Sérvia :D...</p>
+                            <p>A tabela com as partidas e seus resultados poderão ser acessadas no menu acima. Apenas as partidas não realizadas poderão receber os palpites.</p>
+                            <p>A medida que as partidas forem acontecendo, os palpites serão fechados e o resultado real passa a contar na computação para as próximas fases. Nesses casos, o resultado e os palpites serão exibidos.</p>
+                            <p>Acompanhe também, nessa página, o placar das partidas em andamento.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel painel well-sm">
+                    <h3><a data-toggle="collapse" data-parent="#accordion" href="#emAndamento">Partidas em andamento</a> <span class="fa fa-chevron-down"></span></h3>
+                    <div class="panel-collapse collapse" id="emAndamento">
+                        <ul class="list-group panel-body">
+                            {% if not partidas_atuais %}
+                                <li class="list-group-item">
+                                    Não há partidas no momento
+                                </li>
+                            {% endif %}
+                            {% for partida in partidas_atuais %}
+                                {% include 'includes/partida_curta.html' %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel painel well-sm">
+                    <h3><a data-toggle="collapse" data-parent="#accordion" href="#proximas">Próximas</a> <span class="fa fa-chevron-down"></span></h3>
+                    <div class="panel-collapse collapse" id="proximas">
+                        <ul class="list-group panel-body">
+                            {% for partida in proximas_partidas %}
+                                {% include 'includes/partida_curta.html' %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-1"></div>
     </div>
 {% endblock conteudo %}
 
