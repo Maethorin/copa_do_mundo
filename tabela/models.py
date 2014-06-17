@@ -229,14 +229,19 @@ class Partida(models.Model):
             time_2 = self.time_2.nome
         return u"{} x {}".format(time_1, time_2)
 
+    def obter_nome_de_time(self, time):
+        if time:
+            return time.nome
+        return u"Não definido"
+
     def __unicode__(self):
         formato_data = '%a %d %B - %H:%M'
         situacao = "Realizada" if self.realizada else u"Não realizada"
-        if self.time_1:
+        if self.time_1 or self.time_2:
             return u'%s - %s x %s - %s - %s - %s' % (
                 self.fase,
-                self.time_1.nome,
-                self.time_2.nome,
+                self.obter_nome_de_time(self.time_1),
+                self.obter_nome_de_time(self.time_2),
                 self.data.strftime(formato_data),
                 situacao,
                 self.local
