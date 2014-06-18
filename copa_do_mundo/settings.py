@@ -88,12 +88,12 @@ TEMPLATE_DIRS = (
 FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID', '880437195316693')
 
 #produção
-# DEBUG = False
-# LOCAL_DEVELOPMENT = False
-# TEMPLATE_DEBUG = False
-# STATIC_ROOT = '/webapps/copa_do_mundo/app/tabela/static/'
+DEBUG = False
+LOCAL_DEVELOPMENT = False
+TEMPLATE_DEBUG = False
+STATIC_ROOT = '/webapps/copa_do_mundo/app/tabela/static/'
 
 #dev
-DEBUG = True
-LOCAL_DEVELOPMENT = True
-TEMPLATE_DEBUG = True
+# DEBUG = True
+# LOCAL_DEVELOPMENT = True
+# TEMPLATE_DEBUG = True
