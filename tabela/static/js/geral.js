@@ -1,6 +1,24 @@
 $.cookie.json = true;
+var $partida_container = $('.partida');
+$partida_container.on('click', '.novo-palpite', function() {
+    var $this = $(this);
+    var $partida = $this.parents(".partida");
+    $.get("/form_de_partida/" + $partida.data('partida'))
+        .done(function(li) {
+            $partida.find(".placar-partida").append(li);
+            $partida.find(".simulada").toggle( "slide", function() {
+                $partida.find(".votar").toggle( "slide");
+            });
+        });
+});
 
-$('.votar').on('submit', 'form', function(event) {
+function popOver($partida, data) {
+    $partida.find(".simulada").attr("title", data['mensagem']);
+    $partida.find(".simulada").tooltip({"trigger": "manual"});
+    $partida.find(".simulada").tooltip('show');
+}
+
+$partida_container.on('submit', '.votar form', function(event) {
     event.preventDefault();
     var $this = $(this);
     var $partida = $this.parents(".partida");
@@ -14,8 +32,9 @@ $('.votar').on('submit', 'form', function(event) {
     });
     $.post($this[0].action, data)
         .done(function(data) {
-            $partida.find(".votar").toggle( "slide", "left", function() {
-                $partida.find(".simulada").toggle( "slide", "right");
+            $partida.find(".votar").toggle( "slide", function() {
+                $partida.find(".simulada").toggle( "slide");
+                $partida.find(".votar").remove();
             });
             var partidas = $.cookie('partidas');
             if (!partidas) {
@@ -25,40 +44,13 @@ $('.votar').on('submit', 'form', function(event) {
             $.cookie('partidas', partidas, { expires: 180, path:'/' });
             $partida.find(".time_1").text(data['gols_time_1']);
             $partida.find(".time_2").text(data['gols_time_2']);
-            $partida.find(".votos").text(data['votos']);
-        })
-        .fail(function() {
-            alert(0);
-        }
-    );
-});
-
-$('.conteudo').on('click', '.andamento', function() {
-    animaPartidas($('.partidas-andamento'), 'left');
-});
-
-$('.conteudo').on('click', '.proximas', function() {
-    animaPartidas($('.partidas-proximas'), 'right');
-});
-
-function animaPartidas($partidas, direcao) {
-    var aminacao = {};
-    if ($partidas.data("posicao") == 'aberto') {
-        $partidas.find('.corpo-painel').slideToggle(function() {
-            aminacao = (direcao == 'left' ? {left: -545} : {right: -545});
-            $partidas.animate(aminacao);
-            $partidas.data("posicao", ($partidas.data("posicao") == 'fechado' ? 'aberto' : 'fechado'))
+            var $labelVotos = $partida.find(".label-votos");
+            $labelVotos.attr("title", "Placar simulado - " + data['votos'] + " votos");
+            $labelVotos.tooltip("destroy");
+            $labelVotos.tooltip();
+            popOver($partida, data);
         });
-    }
-    else {
-        aminacao = (direcao == 'left' ? {left: 15} : {right: 15});
-        $partidas.animate(aminacao, function() {
-            $partidas.find('.corpo-painel').slideToggle();
-            $partidas.data("posicao", ($partidas.data("posicao") == 'fechado' ? 'aberto' : 'fechado'))
-        });
-    }
-}
-
+});
 
 function redimencionaCentral() {
     var viewportWidth = $(window).width();
@@ -93,5 +85,6 @@ $(window).resize(function() {
 
 $(".time").tooltip();
 $(".time-container").tooltip();
-
 $(".label").tooltip();
+$(".fa").tooltip();
+

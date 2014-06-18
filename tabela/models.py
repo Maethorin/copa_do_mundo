@@ -267,8 +267,11 @@ class Partida(models.Model):
         elif self.media_palpites_time_2() > self.media_palpites_time_1():
             palpite = self.time_2
 
-        if not vitorioso or not palpite:
+        if not vitorioso and not palpite:
             return "EMPATE"
+
+        if not vitorioso and palpite:
+            return "ERRADO"
 
         if vitorioso == palpite:
             return "CERTO"
@@ -279,7 +282,7 @@ class Partida(models.Model):
         return "ERRADO"
 
     def palpite_certo(self):
-        return self.media_palpites_time_1() == int(self.gols_time_1 or 0) and self.media_palpites_time_2() == int(self.gols_time_2)
+        return self.media_palpites_time_1() == int(self.gols_time_1 or 0) and self.media_palpites_time_2() == int(self.gols_time_2 or 0)
 
     def em_andamento(self):
         data_atual = datetime.today()

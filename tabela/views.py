@@ -3,6 +3,7 @@
 import json
 from urlparse import unquote
 from django.conf import settings
+from django.contrib.humanize.templatetags.humanize import intcomma
 
 from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
@@ -13,13 +14,13 @@ from tabela.models import Grupo, Partida, Fase
 
 
 class OpenGraph(object):
-    def __init__(self, title, site_name, url, description, image=None, content_type="article"):
-        self.app_id = settings.FACEBOOK_APP_ID
+    def __init__(self, title, url, description, site_name=None, image=None, content_type="article"):
         self.title = title
-        self.site_name = site_name
         self.url = url
         self.description = description
-        self.image = image or "{}{}img/logo-simulacopa.png".format(settings.BASE_URL, settings.STATIC_URL)
+        self.site_name = site_name or "Simulador da Copa do Mundo"
+        self.app_id = settings.FACEBOOK_APP_ID
+        self.image = image or "{}{}img/simulacopa-favicon.png".format(settings.BASE_URL, settings.STATIC_URL)
         self.type = content_type
 
 
@@ -50,8 +51,7 @@ def criar_contexto(request, titulo_da_pagina, pagina_atual, css_fundo, og, parti
 
 def index(request):
     og = OpenGraph(
-        "Como funciona o Simulador",
-        "Simulador da Copa do Mundo",
+        "Como funciona o SimulaCopa",
         settings.BASE_URL,
         u"Regras de como funciona o Simulador da Copa do Mundo. É, basicamente, o resultado da média dos palpites. Veja mais."
     )
@@ -60,10 +60,9 @@ def index(request):
 
 def agenda(request):
     og = OpenGraph(
-        "Agenda dos jogos da copa",
-        "Simulador da Copa do Mundo",
+        "Agenda dos Jogos da Copa",
         "{}{}".format(settings.BASE_URL, reverse('agenda')),
-        u"Lista dos jogos em andamento e dos próximos jogos. Mostra o placar atual do jogo em andamento. O quatro próximos jogos são exibidos."
+        u"Lista dos jogos em andamento e dos próximos quatro jogos na agenda. Mostra o placar atual do jogo em andamento com atualização em tempo real."
     )
     return render_to_response('agenda.html', criar_contexto(request, "Agenda", "agenda", "agenda", og))
 
@@ -72,9 +71,8 @@ def partidas_de_grupo(request, nome):
     grupo = Grupo.objects.get(nome=nome)
     og = OpenGraph(
         u"Jogos de classificação do Grupo {}".format(grupo.nome),
-        "Simulador da Copa do Mundo",
         "{}{}".format(settings.BASE_URL, reverse('grupo', args=[grupo.nome])),
-        u"Jogos de classificação do Grupo {} com os campos para os palpites de placar no jogo. Só poderá ser dado um palpite por jogo. Os jogos estão agrupados por rodada.".format(grupo.nome)
+        u"Jogos de classificação do Grupo {} para enviar os palpites de placar dos jogos. Os palpites estão abertos para as partidas que ainda não aconteceram. Você pode votar nas partidas quantas vezes quiser e acompanhar o resultado da classificação na página de classificação. Os votos nessa fase afetam a composição das Oitavas de Fina. Os jogos estão agrupados por rodada.".format(grupo.nome)
     )
     partidas_do_grupo = grupo.partidas_do_grupo_na_fase('classificacao')
     contexto = criar_contexto(request, "Grupo {}".format(grupo.nome), grupo.nome, 'grupos', og, partidas=partidas_do_grupo)
@@ -89,22 +87,39 @@ def classificacao(request, atual=None):
         url = "{}{}".format(settings.BASE_URL, reverse('classificacao', args=['atual']))
     og = OpenGraph(
         u"Tabela de classificação",
-        "Simulador da Copa do Mundo",
         url,
-        "Tabela contento a classificação {} da 1ª fase da Copa. A tabela está organizada por grupo e tem as informação de pontos, jogos disputados, vitórias, empates, derrotas, gols pró, gols contra, saldo de gols e aproveitamento".format(('real' if atual else 'simulada'))
+        u"Tabela contento a classificação {} da 1ª fase da Copa. A tabela está organizada por grupo e tem as informação de pontos, jogos disputados, vitórias, empates, derrotas, gols pró, gols contra, saldo de gols e aproveitamento.".format(('real' if atual else 'simulada'))
     )
     contexto = criar_contexto(request, "Classificação", 'classificacao_real' if atual else 'classificacao_simulada', 'classificacao', og)
     contexto.update({'em_classificacao': True, 'atual': atual})
     return render_to_response('classificacao.html', contexto)
 
 
+DESCRICAO_FASES = {
+    'classificacao': u"Jogos da Classificação para enviar os palpites de placar dos jogos. Os palpites estão abertos para as partidas que ainda não aconteceram. Você pode votar nas partidas e acompanhar o resultado da classificação na página de classificação. Os votos nessa fase afetam a composição das Oitavas de Final",
+    'oitavas': u"Jogos das Oitavas de Final para enviar os palpites de placar dos jogos. Os palpites estão abertos para as partidas que ainda não aconteceram. Início do mata-mata onde é ganhar ou ser eliminado. Você pode votar quantas vezes quiser nas partidas. Os votos nessa fase afetam a composição das Quartas de Final",
+    "quartas": u"Jogos das Quartas de Final para enviar os palpites de placar dos jogos. Os palpites estão abertos para as partidas que ainda não aconteceram. Oito times em quatro jogos decisivos. Você pode votar quantas vezes quiser nas partidas. Os votos nessa fase afetam a composição das Semifinais",
+    'semifinais': u"Jogos das Semifinais para enviar os palpites de placar dos jogos. Os palpites estão abertos para as partidas que ainda não aconteceram. Os jogos que irão decidir as disputas da Final e do Terceiro Lugar. Você pode votar quantas vezes quiser nas partidas. Essa votação não afeta nenhuma fase.",
+    'terceiro_lugar': u"Disputa de terceiro lugar. Para os perdedores das Semifinais, resta disputar a terceira colocação. Você pode votar quantas vezes quiser na partida. Essa votação não afeta nenhuma fase.",
+    'final': u"Grande final. Dessa partida sairá o ganhador da Copa do Mundo!"
+}
+
+TITULO_FASES = {
+    'classificacao': u"Jogos da Classificação",
+    'oitavas': u"Jogos das Oitavas de Final",
+    "quartas": u"Jogos das Quartas de Final",
+    'semifinais': u"Jogos das Semifinais",
+    'terceiro_lugar': u"Disputa de Terceiro Lugar",
+    'final': u"Grande Final"
+}
+
+
 def mostra_rodada(request, slug):
     fase = Fase.objects.get(slug=slug)
     og = OpenGraph(
-        u"Jogos de {}".format(fase.nome),
-        "Simulador da Copa do Mundo",
+        TITULO_FASES[str(fase.slug)],
         "{}{}".format(settings.BASE_URL, reverse('rodada', args=[fase.slug])),
-        u"Jogos de {} com os campos para os palpites de placar no jogo. Só poderá ser dado um palpite por jogo. Os jogos estão ordenados por data".format(fase.nome)
+        DESCRICAO_FASES[str(fase.slug)]
     )
     partidas = Partida.objects.filter(fase=fase)
     contexto = criar_contexto(request, fase.nome, slug, slug, og, partidas=partidas)
@@ -122,7 +137,8 @@ def registra_palpite(request):
         "partida_id": "partida_{}".format(partida.id),
         "gols_time_1": partida.media_palpites_time_1(),
         "gols_time_2": partida.media_palpites_time_2(),
-        "votos": partida.votos
+        "votos": intcomma(partida.votos),
+        "mensagem": "Palpite {} {} x {} {} registrado".format(partida.time_1.abreviatura, palpite_time_1, palpite_time_2, partida.time_2.abreviatura)
     }
     return HttpResponse(json.dumps(resultado), mimetype="application/json")
 
@@ -148,3 +164,9 @@ def _obtem_palpites(request):
         palpite_time_2 = 0
 
     return palpite_time_1, palpite_time_2
+
+
+def form_de_partida(request, partida_id):
+    contexto = {'partida': Partida.objects.get(id=partida_id), 'display_none': True}
+    contexto.update(csrf(request))
+    return render_to_response('includes/form_de_partida.html', contexto)

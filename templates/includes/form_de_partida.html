@@ -1,0 +1,16 @@
+                    <li class="list-group-item votar text-center" {% if display_none %}style="display: none;"{% endif %}>
+                        <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal form-palpite" role="form">
+                            {% csrf_token %}
+                            <input type="hidden" name="partida_id" value="{{partida.id}}" />
+                            {% if partida.time_1 and partida.time_2 %}
+                            {% include 'includes/placar.html' %}
+                            {% else %}
+                            {% with final=True %}
+                            {% include 'includes/placar.html' %}
+                            {% endwith %}
+                            {% endif %}
+                            {% if partida.time_1 and partida.time_2 %}
+                             <button type="submit" class="btn btn-primary btn-sm enviar-palpite"><span class="fa fa-share" title="Enviar palpite"></span></button>
+                            {% endif %}
+                        </form>
+                    </li>

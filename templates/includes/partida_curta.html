@@ -23,7 +23,10 @@
                     </li>
                     {% endif %}
                     <li class="list-group-item simulada text-center"{% if not partida.realizada and not partida.id in partidas_votadas %} style="display: none;"{% endif %}>
-                        <span class="label label-primary" title="Placar simulado - {{ partida.votos|intcomma }} votos">S</span>
+                        {% if not partida.realizada and not partida.em_andamento %}
+                        <button type="button" class="btn btn-primary btn-sm novo-palpite"><span class="fa fa-reply" title="Novo palpite"></span></button>
+                        {% endif %}
+                        <span class="label label-simulado label-votos" title="Placar simulado - {{ partida.votos|intcomma }} votos">S</span>
                         {% with simulado=True %}
                         {% include 'includes/placar.html' %}
                         {% endwith %}
@@ -32,7 +35,7 @@
                             {% if partida.vitorioso_certo == 'CERTO' %}
                                 <span class="label label-success" title="Acertou vencedor">V</span>
                             {% elif partida.vitorioso_certo == 'EMPATE' %}
-                                <span class="label label-sucess" title="Acertou empate">E</span>
+                                <span class="label label-success" title="Acertou empate">E</span>
                             {% else %}
                                 <span class="label label-danger" title="Errou vencedor">V</span>
                             {% endif %}
@@ -45,28 +48,13 @@
                             {% else %}
                                 <span class="label label-danger" title="Errou vencedor">V</span>
                             {% endif %}
-                                <span class="label label-danger" title="Errou placar">P</span>
+                            <span class="label label-danger" title="Errou placar">P</span>
                         {% endif %}
                         {% endif %}
                     </li>
                     {% if not partida.id in partidas_votadas %}
                         {% if not partida.realizada and not partida.em_andamento %}
-                    <li class="list-group-item votar text-center">
-                        <form action="{% url 'registra_palpite' %}" method="post" class="form-horizontal form-palpite" role="form">
-                            {% csrf_token %}
-                            <input type="hidden" name="partida_id" value="{{partida.id}}" />
-                            {% if partida.time_1 and partida.time_2 %}
-                            {% include 'includes/placar.html' %}
-                            {% else %}
-                            {% with final=True %}
-                            {% include 'includes/placar.html' %}
-                            {% endwith %}
-                            {% endif %}
-                            {% if partida.time_1 and partida.time_2 %}
-                             <button type="submit" class="btn btn-primary btn-sm"><span class="fa fa-share"></span></button>
-                            {% endif %}
-                        </form>
-                    </li>
+                            {% include 'includes/form_de_partida.html' %}
                         {% endif %}
                     {% endif %}
                 </ul>
